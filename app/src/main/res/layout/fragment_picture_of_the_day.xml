@@ -14,4 +14,8 @@
         android:scaleType="fitCenter"
         android:contentDescription="@string/photo_of_the_day_stub"/>
 
+    <include
+        android:id="@+id/includedLoadingLayout"
+        layout="@layout/loading_layout" />
+
 </FrameLayout>

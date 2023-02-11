@@ -6,4 +6,9 @@
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
+
+    <!-- AppState Snackbar -->
+    <string name="requestError">Ошибка загрузки данных</string>
+    <string name="repeatRequest">Отправить повторный запрос</string>
+
 </resources>

@@ -4,7 +4,6 @@ import com.gb_materialdesign.BuildConfig
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Callback
 import retrofit2.Retrofit
@@ -17,7 +16,7 @@ private const val NASA_API_KEY = BuildConfig.NASA_API_KEY
 
 class RemoteSourceNasaAPI {
 
-    private val NasaAPI = Retrofit.Builder()
+    private val nasaAPI = Retrofit.Builder()
         .baseUrl(NASA_DOMAIN)
         .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
         .client(createOkHttpClient(PictureOfTheDayInterceptor()))
@@ -47,7 +46,7 @@ class RemoteSourceNasaAPI {
     }
 
     fun getPictureOfTheDay(callback: Callback<PictureOfTheDayResponse>){
-        NasaAPI.getPictureOfTheDay(NASA_API_KEY).enqueue(callback)
+        nasaAPI.getPictureOfTheDay(NASA_API_KEY).enqueue(callback)
     }
 
 }
