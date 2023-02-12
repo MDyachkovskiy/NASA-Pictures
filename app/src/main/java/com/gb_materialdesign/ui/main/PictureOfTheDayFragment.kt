@@ -1,15 +1,24 @@
 package com.gb_materialdesign.ui.main
 
-import androidx.lifecycle.ViewModelProvider
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentPictureOfTheDayBinding
+import com.gb_materialdesign.model.PictureOfTheDayResponse
 import com.gb_materialdesign.ui.main.AppState.AppState
 import com.gb_materialdesign.ui.main.AppState.AppStateRenderer
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+
+private const val WIKIPEDIA_DOMAIN = "https://en.wikipedia.org/wiki/"
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -17,6 +26,10 @@ class PictureOfTheDayFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var parentView: View
+
+    private lateinit var bottomSheet: View
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
@@ -27,7 +40,7 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private val dataRenderer by lazy {
-        AppStateRenderer(parentView) {viewModel.getPictureOfTheDay()}
+        AppStateRenderer(parentView) { viewModel.getPictureOfTheDay() }
     }
 
     override fun onCreateView(
@@ -42,20 +55,32 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         parentView = binding.main
 
-        binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
+        bottomSheet = view.findViewById<View>(R.id.bottom_sheet_container)
 
-        viewModel.getLiveData().observe(viewLifecycleOwner){
+        binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
+        setBottomSheetBehavior(bottomSheet as ConstraintLayout)
+
+        viewModel.getLiveData().observe(viewLifecycleOwner) {
             renderData(it)
+        }
+
+        binding.inputLayout.setEndIconOnClickListener {
+            startActivity(Intent(Intent.ACTION_VIEW).apply {
+                data = Uri.parse(
+                    "$WIKIPEDIA_DOMAIN${
+                        binding.inputEditText.text.toString()
+                    }"
+                )
+            })
         }
     }
 
-    private fun renderData (appState: AppState) {
+    private fun renderData(appState: AppState) {
         dataRenderer.render(appState)
 
         when (appState) {
             is AppState.Success -> {
-                val url = appState.pictureOfTheDay.url
-                binding.pictureOfTheDay.load(url)
+                displayData(appState.pictureOfTheDay)
             }
             else -> return
         }
@@ -66,4 +91,25 @@ class PictureOfTheDayFragment : Fragment() {
         _binding = null
     }
 
+    private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
+        bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+    }
+
+    private fun displayData(data: PictureOfTheDayResponse) {
+        with(binding) {
+
+            pictureOfTheDay.load(data.url) {
+                lifecycle(this@PictureOfTheDayFragment)
+                error(R.drawable.ic_load_error_vector)
+                placeholder(R.drawable.ic_no_photo_vector)
+                crossfade(true)
+            }
+        }
+
+        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescriptionHeader).text = data.title
+
+        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescription).text = data.explanation
+
+    }
 }
