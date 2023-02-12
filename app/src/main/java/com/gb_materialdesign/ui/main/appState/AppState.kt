@@ -1,4 +1,4 @@
-package com.gb_materialdesign.ui.main.AppState
+package com.gb_materialdesign.ui.main.appState
 
 import com.gb_materialdesign.model.PictureOfTheDayResponse
 

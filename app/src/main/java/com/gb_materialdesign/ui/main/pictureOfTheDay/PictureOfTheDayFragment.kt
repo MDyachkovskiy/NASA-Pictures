@@ -1,21 +1,24 @@
-package com.gb_materialdesign.ui.main
+package com.gb_materialdesign.ui.main.pictureOfTheDay
 
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
+import com.gb_materialdesign.MainActivity
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.gb_materialdesign.model.PictureOfTheDayResponse
-import com.gb_materialdesign.ui.main.AppState.AppState
-import com.gb_materialdesign.ui.main.AppState.AppStateRenderer
+import com.gb_materialdesign.ui.main.appState.AppState
+import com.gb_materialdesign.ui.main.appState.AppStateRenderer
+import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
+import com.gb_materialdesign.utils.toast
+import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 private const val WIKIPEDIA_DOMAIN = "https://en.wikipedia.org/wiki/"
@@ -33,6 +36,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     companion object {
         fun newInstance() = PictureOfTheDayFragment()
+        private var isMain = true
     }
 
     private val viewModel: PictureOfTheDayViewModel by lazy {
@@ -55,10 +59,10 @@ class PictureOfTheDayFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         parentView = binding.main
 
-        bottomSheet = view.findViewById<View>(R.id.bottom_sheet_container)
+        bottomSheet = view.findViewById(R.id.bottom_sheet_container)
 
         binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
-        setBottomSheetBehavior(bottomSheet as ConstraintLayout)
+        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
 
         viewModel.getLiveData().observe(viewLifecycleOwner) {
             renderData(it)
@@ -68,11 +72,13 @@ class PictureOfTheDayFragment : Fragment() {
             startActivity(Intent(Intent.ACTION_VIEW).apply {
                 data = Uri.parse(
                     "$WIKIPEDIA_DOMAIN${
-                        binding.inputEditText.text.toString()
-                    }"
+                        binding.inputEditText.text.toString()}"
                 )
             })
         }
+
+        setBottomAppBar(view)
+
     }
 
     private fun renderData(appState: AppState) {
@@ -112,4 +118,63 @@ class PictureOfTheDayFragment : Fragment() {
         bottomSheet.findViewById<TextView>(R.id.bottomSheetDescription).text = data.explanation
 
     }
+
+    private fun setBottomAppBar(view: View) {
+        val context = activity as MainActivity
+        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+
+        setHasOptionsMenu(true)
+
+        setFloatingActionButton()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu_bottom_bar, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> {
+                activity?.let {
+                    BottomNavigationDrawerFragment().show(it.supportFragmentManager,"tag")
+                }
+            }
+            R.id.app_bar_fav -> toast("Favourite")
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setFloatingActionButton() {
+        binding.fab.setOnClickListener{
+            if(isMain) {
+                isMain = false
+                with(binding) {
+                    bottomAppBar.navigationIcon = null
+
+                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
+
+                    fab.setImageDrawable(context?.let { ContextCompat.getDrawable(it,
+                        R.drawable.ic_back_fab) })
+
+                    bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
+                }
+            } else {
+                isMain = true
+                with(binding) {
+                    bottomAppBar.navigationIcon = context?.let{
+                            ContextCompat.getDrawable(it, R.drawable.ic_hamburger_menu_bottom_bar) }
+
+                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
+
+                    fab.setImageDrawable(context?.let { ContextCompat.getDrawable(it,
+                        R.drawable.ic_plus_fab) })
+
+                    bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
+                }
+            }
+        }
+    }
+
+
 }

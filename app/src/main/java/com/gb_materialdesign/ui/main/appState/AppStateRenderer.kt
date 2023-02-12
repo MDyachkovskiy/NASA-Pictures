@@ -1,4 +1,4 @@
-package com.gb_materialdesign.ui.main.AppState
+package com.gb_materialdesign.ui.main.appState
 
 import android.view.View
 import com.gb_materialdesign.R
