@@ -49,4 +49,8 @@ class RemoteSourceNasaAPI {
         nasaAPI.getPictureOfTheDay(NASA_API_KEY).enqueue(callback)
     }
 
+    fun getPictureOfTheDayByDate (date: String, callback: Callback<PictureOfTheDayResponse>){
+        nasaAPI.getPictureOfTheDayByDate(NASA_API_KEY, date).enqueue(callback)
+    }
+
 }

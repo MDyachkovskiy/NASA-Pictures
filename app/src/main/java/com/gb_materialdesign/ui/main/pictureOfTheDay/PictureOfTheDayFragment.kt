@@ -20,6 +20,8 @@ import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFrag
 import com.gb_materialdesign.utils.toast
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import java.text.SimpleDateFormat
+import java.util.*
 
 private const val WIKIPEDIA_DOMAIN = "https://en.wikipedia.org/wiki/"
 
@@ -78,6 +80,8 @@ class PictureOfTheDayFragment : Fragment() {
         }
 
         setBottomAppBar(view)
+
+        setChipGroup()
 
     }
 
@@ -176,5 +180,26 @@ class PictureOfTheDayFragment : Fragment() {
         }
     }
 
+    private fun setChipGroup() {
 
+        binding.chipToday.setOnClickListener{
+            viewModel.getPictureOfTheDayByDate(getTheDateInFormat(0))
+        }
+
+        binding.chipYesterday.setOnClickListener {
+            viewModel.getPictureOfTheDayByDate(getTheDateInFormat(1))
+        }
+
+        binding.chipDayBeforeYesterday.setOnClickListener {
+            viewModel.getPictureOfTheDayByDate(getTheDateInFormat(2))
+        }
+    }
+
+    private fun getTheDateInFormat (decreaseDays: Int) : String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, -decreaseDays)
+        val date = calendar.time
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return dateFormat.format(date)
+    }
 }

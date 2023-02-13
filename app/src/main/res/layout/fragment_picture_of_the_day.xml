@@ -14,6 +14,39 @@
             android:layout_height="match_parent"
             android:padding="10dp">
 
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chipGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:singleSelection="true"
+                app:checkedChip="@+id/chipToday"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipToday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chipToday"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipYesterday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chipYesterday"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chipDayBeforeYesterday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/chipBeforeYesterday"
+                    style="@style/Widget.MaterialComponents.Chip.Choice"/>
+
+            </com.google.android.material.chip.ChipGroup>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -27,6 +60,7 @@
                 app:helperText="@string/wiki_helper_text"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_wikipedia"
+                app:layout_constraintTop_toBottomOf="@id/chipGroup"
                 app:layout_constraintBottom_toTopOf="@id/pictureOfTheDay"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">

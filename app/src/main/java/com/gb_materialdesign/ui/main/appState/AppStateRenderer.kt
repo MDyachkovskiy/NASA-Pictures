@@ -16,7 +16,7 @@ class AppStateRenderer (
                 is AppState.Error -> {
                 loadindLayout.visibility = View.GONE
                     parentView.showSnackbar(
-                        parentView.context.getString(R.string.requestError),
+                        appState.error.toString(),
                         parentView.context.getString(R.string.repeatRequest),
                         action, 0)
                 }

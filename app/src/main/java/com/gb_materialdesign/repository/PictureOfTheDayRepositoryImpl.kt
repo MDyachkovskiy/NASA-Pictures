@@ -11,4 +11,13 @@ class PictureOfTheDayRepositoryImpl (
     override fun getPictureOfTheDay(callback: Callback<PictureOfTheDayResponse>) {
         remoteSourceNasaAPI.getPictureOfTheDay(callback)
     }
+
+    override fun getPictureOfTheDayByDate(
+        date: String,
+        callback: Callback<PictureOfTheDayResponse>
+    ) {
+        remoteSourceNasaAPI.getPictureOfTheDayByDate(date, callback)
+    }
+
+
 }

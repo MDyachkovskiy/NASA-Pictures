@@ -11,4 +11,9 @@
     <string name="requestError">Ошибка загрузки данных</string>
     <string name="repeatRequest">Отправить повторный запрос</string>
 
+    <!-- Chip titles -->
+    <string name="chipToday">today</string>
+    <string name="chipYesterday">yesterday</string>
+    <string name="chipBeforeYesterday">day before yesterday</string>
+
 </resources>

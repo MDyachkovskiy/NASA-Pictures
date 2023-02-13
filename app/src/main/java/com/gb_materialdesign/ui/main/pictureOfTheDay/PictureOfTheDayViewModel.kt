@@ -63,6 +63,10 @@ class PictureOfTheDayViewModel(
         pictureOfTheDayRepository.getPictureOfTheDay(callback)
     }
 
+    fun getPictureOfTheDayByDate(date: String) {
+        pictureOfTheDayRepository.getPictureOfTheDayByDate(date, callback)
+    }
+
     private fun sendServerRequest() {
         liveData.value = AppState.Loading
         pictureOfTheDayRepository.getPictureOfTheDay(callback)
