@@ -10,4 +10,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="color_gray">#66000000</color>
+
+    <color name="grey_style_1">#120908</color>
+    <color name="grey_style_2">#141816</color>
+    <color name="grey_style_3">#222723</color>
+    <color name="grey_light">#393e37</color>
+    <color name="grey_primary_light">#5e5559</color>
 </resources>
