@@ -8,6 +8,7 @@
     app:behavior_hideable="true"
     app:behavior_peekHeight="200dp"
     android:layout_margin="8dp"
+    android:theme="@style/MyGreyTheme.GB_MaterialDesign"
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View
