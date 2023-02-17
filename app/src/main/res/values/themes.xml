@@ -1,31 +1,17 @@
 <resources >
     <!-- Base application theme. -->
-    <style name="Theme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-    </style>
 
     <style name="MyGreyChip.GB_MaterialDesign" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@drawable/selector_my_chip_background</item>
-        <item name="shapeAppearanceSmallComponent">@style/MyGreyChip.Shape.GB_MaterialDesign</item>
+        <item name="shapeAppearanceOverlay">@style/MyGreyChip.Shape.GB_MaterialDesign</item>
         <item name="android:textAppearance">@style/MyTextAppearance.AppCompat.Body2</item>
     </style>
 
     <style name="MyGreyChip.Shape.GB_MaterialDesign" parent="ShapeAppearance.MaterialComponents.SmallComponent">
-        <item name="cornerFamily">cut</item>
-        <item name="cornerSize">4dp</item>
+        <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="MyGreyTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="MyGreyTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
         <item name="colorPrimary">#607D8B</item>
         <item name="colorPrimaryVariant">#CFD8DC</item>
@@ -37,6 +23,11 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#795548</item>
         <!-- Customize your theme here. -->
+        <item name="fontFamily">@font/roboto-thin</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
     </style>
 
     <style name="MyTextAppearance.AppCompat.Body2" parent="TextAppearance.MaterialComponents.Body2">
@@ -44,6 +35,77 @@
         <item name="android:fontFamily">@font/roboto_mono_thin</item>
         <item name="android:textStyle">bold</item>
         <item name="android:letterSpacing">0.0178571429</item>
+    </style>
+
+
+    <style name="JupiterTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#d7652a</item>
+        <item name="colorPrimaryVariant">#ff9557</item>
+        <item name="colorPrimaryDark">#9f3700</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#f4bc5d</item>
+        <item name="colorSecondaryVariant">#ffee8d</item>
+        <item name="colorSecondaryContainer">#be8c2e</item>
+        <item name="android:textColorPrimary">#490206</item>
+        <item name="android:textColorSecondary">#360201</item>
+        <!-- Status bar color. -->
+        <item name="bottomAppBarColor">#9f3700</item>
+
+        <item name="fontFamily">@font/roboto-thin</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="MarsTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#cf231c</item>
+        <item name="colorPrimaryVariant">#ff5d46</item>
+        <item name="colorPrimaryDark">#960000</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#eddfa0</item>
+        <item name="colorSecondaryVariant">#ffffd2</item>
+        <item name="colorSecondaryContainer">#baad71</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#96130d</item>
+        <!-- Status bar color. -->
+        <item name="bottomAppBarColor">#cf231c</item>
+
+        <item name="fontFamily">@font/roboto-thin</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+    </style>
+
+    <style name="MoonTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">#4e5067</item>
+        <item name="colorPrimaryVariant">#7a7c95</item>
+        <item name="colorPrimaryDark">#25283c</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">#927c91</item>
+        <item name="colorSecondaryVariant">#c3abc1</item>
+        <item name="colorSecondaryContainer">#645063</item>
+        <item name="android:textColorPrimary">#ffffff</item>
+        <item name="android:textColorSecondary">#000000</item>
+        <!-- Status bar color. -->
+        <item name="bottomAppBarColor">#25283c</item>
+
+        <item name="fontFamily">@font/roboto-thin</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="MyFAB.GB_MaterialDesign" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="shapeAppearanceOverlay">@style/MyFAB.Shape.GB_MaterialDesign</item>
+    </style>
+
+    <style name="MyFAB.Shape.GB_MaterialDesign" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">15dp</item>
     </style>
 
 
