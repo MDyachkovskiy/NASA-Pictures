@@ -68,7 +68,6 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/input_edit_text"
-                    android:fontFamily="@font/roboto_mono_thin"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
@@ -107,6 +106,8 @@
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
         app:fabAlignmentMode="center"
+        app:fabCradleRoundedCornerRadius="8dp"
+        app:fabCradleVerticalOffset="15dp"
         app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

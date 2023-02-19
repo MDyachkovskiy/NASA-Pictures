@@ -1,5 +1,4 @@
 <resources >
-    <!-- Base application theme. -->
 
     <style name="MyGreyChip.GB_MaterialDesign" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@drawable/selector_my_chip_background</item>
@@ -23,7 +22,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">#795548</item>
         <!-- Customize your theme here. -->
-        <item name="fontFamily">@font/roboto-thin</item>
+        <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -52,7 +51,7 @@
         <!-- Status bar color. -->
         <item name="bottomAppBarColor">#9f3700</item>
 
-        <item name="fontFamily">@font/roboto-thin</item>
+        <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -73,11 +72,10 @@
         <!-- Status bar color. -->
         <item name="bottomAppBarColor">#cf231c</item>
 
-        <item name="fontFamily">@font/roboto-thin</item>
+        <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
 
     <style name="MoonTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
@@ -94,7 +92,7 @@
         <!-- Status bar color. -->
         <item name="bottomAppBarColor">#25283c</item>
 
-        <item name="fontFamily">@font/roboto-thin</item>
+        <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -107,6 +105,5 @@
     <style name="MyFAB.Shape.GB_MaterialDesign" parent="ShapeAppearance.MaterialComponents.SmallComponent">
         <item name="cornerSize">15dp</item>
     </style>
-
 
 </resources>
