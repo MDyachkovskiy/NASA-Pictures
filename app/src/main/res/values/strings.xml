@@ -22,4 +22,9 @@
     <string name="mars_style_title">Марс</string>
     <string name="moon_style_title">Луна</string>
 
+    <!-- TabLayout titles -->
+    <string name="tabToday">Сегодня</string>
+    <string name="tabYesterday">Вчера</string>
+    <string name="tabBeforeYesterday">Позавчера</string>
+
 </resources>

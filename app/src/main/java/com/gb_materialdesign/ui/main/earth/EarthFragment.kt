@@ -25,7 +25,8 @@ class EarthFragment : Fragment() {
 
         _binding = FragmentEarthBinding.inflate(inflater, container, false)
 
-        binding.earthViewPager.adapter = ViewPagerAdapter(childFragmentManager)
+        binding.earthViewPager.adapter = ViewPagerAdapter(childFragmentManager, context)
+        binding.tabLayout.setupWithViewPager(binding.earthViewPager)
 
         return binding.root
     }
