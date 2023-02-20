@@ -16,9 +16,9 @@ import com.gb_materialdesign.databinding.FragmentPictureOfTheDayBinding
 import com.gb_materialdesign.model.PictureOfTheDayResponse
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
+import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
 import com.gb_materialdesign.ui.main.settings.SettingsFragment
-import com.gb_materialdesign.utils.toast
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.text.SimpleDateFormat
@@ -145,7 +145,11 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager,"tag")
                 }
             }
-            R.id.app_bar_fav -> toast("Favourite")
+            R.id.app_bar_fav -> requireActivity().supportFragmentManager.beginTransaction()
+                .hide(this)
+                .add(R.id.container, EarthFragment.newInstance())
+                .addToBackStack("tag")
+                .commit()
 
             R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
                 .hide(this)
