@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_telescope"
+        android:icon="@drawable/ic_telescope"
+        android:title="@string/navView_telescope" />
+
+    <item
+        android:id="@+id/navigation_earth"
+        android:icon="@drawable/ic_earth"
+        android:title="@string/navView_earth" />
+
+    <item
+        android:id="@+id/navigation_mars"
+        android:icon="@drawable/ic_mars"
+        android:title="@string/navView_mars" />
+
+    <item
+        android:id="@+id/navigation_weather"
+        android:icon="@drawable/ic_system"
+        android:title="@string/navView_weather" />
+
+    <item
+        android:id="@+id/navigation_settings"
+        android:icon="@drawable/ic_settings_menu"
+        android:title="@string/navView_settings" />
+
+</menu>

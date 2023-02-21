@@ -27,4 +27,11 @@
     <string name="tabYesterday">Вчера</string>
     <string name="tabBeforeYesterday">Позавчера</string>
 
+    <!-- NavigationView titles -->
+    <string name="navView_telescope">Телескоп</string>
+    <string name="navView_earth">Земля</string>
+    <string name="navView_mars">Марс</string>
+    <string name="navView_weather">Погода</string>
+    <string name="navView_settings">Настройки</string>
+
 </resources>
