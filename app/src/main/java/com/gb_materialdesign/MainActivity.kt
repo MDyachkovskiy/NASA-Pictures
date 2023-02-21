@@ -17,7 +17,12 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        if (savedInstanceState == null) {
+            replaceFragment(PictureOfTheDayFragment())
+        }
+
         setBottomNavigationView()
+
     }
 
     private fun setBottomNavigationView() {

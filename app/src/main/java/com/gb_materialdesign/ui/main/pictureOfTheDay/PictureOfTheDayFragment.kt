@@ -18,7 +18,6 @@ import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
-import com.gb_materialdesign.ui.main.settings.SettingsFragment
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import java.text.SimpleDateFormat
@@ -38,7 +37,6 @@ class PictureOfTheDayFragment : Fragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     companion object {
-        fun newInstance() = PictureOfTheDayFragment()
         private var isMain = true
     }
 
@@ -150,13 +148,6 @@ class PictureOfTheDayFragment : Fragment() {
                 .add(R.id.container, EarthFragment.newInstance())
                 .addToBackStack("tag")
                 .commit()
-
-            R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
-                .hide(this)
-                .add(R.id.container, SettingsFragment.newInstance())
-                .addToBackStack("tag")
-                .commit()
-
         }
         return super.onOptionsItemSelected(item)
     }

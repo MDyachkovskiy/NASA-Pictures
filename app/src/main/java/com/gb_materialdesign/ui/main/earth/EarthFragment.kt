@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.gb_materialdesign.R
 import com.gb_materialdesign.adapters.ViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentEarthBinding
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 class EarthFragment : Fragment() {
@@ -37,14 +38,17 @@ class EarthFragment : Fragment() {
     }
 
     private fun setTabs() {
-        TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager){ tab, position ->
-            tab.text = when (position) {
-                EARTH_TODAY -> getString(R.string.tabToday)
-                EARTH_YESTERDAY -> getString(R.string.tabYesterday)
-                EARTH_DAY_BEFORE_YESTERDAY -> getString(R.string.tabBeforeYesterday)
-                else -> getString(R.string.tabToday)
-            }
-        }
+        TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager,
+            object: TabLayoutMediator.TabConfigurationStrategy {
+                override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
+                    tab.text = when (position) {
+                        EARTH_TODAY -> getString(R.string.tabToday)
+                        EARTH_YESTERDAY -> getString(R.string.tabYesterday)
+                        EARTH_DAY_BEFORE_YESTERDAY -> getString(R.string.tabBeforeYesterday)
+                        else -> getString(R.string.tabToday)
+                    }
+                }
+            }).attach()
     }
 
     override fun onDestroyView() {
