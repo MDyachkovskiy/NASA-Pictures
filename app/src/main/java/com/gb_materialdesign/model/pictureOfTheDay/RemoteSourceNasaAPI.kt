@@ -14,7 +14,7 @@ import java.io.IOException
 
 private const val NASA_DOMAIN = "https://api.nasa.gov/"
 
-private const val EARTH_PICTURE_DOMAIN = "https://epic.gsfc.nasa.gov/api/enhanced/"
+private const val EARTH_PICTURE_DOMAIN = "https://epic.gsfc.nasa.gov/"
 
 private const val NASA_API_KEY = BuildConfig.NASA_API_KEY
 

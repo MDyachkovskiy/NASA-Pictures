@@ -34,4 +34,11 @@
     <string name="navView_weather">Погода</string>
     <string name="navView_settings">Настройки</string>
 
+    <!-- Earth Picture fragment -->
+    <string name="earthPictureTitle">Титульник</string>
+    <string name="earthPictureDate">Дата и время снимка:</string>
+    <string name="pictureCoordinates">Координаты снимка</string>
+    <string name="coordinatesLon">LON</string>
+    <string name="cooordinatesLat">LAT</string>
+
 </resources>

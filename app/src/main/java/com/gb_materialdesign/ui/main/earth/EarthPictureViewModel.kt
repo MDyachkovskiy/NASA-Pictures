@@ -44,7 +44,6 @@ class EarthPictureViewModel (
         override fun onFailure(call: Call<EarthPictureResponse>, t: Throwable) {
             liveData.postValue(AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
-
     }
 
     private fun checkResponse(serverResponse: EarthPictureResponse): AppState {
@@ -64,5 +63,4 @@ class EarthPictureViewModel (
         liveData.value = AppState.Loading
         earthPictureRepository.getPicturesOfEarth(date, callback)
     }
-
 }

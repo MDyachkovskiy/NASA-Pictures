@@ -5,36 +5,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import coil.load
 import com.gb_materialdesign.R
-import com.gb_materialdesign.adapters.ViewPagerAdapter
-import com.gb_materialdesign.databinding.FragmentEarthBinding
-import com.gb_materialdesign.ui.main.appState.AppStateRenderer
-import com.google.android.material.tabs.TabLayout
-import com.google.android.material.tabs.TabLayoutMediator
-import java.text.SimpleDateFormat
-import java.util.*
+import com.gb_materialdesign.databinding.FragmentEarthPictureBinding
+import com.gb_materialdesign.model.earthPicture.EarthPictureResponseItem
+import com.gb_materialdesign.utils.DSCOVR_EPIC_DOMAIN
 
-class EarthFragment : Fragment() {
+class EarthPictureFragment : Fragment() {
 
-    private var _binding: FragmentEarthBinding? = null
+    private var _binding: FragmentEarthPictureBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var parentView: View
-
-    private val viewModel: EarthPictureViewModel by lazy {
-        ViewModelProvider.NewInstanceFactory().create(EarthPictureViewModel::class.java)
-    }
-
-    private val dataRenderer by lazy{
-        AppStateRenderer(parentView) { viewModel.getLiveData(getTheDateInFormat(0))}
-    }
+    private lateinit var earthPicture: EarthPictureResponseItem
 
     companion object {
-        fun newInstance() = EarthFragment()
-        private const val EARTH_TODAY = 0
-        private const val EARTH_YESTERDAY = 1
-        private const val EARTH_DAY_BEFORE_YESTERDAY = 2
+        fun newInstance(picture : EarthPictureResponseItem): EarthPictureFragment {
+            val fragment = EarthPictureFragment()
+            fragment.arguments = Bundle().apply {
+                putParcelable("picture", picture)
+            }
+            return fragment
+        }
     }
 
     override fun onCreateView(
@@ -42,44 +33,49 @@ class EarthFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        _binding = FragmentEarthBinding.inflate(inflater, container, false)
-
-        binding.earthViewPager.adapter = ViewPagerAdapter(requireActivity(), context)
-        setTabs()
-
+        _binding = FragmentEarthPictureBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        parentView = binding.fragmentEarth
-        super.onViewCreated(view, savedInstanceState)
+
+        earthPicture = arguments?.getParcelable("picture")?: EarthPictureResponseItem()
+
+        displayPicture(earthPicture)
     }
 
-    private fun setTabs() {
-        TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager,
-            object: TabLayoutMediator.TabConfigurationStrategy {
-                override fun onConfigureTab(tab: TabLayout.Tab, position: Int) {
-                    tab.text = when (position) {
-                        EARTH_TODAY -> getString(R.string.tabToday)
-                        EARTH_YESTERDAY -> getString(R.string.tabYesterday)
-                        EARTH_DAY_BEFORE_YESTERDAY -> getString(R.string.tabBeforeYesterday)
-                        else -> getString(R.string.tabToday)
-                    }
-                }
-            }).attach()
+    private fun displayPicture(earthPicture: EarthPictureResponseItem) {
+
+        with (binding) {
+            pictureTitle.text = earthPicture.caption
+
+            val url = getCorrectUrl(earthPicture)
+            earthImage.load(url){
+                lifecycle(this@EarthPictureFragment)
+                error(R.drawable.ic_load_error_vector)
+                placeholder(R.drawable.ic_no_photo_vector)
+                crossfade(true)
+            }
+
+            pictureDate.text = earthPicture.date
+
+            coordinateLat.text = earthPicture.centroidCoordinates?.lat.toString()
+            coordinateLon.text = earthPicture.centroidCoordinates?.lon.toString()
+        }
+    }
+
+    private fun getCorrectUrl(data: EarthPictureResponseItem): String {
+
+        val date = data.date
+        val year = date?.substring(0, 4)
+        val month = date?.substring(5, 7)
+        val day = date?.substring(8, 10)
+
+        return DSCOVR_EPIC_DOMAIN + year + "/" + month + "/" + day + "/png/" + data.image + ".png"
     }
 
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    private fun getTheDateInFormat (decreaseDays: Int) : String {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE, -decreaseDays)
-        val date = calendar.time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return dateFormat.format(date)
     }
 }

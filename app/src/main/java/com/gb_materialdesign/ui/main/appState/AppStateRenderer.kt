@@ -8,7 +8,7 @@ class AppStateRenderer (
     private val parentView: View,
     private val action: (View) -> Unit
 ) {
-    fun render (appState: AppState) {
+    fun render (appState: AppState?) {
         val loadindLayout = parentView.findViewById<View>(R.id.includedLoadingLayout)
 
         if(loadindLayout != null) {
@@ -23,9 +23,14 @@ class AppStateRenderer (
                 AppState.Loading -> {
                     loadindLayout.visibility = View.VISIBLE
                 }
-                is AppState.Success -> {
+                is AppState.SuccessTelescope -> {
                     loadindLayout.visibility = View.GONE
                 }
+
+                is AppState.SuccessEarthPicture -> {
+                    loadindLayout.visibility = View.GONE
+                }
+                else -> return
             }
         }
     }

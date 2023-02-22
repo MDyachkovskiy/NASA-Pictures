@@ -7,7 +7,7 @@ import retrofit2.http.Query
 
 interface PictureOfEarthAPI {
 
-    @GET()
+    @GET("api/enhanced/")
     fun getPicturesOfEarth(
         @Query("date") date:String
     ) : Call<EarthPictureResponse>

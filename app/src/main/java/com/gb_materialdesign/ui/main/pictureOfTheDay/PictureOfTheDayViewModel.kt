@@ -71,5 +71,4 @@ class PictureOfTheDayViewModel(
         liveData.value = AppState.Loading
         pictureOfTheDayRepository.getPictureOfTheDay(callback)
     }
-
 }
