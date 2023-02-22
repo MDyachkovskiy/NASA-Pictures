@@ -13,7 +13,7 @@ import coil.load
 import com.gb_materialdesign.MainActivity
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentPictureOfTheDayBinding
-import com.gb_materialdesign.model.PictureOfTheDayResponse
+import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.ui.main.earth.EarthFragment
@@ -88,7 +88,7 @@ class PictureOfTheDayFragment : Fragment() {
         dataRenderer.render(appState)
 
         when (appState) {
-            is AppState.Success -> {
+            is AppState.SuccessTelescope -> {
                 displayData(appState.pictureOfTheDay)
             }
             else -> return

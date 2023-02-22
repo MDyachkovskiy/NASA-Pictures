@@ -1,4 +1,4 @@
-package com.gb_materialdesign.model
+package com.gb_materialdesign.model.pictureOfTheDay
 
 
 import com.google.gson.annotations.SerializedName

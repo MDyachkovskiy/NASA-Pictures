@@ -2,10 +2,10 @@ package com.gb_materialdesign.ui.main.pictureOfTheDay
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gb_materialdesign.model.PictureOfTheDayResponse
-import com.gb_materialdesign.model.RemoteSourceNasaAPI
-import com.gb_materialdesign.repository.PictureOfTheDayRepository
-import com.gb_materialdesign.repository.PictureOfTheDayRepositoryImpl
+import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
+import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
+import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepository
+import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepositoryImpl
 import com.gb_materialdesign.ui.main.appState.AppState
 import retrofit2.Call
 import retrofit2.Response
@@ -50,7 +50,7 @@ class PictureOfTheDayViewModel(
         return if (serverResponse == null) {
             AppState.Error(Throwable(CORRUPTED_DATA))
         } else {
-            AppState.Success(serverResponse)
+            AppState.SuccessTelescope(serverResponse)
         }
     }
 

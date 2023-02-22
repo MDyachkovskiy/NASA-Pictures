@@ -5,16 +5,30 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.gb_materialdesign.R
 import com.gb_materialdesign.adapters.ViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentEarthBinding
+import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import java.text.SimpleDateFormat
+import java.util.*
 
 class EarthFragment : Fragment() {
 
     private var _binding: FragmentEarthBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var parentView: View
+
+    private val viewModel: EarthPictureViewModel by lazy {
+        ViewModelProvider.NewInstanceFactory().create(EarthPictureViewModel::class.java)
+    }
+
+    private val dataRenderer by lazy{
+        AppStateRenderer(parentView) { viewModel.getLiveData(getTheDateInFormat(0))}
+    }
 
     companion object {
         fun newInstance() = EarthFragment()
@@ -37,6 +51,11 @@ class EarthFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        parentView = binding.fragmentEarth
+        super.onViewCreated(view, savedInstanceState)
+    }
+
     private fun setTabs() {
         TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager,
             object: TabLayoutMediator.TabConfigurationStrategy {
@@ -56,4 +75,11 @@ class EarthFragment : Fragment() {
         super.onDestroyView()
     }
 
+    private fun getTheDateInFormat (decreaseDays: Int) : String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, -decreaseDays)
+        val date = calendar.time
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        return dateFormat.format(date)
+    }
 }

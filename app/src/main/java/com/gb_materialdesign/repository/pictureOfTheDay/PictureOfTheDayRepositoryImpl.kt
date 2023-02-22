@@ -1,7 +1,7 @@
-package com.gb_materialdesign.repository
+package com.gb_materialdesign.repository.pictureOfTheDay
 
-import com.gb_materialdesign.model.PictureOfTheDayResponse
-import com.gb_materialdesign.model.RemoteSourceNasaAPI
+import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
+import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import retrofit2.Callback
 
 class PictureOfTheDayRepositoryImpl (

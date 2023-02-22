@@ -1,4 +1,4 @@
-package com.gb_materialdesign.model
+package com.gb_materialdesign.model.pictureOfTheDay
 
 import retrofit2.Call
 import retrofit2.http.GET

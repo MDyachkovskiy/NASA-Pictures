@@ -1,6 +1,7 @@
 package com.gb_materialdesign.ui.main.appState
 
-import com.gb_materialdesign.model.PictureOfTheDayResponse
+import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
+import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
 
 sealed class AppState {
 
@@ -8,5 +9,7 @@ sealed class AppState {
 
     data class Error(val error: Throwable) : AppState()
 
-    data class Success (val pictureOfTheDay: PictureOfTheDayResponse) : AppState()
+    data class SuccessTelescope (val pictureOfTheDay: PictureOfTheDayResponse) : AppState()
+
+    data class SuccessEarthPicture (val earthPictures: EarthPictureResponse) : AppState()
 }
