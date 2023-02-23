@@ -1,11 +1,17 @@
 package com.gb_materialdesign.ui.main.earth
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentEarthPictureBinding
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponseItem
@@ -50,11 +56,38 @@ class EarthPictureFragment : Fragment() {
             pictureTitle.text = earthPicture.caption
 
             val url = getCorrectUrl(earthPicture)
-            earthImage.load(url){
-                lifecycle(this@EarthPictureFragment)
-                error(R.drawable.ic_load_error_vector)
-                placeholder(R.drawable.ic_no_photo_vector)
-                crossfade(true)
+
+            val options = RequestOptions()
+                .error(R.drawable.ic_load_error_vector)
+                .placeholder(R.drawable.ic_no_photo_vector)
+
+            activity?.let {
+                Glide.with(it)
+                    .load(url)
+                    .apply(options)
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar.visibility = View.GONE
+                            return false
+                        }
+
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar.visibility = View.GONE
+                            return false
+                        }
+                    })
+                    .into(earthImage)
             }
 
             pictureDate.text = earthPicture.date
@@ -71,7 +104,7 @@ class EarthPictureFragment : Fragment() {
         val month = date?.substring(5, 7)
         val day = date?.substring(8, 10)
 
-        return DSCOVR_EPIC_DOMAIN + year + "/" + month + "/" + day + "/png/" + data.image + ".png"
+        return DSCOVR_EPIC_DOMAIN + year + "/" + month + "/" + day + "/jpg/" + data.image + ".jpg"
     }
 
     override fun onDestroyView() {
