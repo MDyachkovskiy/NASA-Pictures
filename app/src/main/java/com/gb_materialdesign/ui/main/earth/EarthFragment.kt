@@ -4,12 +4,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.gb_materialdesign.R
 import com.gb_materialdesign.adapters.ViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentEarthBinding
+import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
+import com.google.android.material.tabs.TabLayoutMediator
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,8 +28,8 @@ class EarthFragment : Fragment() {
         ViewModelProvider.NewInstanceFactory().create(EarthPictureViewModel::class.java)
     }
 
-    private val dataRenderer by lazy{
-        AppStateRenderer(parentView) { viewModel.getLiveData(getTheDateInFormat(0))}
+    private val dataRenderer by lazy {
+        AppStateRenderer(parentView) { viewModel.getLiveData(getTheDateInFormat(0)) }
     }
 
     companion object {
@@ -46,7 +50,7 @@ class EarthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         parentView = binding.fragmentEarth
 
-        viewModel.getLiveData(getTheDateInFormat(0)).observe(viewLifecycleOwner){
+        viewModel.getLiveData(getTheDateInFormat(0)).observe(viewLifecycleOwner) {
             renderData(it)
         }
     }
@@ -54,11 +58,16 @@ class EarthFragment : Fragment() {
     private fun renderData(appState: AppState?) {
         dataRenderer.render(appState)
 
-        when(appState) {
+        when (appState) {
             is AppState.SuccessEarthPicture -> {
-                binding.earthViewPager.adapter = ViewPagerAdapter(requireActivity(),
+
+                val pictures = appState.earthPictures
+                binding.earthViewPager.adapter = ViewPagerAdapter(
+                    requireActivity(),
                     context,
-                appState.earthPictures)
+                    pictures
+                )
+                setTabs(pictures)
             }
             else -> return
         }
@@ -69,11 +78,21 @@ class EarthFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun getTheDateInFormat (decreaseDays: Int) : String {
+    private fun getTheDateInFormat(decreaseDays: Int): String {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DATE, -decreaseDays)
         val date = calendar.time
         val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
         return dateFormat.format(date)
+    }
+
+    private fun setTabs(pictures: EarthPictureResponse) {
+        TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager) { tab, position ->
+            val picture = pictures[position]
+            context?.let {
+                tab.icon = ContextCompat.getDrawable(it, R.drawable.ic_earth)
+            }
+            tab.text = picture.date?.substring(11, 19)
+        }.attach()
     }
 }

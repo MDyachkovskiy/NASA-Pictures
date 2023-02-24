@@ -39,6 +39,7 @@
     <string name="earthPictureDate">Дата и время снимка:</string>
     <string name="pictureCoordinates">Координаты снимка</string>
     <string name="coordinatesLon">LON</string>
-    <string name="cooordinatesLat">LAT</string>
+    <string name="coordinatesLat">LAT</string>
+    <string name="tab_layout_sometime">в какое-то время</string>
 
 </resources>
