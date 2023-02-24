@@ -3,7 +3,7 @@ package com.gb_materialdesign
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.gb_materialdesign.databinding.ActivityMainBinding
-import com.gb_materialdesign.ui.main.PictureOfTheDayFragment
+import com.gb_materialdesign.ui.main.pictureOfTheDay.PictureOfTheDayFragment
 
 class MainActivity : AppCompatActivity() {
 
