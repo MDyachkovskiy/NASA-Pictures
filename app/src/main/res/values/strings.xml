@@ -16,4 +16,10 @@
     <string name="chipYesterday">yesterday</string>
     <string name="chipBeforeYesterday">day before yesterday</string>
 
+    <!-- Color styles titles -->
+    <string name="colorThemeTitle">Выберите цветовую тему</string>
+    <string name="jupiter_style_title">Юпитер</string>
+    <string name="mars_style_title">Марс</string>
+    <string name="moon_style_title">Луна</string>
+
 </resources>

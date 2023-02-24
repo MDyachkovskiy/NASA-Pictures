@@ -17,6 +17,7 @@ import com.gb_materialdesign.model.PictureOfTheDayResponse
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
+import com.gb_materialdesign.ui.main.settings.SettingsFragment
 import com.gb_materialdesign.utils.toast
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -145,6 +146,13 @@ class PictureOfTheDayFragment : Fragment() {
                 }
             }
             R.id.app_bar_fav -> toast("Favourite")
+
+            R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
+                .hide(this)
+                .add(R.id.container, SettingsFragment.newInstance())
+                .addToBackStack("tag")
+                .commit()
+
         }
         return super.onOptionsItemSelected(item)
     }
