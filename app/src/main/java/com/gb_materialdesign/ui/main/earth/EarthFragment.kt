@@ -1,12 +1,15 @@
 package com.gb_materialdesign.ui.main.earth
 
+import android.graphics.Typeface
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewpager2.widget.ViewPager2
 import com.gb_materialdesign.R
 import com.gb_materialdesign.adapters.ViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentEarthBinding
@@ -32,6 +35,34 @@ class EarthFragment : Fragment() {
         AppStateRenderer(parentView) { viewModel.getLiveData(getTheDateInFormat(0)) }
     }
 
+    private val onPageChangeListener = object : ViewPager2.OnPageChangeCallback() {
+        override fun onPageSelected(position: Int) {
+
+            val tabCount = binding.earthViewPager.adapter?.itemCount
+            for (i in 0 until (tabCount ?: 0)) {
+
+                context?.let {
+
+                    val selectedTab = binding.earthTabLayout.getTabAt(i)
+                    val customTabView = selectedTab?.customView as? AppCompatTextView
+                    val icon = ContextCompat.getDrawable(it, R.drawable.ic_earth)?.mutate()
+
+                    if (i == position) {
+                        val color = resources.getColor(R.color.textColorPrimaryJupiterTheme)
+                        icon?.setTint(color)
+
+                        customTabView?.setTextColor(color)
+                        customTabView?.setTypeface(null, Typeface.BOLD)
+                        customTabView?.setCompoundDrawablesWithIntrinsicBounds(
+                            icon, null, null, null)
+                    } else {
+                        customTabView?.setTypeface(null, Typeface.NORMAL)
+                    }
+                }
+            }
+        }
+    }
+
     companion object {
         fun newInstance() = EarthFragment()
     }
@@ -50,6 +81,8 @@ class EarthFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         parentView = binding.fragmentEarth
 
+        binding.earthViewPager.registerOnPageChangeCallback(onPageChangeListener)
+
         viewModel.getLiveData(getTheDateInFormat(0)).observe(viewLifecycleOwner) {
             renderData(it)
         }
@@ -62,11 +95,13 @@ class EarthFragment : Fragment() {
             is AppState.SuccessEarthPicture -> {
 
                 val pictures = appState.earthPictures
+
                 binding.earthViewPager.adapter = ViewPagerAdapter(
                     requireActivity(),
                     context,
                     pictures
                 )
+
                 setTabs(pictures)
             }
             else -> return
@@ -90,9 +125,22 @@ class EarthFragment : Fragment() {
         TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager) { tab, position ->
             val picture = pictures[position]
             context?.let {
-                tab.icon = ContextCompat.getDrawable(it, R.drawable.ic_earth)
+
+                val color = R.color.colorPrimaryGreyTheme
+
+                val layoutInflater = LayoutInflater.from(it)
+                val tabLayout = layoutInflater.inflate(R.layout.view_pager_custom_tab_earth, null)
+                    .findViewById<AppCompatTextView>(R.id.tab_image_textview)
+                tabLayout.text =
+                    picture.date?.substring(11, 19) ?: getString(R.string.tab_layout_sometime)
+                tabLayout.setTextColor(ContextCompat.getColor(it, color))
+
+                val icon = ContextCompat.getDrawable(it, R.drawable.ic_earth)
+                icon?.setTint(ContextCompat.getColor(it, color))
+                tabLayout.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null)
+
+                tab.customView = tabLayout
             }
-            tab.text = picture.date?.substring(11, 19)
         }.attach()
     }
 }

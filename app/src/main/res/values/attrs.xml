@@ -3,4 +3,12 @@
 
     <attr name="bottomAppBarColor" format="color" />
 
+    <attr name="selected_tab_icon_color" format="color" />
+
+    <attr name="selected_tab_text_color" format="color" />
+
+    <attr name="tab_text_color" format="color" />
+
+    <attr name="tab_color" format="color" />
+
 </resources>
