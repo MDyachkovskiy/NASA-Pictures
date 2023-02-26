@@ -3,6 +3,7 @@ package com.gb_materialdesign.model.pictureOfTheDay
 import com.gb_materialdesign.BuildConfig
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.gb_materialdesign.model.earthPicture.PictureOfEarthAPI
+import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -65,6 +66,10 @@ class RemoteSourceNasaAPI {
 
     fun getPicturesOfEarthByDate (date: String, callback: Callback<EarthPictureResponse>){
         earthPictureAPI.getPicturesOfEarth(date).enqueue(callback)
+    }
+
+    fun getPicturesOfMars (date: String, camera: String, callback: Callback<MarsPictureResponse>){
+        nasaAPI.getPicturesOfMars(NASA_API_KEY, date, camera).enqueue(callback)
     }
 
 }
