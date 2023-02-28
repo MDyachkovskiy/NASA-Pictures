@@ -1,9 +1,11 @@
 package com.gb_materialdesign.model.pictureOfTheDay
 
-import com.gb_materialdesign.BuildConfig
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.gb_materialdesign.model.earthPicture.PictureOfEarthAPI
 import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
+import com.gb_materialdesign.utils.EARTH_PICTURE_DOMAIN
+import com.gb_materialdesign.utils.NASA_API_KEY
+import com.gb_materialdesign.utils.NASA_DOMAIN
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -12,12 +14,6 @@ import retrofit2.Callback
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
-
-private const val NASA_DOMAIN = "https://api.nasa.gov/"
-
-private const val EARTH_PICTURE_DOMAIN = "https://epic.gsfc.nasa.gov/"
-
-private const val NASA_API_KEY = BuildConfig.NASA_API_KEY
 
 class RemoteSourceNasaAPI {
 
@@ -68,7 +64,7 @@ class RemoteSourceNasaAPI {
         earthPictureAPI.getPicturesOfEarth(date).enqueue(callback)
     }
 
-    fun getPicturesOfMars (date: String, camera: String, callback: Callback<MarsPictureResponse>){
+    fun getPicturesOfMars (date: String, camera: String?, callback: Callback<MarsPictureResponse>){
         nasaAPI.getPicturesOfMars(NASA_API_KEY, date, camera).enqueue(callback)
     }
 

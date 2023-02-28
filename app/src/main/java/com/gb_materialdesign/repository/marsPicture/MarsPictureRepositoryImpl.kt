@@ -10,7 +10,7 @@ class MarsPictureRepositoryImpl (
 
     override fun getPictureOfMars(
         date: String,
-        camera: String,
+        camera: String?,
         callback: Callback<MarsPictureResponse>
     ) {
         remoteSourceNasaAPI.getPicturesOfMars(date, camera, callback)

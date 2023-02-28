@@ -7,12 +7,11 @@ import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepository
 import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepositoryImpl
 import com.gb_materialdesign.ui.main.appState.AppState
+import com.gb_materialdesign.utils.CORRUPTED_DATA
+import com.gb_materialdesign.utils.REQUEST_ERROR
+import com.gb_materialdesign.utils.SERVER_ERROR
 import retrofit2.Call
 import retrofit2.Response
-
-private const val SERVER_ERROR = "Ошибка сервера"
-private const val REQUEST_ERROR = "Ошибка запроса на сервер"
-private const val CORRUPTED_DATA = "Неполные данные"
 
 class PictureOfTheDayViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),

@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.gb_materialdesign.databinding.ActivityMainBinding
 import com.gb_materialdesign.ui.main.earth.EarthFragment
+import com.gb_materialdesign.ui.main.mars.MarsFragment
 import com.gb_materialdesign.ui.main.pictureOfTheDay.PictureOfTheDayFragment
 import com.gb_materialdesign.ui.main.settings.SettingsFragment
 
@@ -39,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.navigation_mars -> {
-                    replaceFragment(EarthFragment())
+                    replaceFragment(MarsFragment())
                     true
                 }
                 R.id.navigation_weather -> {

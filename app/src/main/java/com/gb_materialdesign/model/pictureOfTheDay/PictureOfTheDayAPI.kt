@@ -6,7 +6,6 @@ import retrofit2.http.GET
 import retrofit2.http.Query
 
 private const val END_POINT = "planetary/apod"
-
 private const val MARS_END_POINT = "mars-photos/api/v1/rovers/curiosity/photos"
 
 interface PictureOfTheDayAPI {
@@ -26,6 +25,6 @@ interface PictureOfTheDayAPI {
     fun getPicturesOfMars(
         @Query("api_key") apiKey:String,
         @Query("earth_date") date:String,
-        @Query("camera") camera:String
+        @Query("camera") camera:String?
     ) : Call<MarsPictureResponse>
 }

@@ -7,12 +7,11 @@ import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import com.gb_materialdesign.repository.earthPicture.EarthPictureRepository
 import com.gb_materialdesign.repository.earthPicture.EarthPictureRepositoryImpl
 import com.gb_materialdesign.ui.main.appState.AppState
+import com.gb_materialdesign.utils.CORRUPTED_DATA
+import com.gb_materialdesign.utils.REQUEST_ERROR
+import com.gb_materialdesign.utils.SERVER_ERROR
 import retrofit2.Call
 import retrofit2.Response
-
-private const val SERVER_ERROR = "Ошибка сервера"
-private const val REQUEST_ERROR = "Ошибка запроса на сервер"
-private const val CORRUPTED_DATA = "Неполные данные"
 
 class EarthPictureViewModel (
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -47,7 +46,7 @@ class EarthPictureViewModel (
     }
 
     private fun checkResponse(serverResponse: EarthPictureResponse): AppState {
-        return if (serverResponse.isNullOrEmpty()) {
+        return if (serverResponse.isEmpty()) {
             AppState.Error(Throwable(CORRUPTED_DATA))
         } else {
             AppState.SuccessEarthPicture(serverResponse)

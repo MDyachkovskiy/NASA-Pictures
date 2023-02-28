@@ -16,9 +16,8 @@ import com.gb_materialdesign.databinding.FragmentEarthBinding
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
+import com.gb_materialdesign.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
-import java.text.SimpleDateFormat
-import java.util.*
 
 class EarthFragment : Fragment() {
 
@@ -111,14 +110,6 @@ class EarthFragment : Fragment() {
     override fun onDestroyView() {
         _binding = null
         super.onDestroyView()
-    }
-
-    private fun getTheDateInFormat(decreaseDays: Int): String {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE, -decreaseDays)
-        val date = calendar.time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return dateFormat.format(date)
     }
 
     private fun setTabs(pictures: EarthPictureResponse) {

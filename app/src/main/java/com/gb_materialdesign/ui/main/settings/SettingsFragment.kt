@@ -18,10 +18,6 @@ class SettingsFragment : Fragment() {
 
     private var currentThemeId = R.style.MyGreyTheme_GB_MaterialDesign
 
-    companion object {
-        fun newInstance() = SettingsFragment()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         activity?.setTheme(currentThemeId)

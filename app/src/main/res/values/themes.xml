@@ -33,6 +33,7 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@color/colorSecondaryGreyTheme</item>
+        <item name="bottomAppBarColor">@color/colorSecondaryGreyTheme</item>
         <!-- Customize your theme here. -->
         <item name="fontFamily">@font/roboto_thin</item>
 
