@@ -16,37 +16,47 @@
             android:padding="10dp">
 
             <com.google.android.material.chip.ChipGroup
-                android:id="@+id/chipGroup"
+                android:id="@+id/chip_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:singleSelection="true"
-                app:checkedChip="@+id/chipToday"
+                app:checkedChip="@+id/chip_today"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipToday"
+                    android:id="@+id/chip_today"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chipToday"
                     style="@style/MyGreyChip.GB_MaterialDesign"/>
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipYesterday"
+                    android:id="@+id/chip_yesterday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chipYesterday"
                     style="@style/MyGreyChip.GB_MaterialDesign"/>
 
                 <com.google.android.material.chip.Chip
-                    android:id="@+id/chipDayBeforeYesterday"
+                    android:id="@+id/chip_day_before_yesterday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chipBeforeYesterday"
                     style="@style/MyGreyChip.GB_MaterialDesign"/>
 
             </com.google.android.material.chip.ChipGroup>
+
+            <include
+                android:id="@+id/included_loading_layout"
+                layout="@layout/loading_layout"
+                android:layout_height="match_parent"
+                android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_layout"
@@ -61,8 +71,8 @@
                 app:helperText="@string/wiki_helper_text"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_wikipedia"
-                app:layout_constraintTop_toBottomOf="@id/chipGroup"
-                app:layout_constraintBottom_toTopOf="@id/pictureOfTheDay"
+                app:layout_constraintTop_toBottomOf="@id/chip_group"
+                app:layout_constraintBottom_toTopOf="@id/picture_of_the_day"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent">
 
@@ -75,7 +85,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.gb_materialdesign.utils.EquilateralImageView
-                android:id="@+id/pictureOfTheDay"
+                android:id="@+id/picture_of_the_day"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/image_8dp"
@@ -86,10 +96,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
-
-            <include
-                android:id="@+id/includedLoadingLayout"
-                layout="@layout/loading_layout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

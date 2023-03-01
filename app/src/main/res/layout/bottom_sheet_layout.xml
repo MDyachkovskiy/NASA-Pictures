@@ -11,7 +11,7 @@
     app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
     <View
-        android:id="@+id/bottomSheetLine"
+        android:id="@+id/bottom_sheet_line"
         android:layout_width="25dp"
         android:layout_height="1dp"
         android:layout_marginTop="5dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/bottomSheetDescriptionHeader"
+        android:id="@+id/bottom_sheet_description_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="10dp"
@@ -31,15 +31,15 @@
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetLine" />
+        app:layout_constraintTop_toBottomOf="@id/bottom_sheet_line" />
 
     <TextView
-        android:id="@+id/bottomSheetDescription"
+        android:id="@+id/bottom_sheet_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginVertical="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/bottomSheetDescriptionHeader" />
+        app:layout_constraintTop_toBottomOf="@id/bottom_sheet_description_header" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

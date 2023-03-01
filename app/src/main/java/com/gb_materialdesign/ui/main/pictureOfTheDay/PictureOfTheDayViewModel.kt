@@ -59,10 +59,12 @@ class PictureOfTheDayViewModel(
     }
 
    fun getPictureOfTheDay() {
-        pictureOfTheDayRepository.getPictureOfTheDay(callback)
+       liveData.value = AppState.Loading
+       pictureOfTheDayRepository.getPictureOfTheDay(callback)
     }
 
     fun getPictureOfTheDayByDate(date: String) {
+        liveData.value = AppState.Loading
         pictureOfTheDayRepository.getPictureOfTheDayByDate(date, callback)
     }
 

@@ -63,6 +63,7 @@ class PictureOfTheDayFragment : Fragment() {
         bottomSheet = view.findViewById(R.id.bottom_sheet_container)
 
         binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
+
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
 
         viewModel.getLiveData().observe(viewLifecycleOwner) {
@@ -90,6 +91,7 @@ class PictureOfTheDayFragment : Fragment() {
         when (appState) {
             is AppState.SuccessTelescope -> {
                 displayData(appState.pictureOfTheDay)
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
             }
             else -> return
         }
@@ -116,9 +118,9 @@ class PictureOfTheDayFragment : Fragment() {
             }
         }
 
-        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescriptionHeader).text = data.title
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = data.title
 
-        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescription).text = data.explanation
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = data.explanation
 
     }
 

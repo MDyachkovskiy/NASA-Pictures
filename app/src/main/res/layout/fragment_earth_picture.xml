@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/earthToday"
+    android:id="@+id/earth_today"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <include
-        android:id="@+id/includedLoadingLayout"
+        android:id="@+id/included_loading_layout"
         layout="@layout/loading_layout" />
 
     <LinearLayout
@@ -20,7 +20,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/pictureTitle"
+            android:id="@+id/picture_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -36,7 +36,7 @@
             android:layout_margin="8dp">
 
             <com.gb_materialdesign.utils.EquilateralImageView
-                android:id="@+id/earthImage"
+                android:id="@+id/earth_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -64,7 +64,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/pictureDate"
+                android:id="@+id/picture_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -74,7 +74,7 @@
         </LinearLayout>
 
         <TextView
-            android:id="@+id/coordinateTitle"
+            android:id="@+id/coordinate_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -99,7 +99,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/coordinateLat"
+                android:id="@+id/coordinate_lat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
@@ -115,7 +115,7 @@
                 android:textStyle="bold"/>
 
             <TextView
-                android:id="@+id/coordinateLon"
+                android:id="@+id/coordinate_lon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"

@@ -67,7 +67,7 @@ class MarsFragment : Fragment() {
 
         val drawerLayout = binding.marsFragment
         childFragmentManager.beginTransaction()
-            .replace(R.id.marsContainer, MarsViewPagerFragment.newInstance(camera))
+            .replace(R.id.mars_container, MarsViewPagerFragment.newInstance(camera))
             .addToBackStack("tag")
             .commit()
         drawerLayout.closeDrawer(GravityCompat.START)
