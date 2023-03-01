@@ -5,6 +5,10 @@
     android:layout_height="match_parent"
     android:id="@+id/fragmentEarth">
 
+    <include
+        android:id="@+id/includedLoadingLayout"
+        layout="@layout/loading_layout" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/earthTabLayout"
         android:layout_width="match_parent"

@@ -65,7 +65,7 @@ class RemoteSourceNasaAPI {
     }
 
     fun getPicturesOfMars (date: String, camera: String?, callback: Callback<MarsPictureResponse>){
-        nasaAPI.getPicturesOfMars(NASA_API_KEY, date, camera).enqueue(callback)
+        nasaAPI.getPicturesOfMars(NASA_API_KEY, "2023-02-20", camera).enqueue(callback)
     }
 
 }

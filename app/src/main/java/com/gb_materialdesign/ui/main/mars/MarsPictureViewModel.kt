@@ -56,6 +56,7 @@ class MarsPictureViewModel(
     fun getLiveData() : MutableLiveData<AppState> = liveData
 
     fun getPicturesOfMarsByCamera (camera: String?, date: String) {
+        liveData.value = AppState.Loading
         marsPictureRepository.getPictureOfMars(date, camera, callback)
     }
 

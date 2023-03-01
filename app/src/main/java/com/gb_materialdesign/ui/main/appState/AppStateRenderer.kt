@@ -23,14 +23,8 @@ class AppStateRenderer (
                 AppState.Loading -> {
                     loadindLayout.visibility = View.VISIBLE
                 }
-                is AppState.SuccessTelescope -> {
-                    loadindLayout.visibility = View.GONE
-                }
 
-                is AppState.SuccessEarthPicture -> {
-                    loadindLayout.visibility = View.GONE
-                }
-                else -> return
+                else -> loadindLayout.visibility = View.GONE
             }
         }
     }

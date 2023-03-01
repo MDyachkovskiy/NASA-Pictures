@@ -9,9 +9,11 @@ import androidx.lifecycle.ViewModelProvider
 import com.gb_materialdesign.adapters.MarsViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentMarsViewpagerBinding
 import com.gb_materialdesign.model.marsPicture.Camera
+import com.gb_materialdesign.model.marsPicture.Photo
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.utils.getTheDateInFormat
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MarsViewPagerFragment: Fragment() {
 
@@ -71,9 +73,18 @@ class MarsViewPagerFragment: Fragment() {
 
                 binding.marsViewPager.adapter = MarsViewPagerAdapter(requireActivity(),
                     context, pictures.photos)
+
+                setTabs(pictures.photos)
             }
             else -> return
         }
+    }
+
+    private fun setTabs(photos: List<Photo>) {
+        TabLayoutMediator(binding.marsTabLayout, binding.marsViewPager) {tab, position ->
+            val marsPicture = photos[position]
+            tab.text = marsPicture.id.toString()
+        }.attach()
     }
 
     override fun onDestroyView() {

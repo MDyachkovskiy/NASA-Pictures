@@ -49,9 +49,9 @@
 
     <!-- Mars Picture fragment -->
     <string name="mars_picture_title">Снимок сделан:</string>
-    <string name="mars_picture_rover">Ровер</string>
-    <string name="mars_picture_date">Дата снимка на Земле</string>
-    <string name="mars_picture_mars_sol">Дата снимка в Марсианских сол</string>
-    <string name="mars_picture_camera">Камера</string>
+    <string name="mars_picture_rover">Ровер -</string>
+    <string name="mars_picture_date">Дата снимка на Земле:</string>
+    <string name="mars_picture_mars_sol">Дата снимка в Марсианских сол:</string>
+    <string name="mars_picture_camera">Камера:</string>
 
 </resources>
