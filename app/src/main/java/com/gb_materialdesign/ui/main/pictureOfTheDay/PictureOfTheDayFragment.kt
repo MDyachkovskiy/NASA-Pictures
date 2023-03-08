@@ -87,7 +87,7 @@ class PictureOfTheDayFragment : Fragment() {
                     animation.duration = 1000
                     animation.fillAfter = true
                     v.startAnimation(animation)
-                    isImageScaled = true
+                    isImageScaled = !isImageScaled
                 } else {
                     val animation = ScaleAnimation(
                         3f, 1f,
@@ -97,7 +97,7 @@ class PictureOfTheDayFragment : Fragment() {
                     animation.duration = 1000
                     animation.fillAfter = true
                     v.startAnimation(animation)
-                    isImageScaled = false
+                    isImageScaled = !isImageScaled
                 }
             }
             true
