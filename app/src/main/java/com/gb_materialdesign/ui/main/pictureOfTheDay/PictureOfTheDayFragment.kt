@@ -12,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Fade
 import androidx.transition.Slide
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
@@ -198,22 +199,29 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun displayViewElements() {
 
-        val transition = TransitionSet()
-        transition.duration = 2000
-        transition.ordering = TransitionSet.ORDERING_SEQUENTIAL
+        val chipTransition = TransitionSet().apply {
+            duration = 1500
+            ordering = TransitionSet.ORDERING_SEQUENTIAL
+            val fade = Slide(Gravity.END)
+            this.addTransition(fade)
+        }
 
-        val fade = Slide(Gravity.END)
-        transition.addTransition(fade)
-
-        TransitionManager.beginDelayedTransition(binding.root, transition)
+        val textInputTransition = TransitionSet().apply {
+            duration = 2000
+            val fade = Fade()
+            this.addTransition(fade)
+        }
 
         if (isViewVisible) {
             return
         } else {
             with(binding){
+                TransitionManager.beginDelayedTransition(chipGroup, chipTransition)
                 chipToday.visibility = View.VISIBLE
                 chipYesterday.visibility = View.VISIBLE
                 chipDayBeforeYesterday.visibility = View.VISIBLE
+
+                TransitionManager.beginDelayedTransition(root, textInputTransition)
                 inputLayout.visibility = View.VISIBLE
             }
             isViewVisible = !isViewVisible
