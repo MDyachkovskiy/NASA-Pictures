@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.transition.TransitionManager
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -47,6 +48,8 @@ class PictureOfTheDayFragment : Fragment() {
     private var pivotX = 0.5f
     private var pivotY = 0.5f
 
+    private var isViewVisible = false
+
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     companion object {
@@ -74,8 +77,6 @@ class PictureOfTheDayFragment : Fragment() {
         parentView = binding.main
 
         bottomSheet = view.findViewById(R.id.bottom_sheet_container)
-
-        binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
 
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         
@@ -134,7 +135,6 @@ class PictureOfTheDayFragment : Fragment() {
         when (appState) {
             is AppState.SuccessTelescope -> {
                 displayData(appState.pictureOfTheDay)
-                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
             }
             else -> return
         }
@@ -195,12 +195,21 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun displayViewElements() {
-        with(binding){
-            chipToday.visibility = View.VISIBLE
-            chipYesterday.visibility = View.VISIBLE
-            chipDayBeforeYesterday.visibility = View.VISIBLE
-            inputLayout.visibility = View.VISIBLE
+
+        TransitionManager.beginDelayedTransition(binding.root)
+
+        if (isViewVisible) {
+            return
+        } else {
+            with(binding){
+                chipToday.visibility = View.VISIBLE
+                chipYesterday.visibility = View.VISIBLE
+                chipDayBeforeYesterday.visibility = View.VISIBLE
+                inputLayout.visibility = View.VISIBLE
+            }
+            isViewVisible = !isViewVisible
         }
+
     }
 
     private fun setBottomAppBar(view: View) {
