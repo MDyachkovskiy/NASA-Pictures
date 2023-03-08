@@ -31,7 +31,7 @@
     <string name="navView_telescope">Телескоп</string>
     <string name="navView_earth">Земля</string>
     <string name="navView_mars">Марс</string>
-    <string name="navView_weather">Погода</string>
+    <string name="navView_space">Космос</string>
     <string name="navView_settings">Настройки</string>
 
     <!-- Earth Picture fragment -->

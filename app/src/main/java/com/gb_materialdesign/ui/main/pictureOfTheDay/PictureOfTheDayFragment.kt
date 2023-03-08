@@ -221,8 +221,10 @@ class PictureOfTheDayFragment : Fragment() {
                 chipYesterday.visibility = View.VISIBLE
                 chipDayBeforeYesterday.visibility = View.VISIBLE
 
-                TransitionManager.beginDelayedTransition(root, textInputTransition)
+                TransitionManager.beginDelayedTransition(inputLayout, textInputTransition)
                 inputLayout.visibility = View.VISIBLE
+
+                TransitionManager.beginDelayedTransition(root)
             }
             isViewVisible = !isViewVisible
         }

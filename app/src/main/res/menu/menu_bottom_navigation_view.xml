@@ -17,9 +17,9 @@
         android:title="@string/navView_mars" />
 
     <item
-        android:id="@+id/navigation_weather"
+        android:id="@+id/navigation_space"
         android:icon="@drawable/ic_system"
-        android:title="@string/navView_weather" />
+        android:title="@string/navView_space" />
 
     <item
         android:id="@+id/navigation_settings"
