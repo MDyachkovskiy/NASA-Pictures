@@ -1,5 +1,7 @@
 <resources >
 
+    <!-- Chip Style -->
+
     <style name="MyGreyChip.GB_MaterialDesign" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipBackgroundColor">@drawable/selector_my_chip_background</item>
         <item name="shapeAppearanceOverlay">@style/MyGreyChip.Shape.GB_MaterialDesign</item>
@@ -10,25 +12,6 @@
         <item name="cornerSize">8dp</item>
     </style>
 
-    <style name="MyGreyTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">#607D8B</item>
-        <item name="colorPrimaryVariant">#CFD8DC</item>
-        <item name="colorOnPrimary">#212121</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">#795548</item>
-        <item name="colorSecondaryVariant">#607D8B</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">#795548</item>
-        <!-- Customize your theme here. -->
-        <item name="fontFamily">@font/roboto_thin</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-    </style>
-
     <style name="MyTextAppearance.AppCompat.Body2" parent="TextAppearance.MaterialComponents.Body2">
         <item name="fontFamily">@font/roboto_mono_thin</item>
         <item name="android:fontFamily">@font/roboto_mono_thin</item>
@@ -36,67 +19,121 @@
         <item name="android:letterSpacing">0.0178571429</item>
     </style>
 
+    <!-- Grey Color Theme -->
 
-    <style name="JupiterTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
+    <style name="MyGreyTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#d7652a</item>
-        <item name="colorPrimaryVariant">#ff9557</item>
-        <item name="colorPrimaryDark">#9f3700</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">#f4bc5d</item>
-        <item name="colorSecondaryVariant">#ffee8d</item>
-        <item name="colorSecondaryContainer">#be8c2e</item>
-        <item name="android:textColorPrimary">#490206</item>
-        <item name="android:textColorSecondary">#360201</item>
-        <!-- Status bar color. -->
-        <item name="bottomAppBarColor">#9f3700</item>
+        <item name="colorPrimary">@color/colorPrimaryGreyTheme</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantGreyTheme</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryGreyTheme</item>
 
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorSecondaryGreyTheme</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantGreyTheme</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@color/colorSecondaryGreyTheme</item>
+        <item name="bottomAppBarColor">@color/colorSecondaryGreyTheme</item>
+        <!-- Customize your theme here. -->
         <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
+        <!-- Secondary brand color. -->
+        <item name="selected_tab_icon_color">@color/colorSecondaryGreyTheme</item>
+        <item name="selected_tab_text_color">@color/colorSecondaryGreyTheme</item>
+        <item name="tab_text_color">@color/colorOnPrimaryGreyTheme</item>
+        <item name="tab_color">@color/colorOnPrimaryGreyTheme</item>
+
     </style>
+
+    <!-- Mars Color Theme -->
 
     <style name="MarsTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#cf231c</item>
-        <item name="colorPrimaryVariant">#ff5d46</item>
-        <item name="colorPrimaryDark">#960000</item>
+        <item name="colorPrimary">@color/colorPrimaryMarsTheme</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantMarsTheme</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkMarsTheme</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#eddfa0</item>
-        <item name="colorSecondaryVariant">#ffffd2</item>
-        <item name="colorSecondaryContainer">#baad71</item>
-        <item name="android:textColorPrimary">#ffffff</item>
-        <item name="android:textColorSecondary">#96130d</item>
+        <item name="colorSecondary">@color/colorSecondaryMarsTheme</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantMarsTheme</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryContainerMarsTheme</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryMarsTheme</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryMarsTheme</item>
         <!-- Status bar color. -->
-        <item name="bottomAppBarColor">#cf231c</item>
+        <item name="bottomAppBarColor">@color/colorPrimaryMarsTheme</item>
 
         <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="selected_tab_icon_color">@color/textColorSecondaryMarsTheme</item>
+        <item name="selected_tab_text_color">@color/textColorSecondaryMarsTheme</item>
+        <item name="tab_text_color">@color/colorOnPrimaryGreyTheme</item>
+        <item name="tab_color">@color/colorOnPrimaryGreyTheme</item>
+
     </style>
+
+    <!-- Jupiter Color Theme -->
+
+    <style name="JupiterTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/colorPrimaryJupiterTheme</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantJupiterTheme</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkJupiterTheme</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/colorSecondaryJupiterTheme</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantJupiterTheme</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryContainerJupiterTheme</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryJupiterTheme</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryJupiterTheme</item>
+        <!-- Status bar color. -->
+        <item name="bottomAppBarColor">@color/colorPrimaryDarkJupiterTheme</item>
+
+        <item name="fontFamily">@font/roboto_thin</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="selected_tab_icon_color">@color/textColorPrimaryJupiterTheme</item>
+        <item name="selected_tab_text_color">@color/textColorPrimaryJupiterTheme</item>
+        <item name="tab_text_color">@color/colorOnPrimaryGreyTheme</item>
+        <item name="tab_color">@color/colorOnPrimaryGreyTheme</item>
+
+    </style>
+
+    <!-- Moon Color Theme -->
 
     <style name="MoonTheme.GB_MaterialDesign" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">#4e5067</item>
-        <item name="colorPrimaryVariant">#7a7c95</item>
-        <item name="colorPrimaryDark">#25283c</item>
+        <item name="colorPrimary">@color/colorPrimaryMoonTheme</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryVariantMoonTheme</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkMoonTheme</item>
+        <item name="colorOnPrimary">@color/colorOnPrimaryMoonTheme</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">#927c91</item>
-        <item name="colorSecondaryVariant">#c3abc1</item>
-        <item name="colorSecondaryContainer">#645063</item>
-        <item name="android:textColorPrimary">#ffffff</item>
-        <item name="android:textColorSecondary">#000000</item>
+        <item name="colorSecondary">@color/colorSecondaryMoonTheme</item>
+        <item name="colorSecondaryVariant">@color/colorSecondaryVariantMoonTheme</item>
+        <item name="colorSecondaryContainer">@color/colorSecondaryContainerMoonTheme</item>
+        <item name="android:textColorPrimary">@color/textColorPrimaryMoonTheme</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryMoonTheme</item>
         <!-- Status bar color. -->
-        <item name="bottomAppBarColor">#25283c</item>
+        <item name="bottomAppBarColor">@color/colorPrimaryDarkMoonTheme</item>
 
         <item name="fontFamily">@font/roboto_thin</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+
+        <item name="selected_tab_icon_color">@color/colorPrimaryDarkMoonTheme</item>
+        <item name="selected_tab_text_color">@color/colorPrimaryDarkMoonTheme</item>
+        <item name="tab_text_color">@color/colorOnPrimaryMoonTheme</item>
+        <item name="tab_color">@color/colorOnPrimaryMoonTheme</item>
+
     </style>
+
+    <!-- FAB Style -->
 
     <style name="MyFAB.GB_MaterialDesign" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="shapeAppearanceOverlay">@style/MyFAB.Shape.GB_MaterialDesign</item>

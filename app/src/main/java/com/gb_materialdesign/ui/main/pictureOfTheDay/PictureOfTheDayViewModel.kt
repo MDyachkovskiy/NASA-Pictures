@@ -2,17 +2,16 @@ package com.gb_materialdesign.ui.main.pictureOfTheDay
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gb_materialdesign.model.PictureOfTheDayResponse
-import com.gb_materialdesign.model.RemoteSourceNasaAPI
-import com.gb_materialdesign.repository.PictureOfTheDayRepository
-import com.gb_materialdesign.repository.PictureOfTheDayRepositoryImpl
+import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
+import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
+import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepository
+import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepositoryImpl
 import com.gb_materialdesign.ui.main.appState.AppState
+import com.gb_materialdesign.utils.CORRUPTED_DATA
+import com.gb_materialdesign.utils.REQUEST_ERROR
+import com.gb_materialdesign.utils.SERVER_ERROR
 import retrofit2.Call
 import retrofit2.Response
-
-private const val SERVER_ERROR = "Ошибка сервера"
-private const val REQUEST_ERROR = "Ошибка запроса на сервер"
-private const val CORRUPTED_DATA = "Неполные данные"
 
 class PictureOfTheDayViewModel(
     private val liveData: MutableLiveData<AppState> = MutableLiveData(),
@@ -50,7 +49,7 @@ class PictureOfTheDayViewModel(
         return if (serverResponse == null) {
             AppState.Error(Throwable(CORRUPTED_DATA))
         } else {
-            AppState.Success(serverResponse)
+            AppState.SuccessTelescope(serverResponse)
         }
     }
 
@@ -60,10 +59,12 @@ class PictureOfTheDayViewModel(
     }
 
    fun getPictureOfTheDay() {
-        pictureOfTheDayRepository.getPictureOfTheDay(callback)
+       liveData.value = AppState.Loading
+       pictureOfTheDayRepository.getPictureOfTheDay(callback)
     }
 
     fun getPictureOfTheDayByDate(date: String) {
+        liveData.value = AppState.Loading
         pictureOfTheDayRepository.getPictureOfTheDayByDate(date, callback)
     }
 
@@ -71,5 +72,4 @@ class PictureOfTheDayViewModel(
         liveData.value = AppState.Loading
         pictureOfTheDayRepository.getPictureOfTheDay(callback)
     }
-
 }

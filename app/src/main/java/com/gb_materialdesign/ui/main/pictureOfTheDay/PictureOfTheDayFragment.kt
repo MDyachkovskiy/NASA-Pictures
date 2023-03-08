@@ -13,18 +13,17 @@ import coil.load
 import com.gb_materialdesign.MainActivity
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentPictureOfTheDayBinding
-import com.gb_materialdesign.model.PictureOfTheDayResponse
+import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
+import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
-import com.gb_materialdesign.ui.main.settings.SettingsFragment
-import com.gb_materialdesign.utils.toast
+import com.gb_materialdesign.utils.WIKIPEDIA_DOMAIN
+import com.gb_materialdesign.utils.getTheDateInFormat
 import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import java.text.SimpleDateFormat
-import java.util.*
 
-private const val WIKIPEDIA_DOMAIN = "https://en.wikipedia.org/wiki/"
+
 
 class PictureOfTheDayFragment : Fragment() {
 
@@ -38,7 +37,6 @@ class PictureOfTheDayFragment : Fragment() {
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     companion object {
-        fun newInstance() = PictureOfTheDayFragment()
         private var isMain = true
     }
 
@@ -65,6 +63,7 @@ class PictureOfTheDayFragment : Fragment() {
         bottomSheet = view.findViewById(R.id.bottom_sheet_container)
 
         binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
+
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
 
         viewModel.getLiveData().observe(viewLifecycleOwner) {
@@ -90,8 +89,9 @@ class PictureOfTheDayFragment : Fragment() {
         dataRenderer.render(appState)
 
         when (appState) {
-            is AppState.Success -> {
+            is AppState.SuccessTelescope -> {
                 displayData(appState.pictureOfTheDay)
+                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
             }
             else -> return
         }
@@ -118,9 +118,9 @@ class PictureOfTheDayFragment : Fragment() {
             }
         }
 
-        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescriptionHeader).text = data.title
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = data.title
 
-        bottomSheet.findViewById<TextView>(R.id.bottomSheetDescription).text = data.explanation
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = data.explanation
 
     }
 
@@ -145,14 +145,11 @@ class PictureOfTheDayFragment : Fragment() {
                     BottomNavigationDrawerFragment().show(it.supportFragmentManager,"tag")
                 }
             }
-            R.id.app_bar_fav -> toast("Favourite")
-
-            R.id.app_bar_settings -> requireActivity().supportFragmentManager.beginTransaction()
+            R.id.app_bar_fav -> requireActivity().supportFragmentManager.beginTransaction()
                 .hide(this)
-                .add(R.id.container, SettingsFragment.newInstance())
+                .add(R.id.container, EarthFragment.newInstance())
                 .addToBackStack("tag")
                 .commit()
-
         }
         return super.onOptionsItemSelected(item)
     }
@@ -201,13 +198,5 @@ class PictureOfTheDayFragment : Fragment() {
         binding.chipDayBeforeYesterday.setOnClickListener {
             viewModel.getPictureOfTheDayByDate(getTheDateInFormat(2))
         }
-    }
-
-    private fun getTheDateInFormat (decreaseDays: Int) : String {
-        val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE, -decreaseDays)
-        val date = calendar.time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        return dateFormat.format(date)
     }
 }

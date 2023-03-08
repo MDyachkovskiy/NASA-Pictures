@@ -1,6 +1,11 @@
-package com.gb_materialdesign.model
+package com.gb_materialdesign.model.pictureOfTheDay
 
-import com.gb_materialdesign.BuildConfig
+import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
+import com.gb_materialdesign.model.earthPicture.PictureOfEarthAPI
+import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
+import com.gb_materialdesign.utils.EARTH_PICTURE_DOMAIN
+import com.gb_materialdesign.utils.NASA_API_KEY
+import com.gb_materialdesign.utils.NASA_DOMAIN
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -10,10 +15,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
-private const val NASA_DOMAIN = "https://api.nasa.gov/"
-
-private const val NASA_API_KEY = BuildConfig.NASA_API_KEY
-
 class RemoteSourceNasaAPI {
 
     private val nasaAPI = Retrofit.Builder()
@@ -22,6 +23,12 @@ class RemoteSourceNasaAPI {
         .client(createOkHttpClient(PictureOfTheDayInterceptor()))
         .build()
         .create(PictureOfTheDayAPI::class.java)
+
+    private val earthPictureAPI = Retrofit.Builder()
+        .baseUrl(EARTH_PICTURE_DOMAIN)
+        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
+        .build()
+        .create(PictureOfEarthAPI::class.java)
 
     private fun createOkHttpClient(
         interceptor: Interceptor
@@ -51,6 +58,14 @@ class RemoteSourceNasaAPI {
 
     fun getPictureOfTheDayByDate (date: String, callback: Callback<PictureOfTheDayResponse>){
         nasaAPI.getPictureOfTheDayByDate(NASA_API_KEY, date).enqueue(callback)
+    }
+
+    fun getPicturesOfEarthByDate (date: String, callback: Callback<EarthPictureResponse>){
+        earthPictureAPI.getPicturesOfEarth(date).enqueue(callback)
+    }
+
+    fun getPicturesOfMars (date: String, camera: String?, callback: Callback<MarsPictureResponse>){
+        nasaAPI.getPicturesOfMars(NASA_API_KEY, "2023-02-20", camera).enqueue(callback)
     }
 
 }
