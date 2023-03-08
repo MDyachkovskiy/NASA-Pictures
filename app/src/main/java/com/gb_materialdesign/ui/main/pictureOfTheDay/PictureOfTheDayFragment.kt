@@ -4,6 +4,8 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
@@ -33,6 +35,11 @@ class PictureOfTheDayFragment : Fragment() {
     private lateinit var parentView: View
 
     private lateinit var bottomSheet: View
+
+    private var isImageScaled = false
+
+    private var pivotX = 0.5f
+    private var pivotY = 0.5f
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -65,6 +72,36 @@ class PictureOfTheDayFragment : Fragment() {
         binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
 
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        
+        binding.pictureOfTheDay.setOnTouchListener { v, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN){
+                v.performClick()
+                if (!isImageScaled) {
+                    pivotX = motionEvent.x / v.width
+                    pivotY = motionEvent.y / v.height
+                    val animation = ScaleAnimation(
+                        1f, 3f,
+                        1f, 3f,
+                        Animation.RELATIVE_TO_SELF, pivotX,
+                        Animation.RELATIVE_TO_SELF, pivotY)
+                    animation.duration = 1000
+                    animation.fillAfter = true
+                    v.startAnimation(animation)
+                    isImageScaled = true
+                } else {
+                    val animation = ScaleAnimation(
+                        3f, 1f,
+                        3f, 1f,
+                    Animation.RELATIVE_TO_SELF, pivotX,
+                    Animation.RELATIVE_TO_SELF, pivotY)
+                    animation.duration = 1000
+                    animation.fillAfter = true
+                    v.startAnimation(animation)
+                    isImageScaled = false
+                }
+            }
+            true
+        }
 
         viewModel.getLiveData().observe(viewLifecycleOwner) {
             renderData(it)
