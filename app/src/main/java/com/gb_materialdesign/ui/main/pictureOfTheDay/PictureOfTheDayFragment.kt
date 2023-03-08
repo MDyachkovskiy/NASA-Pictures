@@ -4,7 +4,6 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -13,6 +12,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -196,7 +198,14 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun displayViewElements() {
 
-        TransitionManager.beginDelayedTransition(binding.root)
+        val transition = TransitionSet()
+        transition.duration = 2000
+        transition.ordering = TransitionSet.ORDERING_SEQUENTIAL
+
+        val fade = Slide(Gravity.END)
+        transition.addTransition(fade)
+
+        TransitionManager.beginDelayedTransition(binding.root, transition)
 
         if (isViewVisible) {
             return
@@ -209,7 +218,6 @@ class PictureOfTheDayFragment : Fragment() {
             }
             isViewVisible = !isViewVisible
         }
-
     }
 
     private fun setBottomAppBar(view: View) {
