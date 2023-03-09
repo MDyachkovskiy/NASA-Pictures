@@ -1,5 +1,6 @@
 package com.gb_materialdesign.model.pictureOfTheDay
 
+import com.gb_materialdesign.model.asteroids.AsteroidsListResponse
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.gb_materialdesign.model.earthPicture.PictureOfEarthAPI
 import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
@@ -66,6 +67,10 @@ class RemoteSourceNasaAPI {
 
     fun getPicturesOfMars (date: String, camera: String?, callback: Callback<MarsPictureResponse>){
         nasaAPI.getPicturesOfMars(NASA_API_KEY, "2023-02-20", camera).enqueue(callback)
+    }
+
+    fun getAsteroidsList (date: String?, callback: Callback<AsteroidsListResponse>){
+        nasaAPI.getAsteroidsList(NASA_API_KEY, date, date).enqueue(callback)
     }
 
 }
