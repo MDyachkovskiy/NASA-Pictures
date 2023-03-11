@@ -1,5 +1,7 @@
 package com.gb_materialdesign.model.pictureOfTheDay
 
+import android.util.Log
+import com.gb_materialdesign.model.asteroids.AsteroidsListResponse
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.gb_materialdesign.model.earthPicture.PictureOfEarthAPI
 import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
@@ -48,7 +50,13 @@ class RemoteSourceNasaAPI {
 
         @kotlin.jvm.Throws(IOException::class)
         override fun intercept(chain: Interceptor.Chain): okhttp3.Response {
-            return chain.proceed(chain.request())
+            val request = chain.request()
+            Log.d("MyInterceptor","Request: ${request.method} ${request.url}")
+
+            val response = chain.proceed(request)
+            Log.d("MyInterceptor", "Response: ${response.code} ${response.message}")
+
+            return response
         }
     }
 
@@ -68,4 +76,7 @@ class RemoteSourceNasaAPI {
         nasaAPI.getPicturesOfMars(NASA_API_KEY, "2023-02-20", camera).enqueue(callback)
     }
 
+    fun getAsteroidsList (date: String?, callback: Callback<AsteroidsListResponse>){
+        nasaAPI.getAsteroidsList(NASA_API_KEY, "2023-03-10", date).enqueue(callback)
+    }
 }

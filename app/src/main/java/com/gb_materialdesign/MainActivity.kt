@@ -8,6 +8,7 @@ import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.mars.MarsFragment
 import com.gb_materialdesign.ui.main.pictureOfTheDay.PictureOfTheDayFragment
 import com.gb_materialdesign.ui.main.settings.SettingsFragment
+import com.gb_materialdesign.ui.main.space.SpaceFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,8 +44,8 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(MarsFragment())
                     true
                 }
-                R.id.navigation_weather -> {
-                    replaceFragment(EarthFragment())
+                R.id.navigation_space -> {
+                    replaceFragment(SpaceFragment())
                     true
                 }
                 R.id.navigation_settings -> {
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.navigation_mars -> {
                 }
-                R.id.navigation_weather -> {
+                R.id.navigation_space -> {
                 }
                 R.id.navigation_settings -> {
                 }
