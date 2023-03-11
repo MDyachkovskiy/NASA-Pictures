@@ -1,6 +1,8 @@
 package com.gb_materialdesign.adapters
 
+import android.content.Context
 import android.graphics.Rect
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +11,18 @@ import androidx.transition.Explode
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
+import com.gb_materialdesign.MainActivity
+import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.ItemAsteroidsListBinding
 import com.gb_materialdesign.model.asteroids.Asteroid
 import com.gb_materialdesign.model.asteroids.AsteroidsListResponse
+import com.gb_materialdesign.ui.main.asteroids.AsteroidDetailsFragment
+import com.gb_materialdesign.utils.KEY_BUNDLE_ASTEROID
 
 class AsteroidsListAdapter(
     private val asteroidList: AsteroidsListResponse,
-    private val recyclerView: RecyclerView
+    private val recyclerView: RecyclerView,
+    private val context: Context?
 ): RecyclerView.Adapter<AsteroidsListAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -28,14 +35,31 @@ class AsteroidsListAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val asteroids = asteroidList.nearEarthObjects.asteroids
         if (asteroids != null) {
+            val asteroid = asteroids[position]
             holder.bind(asteroids[position])
             holder.itemView.setOnClickListener {
-                explodeAnimation(it)
+                explodeAnimation(it, asteroid)
             }
         }
     }
 
-    private fun explodeAnimation(it: View) {
+    private fun openDetailsFragment(asteroid: Asteroid) {
+        val fragment = AsteroidDetailsFragment.newInstance(Bundle())
+        fragment.arguments = Bundle().apply {
+            putParcelable(KEY_BUNDLE_ASTEROID, asteroid)
+        }
+
+        Thread.sleep(2000)
+
+        (context as MainActivity).supportFragmentManager
+            .beginTransaction()
+            .addToBackStack(null)
+            .add(R.id.space_container, fragment)
+            .commit()
+
+    }
+
+    private fun explodeAnimation(it: View, asteroid: Asteroid) {
         val myAutoTransition = TransitionSet()
         myAutoTransition.ordering = TransitionSet.ORDERING_SEQUENTIAL
         val explode = Explode()
@@ -50,6 +74,7 @@ class AsteroidsListAdapter(
         myAutoTransition.addTransition(explode)
         TransitionManager.beginDelayedTransition(recyclerView, myAutoTransition)
         recyclerView.adapter = null
+        openDetailsFragment(asteroid)
     }
 
     override fun getItemCount(): Int {

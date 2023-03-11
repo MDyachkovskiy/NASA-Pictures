@@ -55,7 +55,7 @@ class AsteroidsListFragment : Fragment() {
         when(appState) {
             is AppState.SuccessAsteroidList -> {
                 binding.asteroidsList.adapter = AsteroidsListAdapter(appState.asteroidList,
-                binding.asteroidsList)
+                binding.asteroidsList, context)
             }
             else -> return
         }
