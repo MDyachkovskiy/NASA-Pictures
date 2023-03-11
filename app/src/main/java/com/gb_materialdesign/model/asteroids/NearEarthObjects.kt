@@ -1,6 +1,10 @@
 package com.gb_materialdesign.model.asteroids
 
+import com.google.gson.*
+import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class NearEarthObjects(
-    val nearEarthObjects: Map<String, List<Asteroid>>
+    @SerializedName("2023-03-10")
+    val asteroids: List<Asteroid>
 )

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.gb_materialdesign.adapters.AsteroidsListAdapter
 import com.gb_materialdesign.databinding.FragmentAsteroidsListBinding
 import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
@@ -50,6 +51,14 @@ class AsteroidsListFragment : Fragment() {
 
     private fun renderData(appState: AppState?) {
         dataRenderer.render(appState)
+
+        when(appState) {
+            is AppState.SuccessAsteroidList -> {
+                binding.asteroidsList.adapter = AsteroidsListAdapter(appState.asteroidList,
+                binding.asteroidsList)
+            }
+            else -> return
+        }
     }
 
     override fun onDestroyView() {

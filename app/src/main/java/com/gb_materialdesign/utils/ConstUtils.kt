@@ -13,3 +13,4 @@ const val EARTH_PICTURE_DOMAIN = "https://epic.gsfc.nasa.gov/"
 const val NASA_API_KEY = BuildConfig.NASA_API_KEY
 const val DSCOVR_EPIC_DOMAIN = "https://epic.gsfc.nasa.gov/archive/enhanced/"
 
+
