@@ -70,5 +70,6 @@
     <string name="solar_flare">Вспышки на солнце</string>
     <string name="geomagnetic_storm">Геомагнитные бури</string>
     <string name="radiation_belt">Радиационный фон</string>
+    <string name="show_details">Показать описание</string>
 
 </resources>
