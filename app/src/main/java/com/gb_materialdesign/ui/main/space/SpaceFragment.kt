@@ -1,5 +1,6 @@
 package com.gb_materialdesign.ui.main.space
 
+import android.animation.ObjectAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ class SpaceFragment: Fragment() {
 
     private var _binding: FragmentSpaceBinding? = null
     private val binding get() = _binding!!
+
+    private var isMenuDisplayed = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,6 +33,19 @@ class SpaceFragment: Fragment() {
             .replace(R.id.space_container, AsteroidsListFragment.newInstance())
             .addToBackStack("")
             .commit()
+
+        binding.fab.setOnClickListener {
+            isMenuDisplayed = !isMenuDisplayed
+            if(isMenuDisplayed) {
+                ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, 360f)
+                    .setDuration(1000)
+                    .start()
+            } else {
+                ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, -360f)
+                    .setDuration(1000)
+                    .start()
+            }
+        }
     }
 
     override fun onDestroyView() {

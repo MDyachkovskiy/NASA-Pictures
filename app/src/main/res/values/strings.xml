@@ -66,4 +66,9 @@
     <string name="sentry_object">Отслеживаемость</string>
     <string name="miss_distance">Расстояние прохода от Земли</string>
 
+    <!-- Space fragment -->
+    <string name="solar_flare">Вспышки на солнце</string>
+    <string name="geomagnetic_storm">Геомагнитные бури</string>
+    <string name="radiation_belt">Радиационный фон</string>
+
 </resources>
