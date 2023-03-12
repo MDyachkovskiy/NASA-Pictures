@@ -60,6 +60,9 @@ class SpaceFragment: Fragment() {
             ObjectAnimator.ofFloat(binding.radiationBeltOption, View.TRANSLATION_Y, -405f)
                 .setDuration(duration)
                 .start()
+            ObjectAnimator.ofFloat(binding.transparentBackground, View.ALPHA, 0.5f)
+                .setDuration(duration)
+                .start()
 
             binding.solarFlareOption.animate().alpha(1f).setDuration(duration).setListener(
                 object : AnimatorListenerAdapter() {
@@ -97,6 +100,9 @@ class SpaceFragment: Fragment() {
                 .setDuration(duration)
                 .start()
             ObjectAnimator.ofFloat(binding.radiationBeltOption, View.TRANSLATION_Y, 0f)
+                .setDuration(duration)
+                .start()
+            ObjectAnimator.ofFloat(binding.transparentBackground, View.ALPHA, 0f)
                 .setDuration(duration)
                 .start()
 
