@@ -75,4 +75,8 @@
     <!-- PictureOfTheDay Bottom menu -->
     <string name="menu_contacts">Контакты</string>
 
+    <!-- Contacts Fragment Item -->
+    <string name="company_name">Название компании</string>
+    <string name="user_name">ФИО контакта</string>
+
 </resources>
