@@ -1,6 +1,7 @@
 package com.gb_materialdesign.model.contacts
 
 import com.github.javafaker.Faker
+import java.util.*
 
 class UserService {
 
@@ -26,6 +27,14 @@ class UserService {
         if(indexToDelete!= -1) {
             users.removeAt(indexToDelete)
         }
+    }
+
+    fun moveUser(user: User, moveBy: Int) {
+        val oldIndex = users.indexOfFirst{it.id == user.id}
+        if(oldIndex == -1) return
+        val newIndex = (oldIndex + moveBy)
+        if(newIndex < 0 || newIndex >= users.size) return
+        Collections.swap(users, oldIndex, newIndex)
     }
 
     companion object {
