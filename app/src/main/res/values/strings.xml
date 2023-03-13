@@ -72,4 +72,7 @@
     <string name="radiation_belt">Радиационный фон</string>
     <string name="show_details">Показать описание</string>
 
+    <!-- PictureOfTheDay Bottom menu -->
+    <string name="menu_contacts">Контакты</string>
+
 </resources>

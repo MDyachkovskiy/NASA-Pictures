@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.BottomNavigationLayoutBinding
+import com.gb_materialdesign.ui.main.contacts.ContactsFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
@@ -28,7 +29,13 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
-                R.id.navigation_one -> Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
+
+                R.id.navigation_contacts -> childFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, ContactsFragment.newInstance())
+                    .addToBackStack("tag")
+                    .commit()
+
                 R.id.navigation_two -> Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
             }
             true

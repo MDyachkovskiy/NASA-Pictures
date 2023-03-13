@@ -39,9 +39,7 @@ class SpaceFragment: Fragment() {
             .commit()
 
         binding.fab.setOnClickListener {
-
             menuAnimation()
-
         }
     }
 
@@ -131,7 +129,6 @@ class SpaceFragment: Fragment() {
             )
         }
     }
-
 
     override fun onDestroyView() {
         _binding = null
