@@ -9,7 +9,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gb_materialdesign.adapters.ContactsListAdapter
 import com.gb_materialdesign.databinding.FragmentContactsBinding
-import com.gb_materialdesign.model.contacts.User
 
 class ContactsFragment : Fragment() {
 
@@ -19,6 +18,20 @@ class ContactsFragment : Fragment() {
     private val viewModel: ContactsViewModel by lazy {
         ViewModelProvider.NewInstanceFactory().create(ContactsViewModel::class.java)
     }
+
+    private val callbackAdd = AddItem {user, position ->
+        viewModel.addContact(user, position)
+        val newContacts = viewModel.getUpdatedContacts()
+        adapter.setNewContactsListAfterAdd(newContacts,position)
+    }
+
+    private val callbackRemove = RemoveItem {
+        viewModel.deleteContact(it)
+        val newContacts = viewModel.getUpdatedContacts()
+        adapter.setNewContactsListAfterRemove(newContacts,it)
+    }
+
+    lateinit var adapter: ContactsListAdapter
 
     companion object {
         fun newInstance() = ContactsFragment()
@@ -36,7 +49,8 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel.getLiveData().observe(viewLifecycleOwner) { contacts ->
-            initRV(contacts)
+            adapter = ContactsListAdapter(contacts, callbackAdd, callbackRemove)
+            initRV()
         }
         viewModel.getContacts()
     }
@@ -46,10 +60,10 @@ class ContactsFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun initRV(contacts: List<User>){
-        binding.contactsList?.let{
+    private fun initRV(){
+        binding.contactsList.let{
             it.layoutManager = LinearLayoutManager(context)
-            it.adapter = ContactsListAdapter(contacts)
+            it.adapter = adapter
         }
     }
 }

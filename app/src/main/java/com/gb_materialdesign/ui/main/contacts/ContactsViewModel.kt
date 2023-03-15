@@ -21,4 +21,16 @@ class ContactsViewModel (
         val contacts = contactsRepository.getContactsList()
         liveData.postValue(contacts)
     }
+
+    fun getUpdatedContacts(): List<User> {
+        return contactsRepository.getContactsList()
+    }
+
+    fun deleteContact(position: Int) {
+        contactsRepository.deleteUser(position)
+    }
+
+    fun addContact(user: User, position: Int) {
+        contactsRepository.addUser(user, position)
+    }
 }

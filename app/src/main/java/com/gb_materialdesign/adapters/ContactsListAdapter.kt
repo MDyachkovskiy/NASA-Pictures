@@ -9,17 +9,20 @@ import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.ItemAlternativeContactsListBinding
 import com.gb_materialdesign.databinding.ItemContactsListBinding
 import com.gb_materialdesign.model.contacts.User
-
+import com.gb_materialdesign.ui.main.contacts.AddItem
+import com.gb_materialdesign.ui.main.contacts.RemoveItem
 
 class ContactsListAdapter(
-    private val contacts: List<User>
+    private var contacts: List<User>,
+    private val callbackAdd: AddItem,
+    private val callbackRemove: RemoveItem
 ) : RecyclerView.Adapter<ContactsListAdapter.BaseViewHolder>() {
 
     abstract class BaseViewHolder(view: View): RecyclerView.ViewHolder(view){
         abstract fun bind(user: User)
     }
 
-    class ContactsViewHolder(
+    inner class ContactsViewHolder(
         val binding: ItemContactsListBinding
     ) : BaseViewHolder(binding.root) {
 
@@ -38,6 +41,14 @@ class ContactsListAdapter(
                         .into(photoImageView)
                 }else{
                     photoImageView.setImageResource(R.drawable.ic_user_avatar)
+                }
+
+                binding.addButton.setOnClickListener {
+                    callbackAdd.add(contacts[layoutPosition], layoutPosition)
+                }
+
+                binding.removeButton.setOnClickListener {
+                    callbackRemove.remove(layoutPosition)
                 }
             }
         }
@@ -65,6 +76,16 @@ class ContactsListAdapter(
                 }
             }
         }
+    }
+
+    fun setNewContactsListAfterAdd(newContacts: List<User>, position: Int) {
+        contacts = newContacts
+        notifyItemInserted(position)
+    }
+
+    fun setNewContactsListAfterRemove(newContacts: List<User>, position: Int) {
+        contacts = newContacts
+        notifyItemRemoved(position)
     }
 
     override fun getItemViewType(position: Int): Int {

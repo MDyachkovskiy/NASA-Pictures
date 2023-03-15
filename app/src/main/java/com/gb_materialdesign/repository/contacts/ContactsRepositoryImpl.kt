@@ -10,4 +10,13 @@ class ContactsRepositoryImpl (
     override fun getContactsList(): List<User> {
         return userSource.getUsers()
     }
+
+    override fun deleteUser(position: Int) {
+        userSource.deleteUser(position)
+    }
+
+    override fun addUser(user: User, position: Int) {
+        userSource.addUser(user, position)
+    }
+
 }

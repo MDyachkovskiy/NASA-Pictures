@@ -24,11 +24,14 @@ class UserService {
         return users
     }
 
-    fun deleteUser(user: User) {
-        val indexToDelete = users.indexOfFirst{it.id == user.id}
+    fun deleteUser(indexToDelete: Int) {
         if(indexToDelete!= -1) {
             users.removeAt(indexToDelete)
         }
+    }
+
+    fun addUser(user: User, position: Int) {
+            users.add(position, user)
     }
 
     fun moveUser(user: User, moveBy: Int) {
