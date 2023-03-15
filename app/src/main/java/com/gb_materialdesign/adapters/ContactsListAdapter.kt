@@ -1,6 +1,7 @@
 package com.gb_materialdesign.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,13 +13,17 @@ import com.gb_materialdesign.model.contacts.User
 
 class ContactsListAdapter(
     private val contacts: List<User>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+) : RecyclerView.Adapter<ContactsListAdapter.BaseViewHolder>() {
+
+    abstract class BaseViewHolder(view: View): RecyclerView.ViewHolder(view){
+        abstract fun bind(user: User)
+    }
 
     class ContactsViewHolder(
         val binding: ItemContactsListBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : BaseViewHolder(binding.root) {
 
-        fun bind(user: User) {
+        override fun bind(user: User) {
             with(binding) {
 
                 userNameTextView.text = user.name
@@ -40,9 +45,9 @@ class ContactsListAdapter(
 
     class AlternativeContactsViewHolder(
         val binding: ItemAlternativeContactsListBinding
-    ) : RecyclerView.ViewHolder(binding.root) {
+    ) : BaseViewHolder(binding.root) {
 
-        fun bind(user: User) {
+        override fun bind(user: User) {
             with(binding) {
 
                 userNameTextView.text = user.name
@@ -66,7 +71,7 @@ class ContactsListAdapter(
         return contacts[position].type
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder {
 
         return when(viewType){
             1 -> {
@@ -82,15 +87,8 @@ class ContactsListAdapter(
         }
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(getItemViewType(position)){
-            1 -> {
-                (holder as ContactsViewHolder).bind(contacts[position])
-            }
-            else -> {
-                (holder as AlternativeContactsViewHolder).bind(contacts[position])
-            }
-        }
+    override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
+        holder.bind(contacts[position])
     }
 
     override fun getItemCount(): Int {
