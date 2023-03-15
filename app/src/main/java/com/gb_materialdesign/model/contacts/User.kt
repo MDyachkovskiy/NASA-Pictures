@@ -5,4 +5,5 @@ data class User(
     val photo: String,
     val name: String,
     val company: String,
+    val type: Int
 )

@@ -2,6 +2,7 @@ package com.gb_materialdesign.model.contacts
 
 import com.github.javafaker.Faker
 import java.util.*
+import kotlin.random.Random
 
 class UserService {
 
@@ -14,7 +15,8 @@ class UserService {
             id = it,
             name = faker.name().name(),
             company = faker.company().name(),
-            photo = IMAGES[it % IMAGES.size]
+            photo = IMAGES[it % IMAGES.size],
+            type = if(Random.nextBoolean()) 1 else 2
         ) } as MutableList<User>
     }
 
