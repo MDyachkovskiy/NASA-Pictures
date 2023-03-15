@@ -11,4 +11,6 @@ interface ContactsRepository {
 
     fun addUser(user: User, position: Int)
 
+    fun moveContact(user: User, moveBy: Int)
+
 }

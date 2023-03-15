@@ -10,12 +10,14 @@ import com.gb_materialdesign.databinding.ItemAlternativeContactsListBinding
 import com.gb_materialdesign.databinding.ItemContactsListBinding
 import com.gb_materialdesign.model.contacts.User
 import com.gb_materialdesign.ui.main.contacts.AddItem
+import com.gb_materialdesign.ui.main.contacts.MoveItem
 import com.gb_materialdesign.ui.main.contacts.RemoveItem
 
 class ContactsListAdapter(
     private var contacts: List<User>,
     private val callbackAdd: AddItem,
-    private val callbackRemove: RemoveItem
+    private val callbackRemove: RemoveItem,
+    private val callbackMove: MoveItem
 ) : RecyclerView.Adapter<ContactsListAdapter.BaseViewHolder>() {
 
     abstract class BaseViewHolder(view: View): RecyclerView.ViewHolder(view){
@@ -54,7 +56,7 @@ class ContactsListAdapter(
         }
     }
 
-    class AlternativeContactsViewHolder(
+    inner class AlternativeContactsViewHolder(
         val binding: ItemAlternativeContactsListBinding
     ) : BaseViewHolder(binding.root) {
 
@@ -74,6 +76,13 @@ class ContactsListAdapter(
                 }else{
                     photoImageView.setImageResource(R.drawable.ic_user_avatar)
                 }
+
+                moveUpButton.setOnClickListener{
+                    callbackMove.move(contacts[layoutPosition],-1, layoutPosition)
+                }
+                moveDownButton.setOnClickListener{
+                    callbackMove.move(contacts[layoutPosition],1, layoutPosition)
+                }
             }
         }
     }
@@ -86,6 +95,16 @@ class ContactsListAdapter(
     fun setNewContactsListAfterRemove(newContacts: List<User>, position: Int) {
         contacts = newContacts
         notifyItemRemoved(position)
+    }
+
+    fun setNewContactsAfterMoveUp(newContacts: List<User>, position: Int) {
+        contacts = newContacts
+        notifyItemMoved(position, position+1)
+    }
+
+    fun setNewContactsAfterMoveDown(newContacts: List<User>, position: Int) {
+        contacts = newContacts
+        notifyItemMoved(position, position-1)
     }
 
     override fun getItemViewType(position: Int): Int {

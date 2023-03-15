@@ -33,4 +33,9 @@ class ContactsViewModel (
     fun addContact(user: User, position: Int) {
         contactsRepository.addUser(user, position)
     }
+
+    fun moveContact(user: User, moveBy: Int) {
+        contactsRepository.moveContact(user, moveBy)
+    }
+
 }

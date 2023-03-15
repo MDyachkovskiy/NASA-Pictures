@@ -19,4 +19,7 @@ class ContactsRepositoryImpl (
         userSource.addUser(user, position)
     }
 
+    override fun moveContact(user: User, moveBy: Int) {
+        userSource.moveUser(user, moveBy)
+    }
 }

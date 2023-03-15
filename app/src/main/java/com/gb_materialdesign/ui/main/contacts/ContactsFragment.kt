@@ -31,6 +31,21 @@ class ContactsFragment : Fragment() {
         adapter.setNewContactsListAfterRemove(newContacts,it)
     }
 
+    private val callbackMove = MoveItem{user, moveBy, position ->
+        when(moveBy){
+            1 -> {
+                viewModel.moveContact(user,moveBy)
+                val newContacts = viewModel.getUpdatedContacts()
+                adapter.setNewContactsAfterMoveUp(newContacts,position)
+            }
+            -1 -> {
+                viewModel.moveContact(user,moveBy)
+                val newContacts = viewModel.getUpdatedContacts()
+                adapter.setNewContactsAfterMoveDown(newContacts,position)
+            }
+        }
+    }
+
     lateinit var adapter: ContactsListAdapter
 
     companion object {
@@ -49,7 +64,7 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel.getLiveData().observe(viewLifecycleOwner) { contacts ->
-            adapter = ContactsListAdapter(contacts, callbackAdd, callbackRemove)
+            adapter = ContactsListAdapter(contacts, callbackAdd, callbackRemove, callbackMove)
             initRV()
         }
         viewModel.getContacts()
