@@ -28,4 +28,21 @@ class ItemTouchHelperCallback(
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         callback.onItemDismiss(viewHolder.adapterPosition)
     }
+
+    override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+        if(viewHolder is ContactsListAdapter.AlternativeContactsViewHolder) {
+                viewHolder.onItemSelect()
+            } else if (viewHolder is ContactsListAdapter.ContactsViewHolder) {
+            viewHolder.onItemSelect()
+            }
+        super.onSelectedChanged(viewHolder, actionState)
+    }
+
+    override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+        if(viewHolder is ContactsListAdapter.AlternativeContactsViewHolder) {
+            viewHolder.onItemClear()
+        } else if (viewHolder is ContactsListAdapter.ContactsViewHolder) {
+            viewHolder.onItemClear()
+        }
+    }
 }

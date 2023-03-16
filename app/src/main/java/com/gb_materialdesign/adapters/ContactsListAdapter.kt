@@ -3,6 +3,7 @@ package com.gb_materialdesign.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gb_materialdesign.R
@@ -28,7 +29,7 @@ class ContactsListAdapter(
 
     inner class ContactsViewHolder(
         val binding: ItemContactsListBinding
-    ) : BaseViewHolder(binding.root) {
+    ) : BaseViewHolder(binding.root), ItemTouchHelperViewHolder {
 
         override fun bind(user: User) {
             with(binding) {
@@ -56,11 +57,20 @@ class ContactsListAdapter(
                 }
             }
         }
+
+        override fun onItemSelect() {
+            binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+                R.color.grey_style_3))
+        }
+
+        override fun onItemClear() {
+            binding.root.setBackgroundColor(0)
+        }
     }
 
     inner class AlternativeContactsViewHolder(
         val binding: ItemAlternativeContactsListBinding
-    ) : BaseViewHolder(binding.root) {
+    ) : BaseViewHolder(binding.root), ItemTouchHelperViewHolder {
 
         override fun bind(user: User) {
             with(binding) {
@@ -86,6 +96,15 @@ class ContactsListAdapter(
                     callbackMove.move(contacts[layoutPosition],1, layoutPosition)
                 }
             }
+        }
+
+        override fun onItemSelect() {
+            binding.root.setBackgroundColor(ContextCompat.getColor(itemView.context,
+            R.color.grey_style_3))
+        }
+
+        override fun onItemClear() {
+            binding.root.setBackgroundColor(0)
         }
     }
 
