@@ -3,10 +3,15 @@ package com.gb_materialdesign.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.gb_materialdesign.R
+import com.gb_materialdesign.adapters.difutils.Change
+import com.gb_materialdesign.adapters.difutils.DiffUtilCallback
+import com.gb_materialdesign.adapters.difutils.createCombinedPayload
 import com.gb_materialdesign.databinding.ItemAlternativeContactsListBinding
 import com.gb_materialdesign.databinding.ItemContactsListBinding
 import com.gb_materialdesign.model.contacts.User
@@ -133,6 +138,12 @@ class ContactsListAdapter(
         notifyItemMoved(fromPosition, toPosition)
     }
 
+    fun setNewContactsForDiffUtils(newContacts: List<User>) {
+        val diff = DiffUtil.calculateDiff(DiffUtilCallback(contacts, newContacts))
+        diff.dispatchUpdatesTo(this)
+        contacts = newContacts
+    }
+
     override fun getItemViewType(position: Int): Int {
         return contacts[position].type
     }
@@ -168,4 +179,26 @@ class ContactsListAdapter(
     override fun onItemDismiss(position: Int) {
         callbackRemove.remove(position)
     }
+
+    override fun onBindViewHolder(
+        holder: BaseViewHolder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+
+        if(payloads.isEmpty()){
+            super.onBindViewHolder(holder, position, payloads)
+        } else {
+            val createCombinedPayload = createCombinedPayload(payloads as List<Change<User>>)
+            if(createCombinedPayload.newList.name != createCombinedPayload.oldList.name){
+                holder.itemView.findViewById<TextView>(R.id.user_name_text_view).text =
+                    createCombinedPayload.newList.name
+            }
+            if(createCombinedPayload.newList.company != createCombinedPayload.oldList.company) {
+                holder.itemView.findViewById<TextView>(R.id.user_name_text_view).text =
+                    createCombinedPayload.newList.company
+            }
+        }
+    }
+
 }
