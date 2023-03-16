@@ -5,7 +5,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.ImageView
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import androidx.transition.ChangeBounds
+import androidx.transition.ChangeImageTransform
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
@@ -20,6 +28,8 @@ class MarsPictureFragment : Fragment() {
 
     private var _binding: FragmentMarsPictureBinding? = null
     private val binding get() = _binding!!
+
+    private var isImageScaled = false
 
     private lateinit var marsPicture: Photo
 
@@ -43,8 +53,40 @@ class MarsPictureFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         marsPicture = arguments?.getParcelable("marsPicture")?: Photo()
+
+        binding.marsPicture.setOnClickListener {
+            pictureAnimation(it)
+        }
+
         displayPicture(marsPicture)
+    }
+
+    private fun pictureAnimation(it: View) {
+        isImageScaled = !isImageScaled
+
+        val params = it.layoutParams as FrameLayout.LayoutParams
+
+        val transitionSet = TransitionSet()
+        val changeImageTransform = ChangeImageTransform().apply {
+            duration = 2000
+        }
+        val changeBounds = ChangeBounds()
+
+        transitionSet
+            .addTransition(changeBounds)
+            .addTransition(changeImageTransform)
+
+        TransitionManager.beginDelayedTransition(binding.root, transitionSet)
+        if (isImageScaled) {
+            params.height = ConstraintLayout.LayoutParams.MATCH_PARENT
+            (it as AppCompatImageView).scaleType = ImageView.ScaleType.CENTER_CROP
+        } else {
+            params.height = ConstraintLayout.LayoutParams.WRAP_CONTENT
+            (it as AppCompatImageView).scaleType = ImageView.ScaleType.CENTER_INSIDE
+        }
+        it.layoutParams = params
     }
 
     private fun displayPicture (marsPicture: Photo) {

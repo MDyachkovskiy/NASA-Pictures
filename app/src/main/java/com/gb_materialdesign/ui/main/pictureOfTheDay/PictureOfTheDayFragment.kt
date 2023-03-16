@@ -1,15 +1,28 @@
 package com.gb_materialdesign.ui.main.pictureOfTheDay
 
 import android.content.Intent
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
+import android.view.animation.Animation
+import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import coil.load
+import androidx.transition.Fade
+import androidx.transition.Slide
+import androidx.transition.TransitionManager
+import androidx.transition.TransitionSet
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.Target
 import com.gb_materialdesign.MainActivity
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentPictureOfTheDayBinding
@@ -24,7 +37,6 @@ import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
 
-
 class PictureOfTheDayFragment : Fragment() {
 
     private var _binding: FragmentPictureOfTheDayBinding? = null
@@ -33,6 +45,13 @@ class PictureOfTheDayFragment : Fragment() {
     private lateinit var parentView: View
 
     private lateinit var bottomSheet: View
+
+    private var isImageScaled = false
+
+    private var pivotX = 0.5f
+    private var pivotY = 0.5f
+
+    private var isViewVisible = false
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
@@ -62,9 +81,37 @@ class PictureOfTheDayFragment : Fragment() {
 
         bottomSheet = view.findViewById(R.id.bottom_sheet_container)
 
-        binding.includedLoadingLayout.loadingLayout.visibility = View.VISIBLE
-
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        
+        binding.pictureOfTheDay.setOnTouchListener { v, motionEvent ->
+            if (motionEvent.action == MotionEvent.ACTION_DOWN){
+                v.performClick()
+                if (!isImageScaled) {
+                    pivotX = motionEvent.x / v.width
+                    pivotY = motionEvent.y / v.height
+                    val animation = ScaleAnimation(
+                        1f, 3f,
+                        1f, 3f,
+                        Animation.RELATIVE_TO_SELF, pivotX,
+                        Animation.RELATIVE_TO_SELF, pivotY)
+                    animation.duration = 1000
+                    animation.fillAfter = true
+                    v.startAnimation(animation)
+                    isImageScaled = !isImageScaled
+                } else {
+                    val animation = ScaleAnimation(
+                        3f, 1f,
+                        3f, 1f,
+                    Animation.RELATIVE_TO_SELF, pivotX,
+                    Animation.RELATIVE_TO_SELF, pivotY)
+                    animation.duration = 1000
+                    animation.fillAfter = true
+                    v.startAnimation(animation)
+                    isImageScaled = !isImageScaled
+                }
+            }
+            true
+        }
 
         viewModel.getLiveData().observe(viewLifecycleOwner) {
             renderData(it)
@@ -91,7 +138,6 @@ class PictureOfTheDayFragment : Fragment() {
         when (appState) {
             is AppState.SuccessTelescope -> {
                 displayData(appState.pictureOfTheDay)
-                binding.includedLoadingLayout.loadingLayout.visibility = View.GONE
             }
             else -> return
         }
@@ -108,20 +154,80 @@ class PictureOfTheDayFragment : Fragment() {
     }
 
     private fun displayData(data: PictureOfTheDayResponse) {
-        with(binding) {
 
-            pictureOfTheDay.load(data.url) {
-                lifecycle(this@PictureOfTheDayFragment)
-                error(R.drawable.ic_load_error_vector)
-                placeholder(R.drawable.ic_no_photo_vector)
-                crossfade(true)
-            }
+        val options = RequestOptions()
+            .error(R.drawable.ic_load_error_vector)
+            .placeholder(R.drawable.ic_no_photo_vector)
+
+        activity?.let{
+            Glide.with(it)
+                .load(data.url)
+                .apply(options)
+                .transition(DrawableTransitionOptions.withCrossFade())
+                .listener (object: RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.imageProgressBar.visibility = View.GONE
+                        return false
+                    }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        binding.imageProgressBar.visibility = View.GONE
+                        displayViewElements()
+                        return false
+                    }
+                })
+                .into(binding.pictureOfTheDay)
+
         }
 
         bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = data.title
 
         bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = data.explanation
 
+    }
+
+    private fun displayViewElements() {
+
+        val chipTransition = TransitionSet().apply {
+            duration = 1500
+            ordering = TransitionSet.ORDERING_SEQUENTIAL
+            val fade = Slide(Gravity.END)
+            this.addTransition(fade)
+        }
+
+        val textInputTransition = TransitionSet().apply {
+            duration = 2000
+            val fade = Fade()
+            this.addTransition(fade)
+        }
+
+        if (isViewVisible) {
+            return
+        } else {
+            with(binding){
+                TransitionManager.beginDelayedTransition(chipGroup, chipTransition)
+                chipToday.visibility = View.VISIBLE
+                chipYesterday.visibility = View.VISIBLE
+                chipDayBeforeYesterday.visibility = View.VISIBLE
+
+                TransitionManager.beginDelayedTransition(inputLayout, textInputTransition)
+                inputLayout.visibility = View.VISIBLE
+
+                TransitionManager.beginDelayedTransition(root)
+            }
+            isViewVisible = !isViewVisible
+        }
     }
 
     private fun setBottomAppBar(view: View) {

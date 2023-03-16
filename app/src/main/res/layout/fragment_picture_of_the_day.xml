@@ -26,6 +26,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chipToday"
+                    android:visibility="invisible"
                     style="@style/MyGreyChip.GB_MaterialDesign"/>
 
                 <com.google.android.material.chip.Chip
@@ -33,6 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chipYesterday"
+                    android:visibility="invisible"
                     style="@style/MyGreyChip.GB_MaterialDesign"/>
 
                 <com.google.android.material.chip.Chip
@@ -40,6 +42,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/chipBeforeYesterday"
+                    android:visibility="invisible"
                     style="@style/MyGreyChip.GB_MaterialDesign"/>
 
             </com.google.android.material.chip.ChipGroup>
@@ -57,6 +60,7 @@
                 app:helperText="@string/wiki_helper_text"
                 app:endIconMode="custom"
                 app:endIconDrawable="@drawable/ic_wikipedia"
+                android:visibility="invisible"
                 app:layout_constraintTop_toBottomOf="@id/chip_group"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -72,29 +76,28 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/included_loading_layout"
-        layout="@layout/loading_layout"
-        android:layout_height="match_parent"
+    <FrameLayout
         android:layout_width="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/image_8dp"
+        app:layout_behavior=".ui.main.behaviors.BottomSheetBehavior">
 
-        <com.gb_materialdesign.utils.EquilateralImageView
-            android:id="@+id/picture_of_the_day"
-            android:layout_width="match_parent"
+    <com.gb_materialdesign.utils.EquilateralImageView
+        android:id="@+id/picture_of_the_day"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="fitCenter"
+        android:contentDescription="@string/photo_of_the_day_stub" />
+
+        <ProgressBar
+            android:id="@+id/image_progress_bar"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/image_8dp"
             android:layout_gravity="center"
-            android:scaleType="fitCenter"
-            android:contentDescription="@string/photo_of_the_day_stub"
-            app:layout_behavior=".ui.main.behaviors.BottomSheetBehavior"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:visibility="visible"/>
+
+    </FrameLayout>
 
     <include layout = "@layout/bottom_sheet_layout" />
 

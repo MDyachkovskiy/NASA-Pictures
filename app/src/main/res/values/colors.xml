@@ -6,7 +6,6 @@
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
-
     <color name="colorPrimaryGreyTheme">#607D8B</color>
     <color name="colorPrimaryVariantGreyTheme">#CFD8DC</color>
     <color name="colorOnPrimaryGreyTheme">#212121</color>
@@ -15,14 +14,12 @@
     <color name="colorOnSecondaryGreyTheme">#FF000000</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
     <color name="color_gray">#66000000</color>
     <color name="grey_style_1">#120908</color>
     <color name="grey_style_2">#141816</color>
     <color name="grey_style_3">#222723</color>
     <color name="grey_light">#393e37</color>
     <color name="grey_primary_light">#5e5559</color>
-
     <color name="colorPrimaryJupiterTheme">#d7652a</color>
     <color name="colorPrimaryVariantJupiterTheme">#ff9557</color>
     <color name="colorPrimaryDarkJupiterTheme">#9f3700</color>
@@ -33,7 +30,6 @@
     <color name="textColorPrimaryJupiterTheme">#490206</color>
     <color name="textColorSecondaryJupiterTheme">#360201</color>
     <color name="colorOnSecondaryJupiterTheme">#FF000000</color>
-
     <color name="colorPrimaryMarsTheme">#cf231c</color>
     <color name="colorPrimaryVariantMarsTheme">#ff5d46</color>
     <color name="colorPrimaryDarkMarsTheme">#960000</color>
@@ -43,7 +39,6 @@
     <color name="colorSecondaryContainerMarsTheme">#baad71</color>
     <color name="textColorPrimaryMarsTheme">#ffffff</color>
     <color name="textColorSecondaryMarsTheme">#96130d</color>
-
     <color name="colorPrimaryMoonTheme">#4e5067</color>
     <color name="colorPrimaryVariantMoonTheme">#7a7c95</color>
     <color name="colorPrimaryDarkMoonTheme">#25283c</color>
