@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gb_materialdesign.adapters.ContactsListAdapter
+import com.gb_materialdesign.adapters.ItemTouchHelperCallback
 import com.gb_materialdesign.databinding.FragmentContactsBinding
+import com.gb_materialdesign.model.contacts.User
 
 class ContactsFragment : Fragment() {
 
@@ -46,7 +49,14 @@ class ContactsFragment : Fragment() {
         }
     }
 
-    lateinit var adapter: ContactsListAdapter
+    private val callbackDragAndMove = DragAndMoveItem{user, fromPosition,toPosition ->
+        viewModel.deleteContact(fromPosition)
+        viewModel.addContact(user,toPosition)
+        val newContacts = viewModel.getUpdatedContacts()
+        adapter.setNewContactsAfterMove(newContacts,fromPosition, toPosition)
+    }
+
+    private lateinit var adapter: ContactsListAdapter
 
     companion object {
         fun newInstance() = ContactsFragment()
@@ -64,8 +74,7 @@ class ContactsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         viewModel.getLiveData().observe(viewLifecycleOwner) { contacts ->
-            adapter = ContactsListAdapter(contacts, callbackAdd, callbackRemove, callbackMove)
-            initRV()
+            initRV(contacts)
         }
         viewModel.getContacts()
     }
@@ -75,7 +84,9 @@ class ContactsFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun initRV(){
+    private fun initRV(contacts: List<User>){
+        adapter = ContactsListAdapter(contacts, callbackAdd, callbackRemove, callbackMove, callbackDragAndMove)
+        ItemTouchHelper(ItemTouchHelperCallback(adapter)).attachToRecyclerView(binding.contactsList)
         binding.contactsList.let{
             it.layoutManager = LinearLayoutManager(context)
             it.adapter = adapter

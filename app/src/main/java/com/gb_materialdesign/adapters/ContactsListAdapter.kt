@@ -10,6 +10,7 @@ import com.gb_materialdesign.databinding.ItemAlternativeContactsListBinding
 import com.gb_materialdesign.databinding.ItemContactsListBinding
 import com.gb_materialdesign.model.contacts.User
 import com.gb_materialdesign.ui.main.contacts.AddItem
+import com.gb_materialdesign.ui.main.contacts.DragAndMoveItem
 import com.gb_materialdesign.ui.main.contacts.MoveItem
 import com.gb_materialdesign.ui.main.contacts.RemoveItem
 
@@ -17,8 +18,9 @@ class ContactsListAdapter(
     private var contacts: List<User>,
     private val callbackAdd: AddItem,
     private val callbackRemove: RemoveItem,
-    private val callbackMove: MoveItem
-) : RecyclerView.Adapter<ContactsListAdapter.BaseViewHolder>() {
+    private val callbackMove: MoveItem,
+    private val callbackDragAndMove: DragAndMoveItem
+) : RecyclerView.Adapter<ContactsListAdapter.BaseViewHolder>(), ItemTouchHelperAdapter {
 
     abstract class BaseViewHolder(view: View): RecyclerView.ViewHolder(view){
         abstract fun bind(user: User)
@@ -107,6 +109,11 @@ class ContactsListAdapter(
         notifyItemMoved(position, position-1)
     }
 
+    fun setNewContactsAfterMove(newContacts: List<User>, fromPosition: Int, toPosition: Int) {
+        contacts = newContacts
+        notifyItemMoved(fromPosition, toPosition)
+    }
+
     override fun getItemViewType(position: Int): Int {
         return contacts[position].type
     }
@@ -133,5 +140,13 @@ class ContactsListAdapter(
 
     override fun getItemCount(): Int {
         return contacts.size
+    }
+
+    override fun onItemMove(fromPosition: Int, toPosition: Int) {
+        callbackDragAndMove.dragAndMove(contacts[fromPosition], fromPosition,toPosition)
+    }
+
+    override fun onItemDismiss(position: Int) {
+        callbackRemove.remove(position)
     }
 }
