@@ -4,8 +4,10 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.text.Spannable
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
+import android.text.style.QuoteSpan
 import android.text.style.RelativeSizeSpan
 import android.text.style.ScaleXSpan
 import android.view.*
@@ -195,12 +197,39 @@ class PictureOfTheDayFragment : Fragment() {
 
         }
 
-        setTextFormat(data)
+        setTextFormatHeader(data.title)
+        setTextFormatDescription(data.explanation)
 
     }
 
-    private fun setTextFormat(data: PictureOfTheDayResponse) {
-        val header = data.title
+    private fun setTextFormatDescription(description: String) {
+        val bottomSheetDescription = bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description)
+        val layout = bottomSheetDescription.layout
+        val indexOfLastCharOnFirstLine = layout.getLineEnd(0)
+        val newDescription = description.substring(0, indexOfLastCharOnFirstLine) + "\n" +
+                description.substring(indexOfLastCharOnFirstLine)
+
+
+        val spannableDescription = SpannableString(newDescription)
+        val startIndex = 0
+        val flag = 0
+        val endIndex = description.length
+        val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
+
+        val stripeWidthInPx = 40
+        val gapWidthInPx = 100
+
+        spannableDescription.setSpan(
+            QuoteSpan(color,stripeWidthInPx,gapWidthInPx),
+            startIndex, indexOfLastCharOnFirstLine, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+        val fontSizeMultiplier = 2.0f
+        spannableDescription.setSpan(RelativeSizeSpan(fontSizeMultiplier),startIndex,startIndex+1,flag)
+
+        bottomSheetDescription.text = spannableDescription
+    }
+
+    private fun setTextFormatHeader(header: String) {
         val spannableHeader = SpannableString(header)
         val startIndex = 0
         val flag = 0
@@ -212,15 +241,8 @@ class PictureOfTheDayFragment : Fragment() {
         val proportion = 1.5f
         spannableHeader.setSpan(ScaleXSpan(proportion),startIndex,endIndex,flag)
 
-        val description = data.explanation
-        val spannableDescription = SpannableString(description)
-
-        val fontSizeMultiplier = 2.0f
-        spannableDescription.setSpan(RelativeSizeSpan(fontSizeMultiplier),startIndex,startIndex+1,flag)
-
         bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = spannableHeader
 
-        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = spannableDescription
     }
 
     private fun displayViewElements() {
