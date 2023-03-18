@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.BackgroundColorSpan
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -191,10 +193,22 @@ class PictureOfTheDayFragment : Fragment() {
 
         }
 
-        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = data.title
+        setTextFormat(data)
+
+    }
+
+    private fun setTextFormat(data: PictureOfTheDayResponse) {
+        val header = data.title
+        val spannableString = SpannableString(header)
+        val startIndex = 0
+        val flag = 0
+        val endIndex = header.length
+        val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
+        spannableString.setSpan(BackgroundColorSpan(color),startIndex,endIndex,flag)
+
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = spannableString
 
         bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = data.explanation
-
     }
 
     private fun displayViewElements() {
