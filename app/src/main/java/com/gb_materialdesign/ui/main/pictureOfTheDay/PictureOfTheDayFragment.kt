@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
+import android.text.style.ScaleXSpan
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -199,14 +200,18 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun setTextFormat(data: PictureOfTheDayResponse) {
         val header = data.title
-        val spannableString = SpannableString(header)
+        val spannableHeader = SpannableString(header)
         val startIndex = 0
         val flag = 0
         val endIndex = header.length
-        val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
-        spannableString.setSpan(BackgroundColorSpan(color),startIndex,endIndex,flag)
 
-        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = spannableString
+        val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
+        spannableHeader.setSpan(BackgroundColorSpan(color),startIndex,endIndex,flag)
+
+        val proportion = 1.5f
+        spannableHeader.setSpan(ScaleXSpan(proportion),startIndex,endIndex,flag)
+
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = spannableHeader
 
         bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = data.explanation
     }
