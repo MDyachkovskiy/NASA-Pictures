@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.SpannableString
 import android.text.style.BackgroundColorSpan
+import android.text.style.RelativeSizeSpan
 import android.text.style.ScaleXSpan
 import android.view.*
 import android.view.animation.Animation
@@ -211,9 +212,15 @@ class PictureOfTheDayFragment : Fragment() {
         val proportion = 1.5f
         spannableHeader.setSpan(ScaleXSpan(proportion),startIndex,endIndex,flag)
 
+        val description = data.explanation
+        val spannableDescription = SpannableString(description)
+
+        val fontSizeMultiplier = 2.0f
+        spannableDescription.setSpan(RelativeSizeSpan(fontSizeMultiplier),startIndex,startIndex+1,flag)
+
         bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description_header).text = spannableHeader
 
-        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = data.explanation
+        bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description).text = spannableDescription
     }
 
     private fun displayViewElements() {
