@@ -13,6 +13,7 @@ import android.view.animation.ScaleAnimation
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.transition.Fade
@@ -226,6 +227,20 @@ class PictureOfTheDayFragment : Fragment() {
         val fontSizeMultiplier = 2.0f
         spannableDescription.setSpan(RelativeSizeSpan(fontSizeMultiplier),
             startIndex,startIndex+1,flag)
+
+        val bitmap = ContextCompat.getDrawable(requireContext(),
+            R.drawable.ic_baseline_favorite_border_24)!!.toBitmap()
+        for(i in newDescription.indices){
+            if(newDescription[i] == 'o'){
+                spannableDescription.setSpan(
+                    ImageSpan(requireContext(), bitmap, DynamicDrawableSpan.ALIGN_BOTTOM),
+                    i, i+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            } else if (newDescription[i] == 'O') {
+                spannableDescription.setSpan(
+                    ImageSpan(requireContext(), bitmap, DynamicDrawableSpan.ALIGN_BOTTOM),
+                    i, i+1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+        }
 
         bottomSheetDescription.text = spannableDescription
     }
