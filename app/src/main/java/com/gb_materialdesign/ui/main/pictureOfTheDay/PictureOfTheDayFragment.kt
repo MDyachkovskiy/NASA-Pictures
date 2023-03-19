@@ -6,10 +6,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.text.Spannable
 import android.text.SpannableString
-import android.text.style.BackgroundColorSpan
-import android.text.style.QuoteSpan
-import android.text.style.RelativeSizeSpan
-import android.text.style.ScaleXSpan
+import android.text.style.*
 import android.view.*
 import android.view.animation.Animation
 import android.view.animation.ScaleAnimation
@@ -204,8 +201,7 @@ class PictureOfTheDayFragment : Fragment() {
 
     private fun setTextFormatDescription(description: String) {
         val bottomSheetDescription = bottomSheet.findViewById<TextView>(R.id.bottom_sheet_description)
-        val layout = bottomSheetDescription.layout
-        val indexOfLastCharOnFirstLine = layout.getLineEnd(0)
+        val indexOfLastCharOnFirstLine = 40
         val newDescription = description.substring(0, indexOfLastCharOnFirstLine) + "\n" +
                 description.substring(indexOfLastCharOnFirstLine)
 
@@ -216,15 +212,20 @@ class PictureOfTheDayFragment : Fragment() {
         val endIndex = description.length
         val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
 
-        val stripeWidthInPx = 40
+        val stripeWidthInPx = 20
         val gapWidthInPx = 100
 
         spannableDescription.setSpan(
             QuoteSpan(color,stripeWidthInPx,gapWidthInPx),
             startIndex, indexOfLastCharOnFirstLine, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
 
+        val lineHeightInPx = 100
+        spannableDescription.setSpan(LineHeightSpan.Standard(lineHeightInPx),
+            startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+
         val fontSizeMultiplier = 2.0f
-        spannableDescription.setSpan(RelativeSizeSpan(fontSizeMultiplier),startIndex,startIndex+1,flag)
+        spannableDescription.setSpan(RelativeSizeSpan(fontSizeMultiplier),
+            startIndex,startIndex+1,flag)
 
         bottomSheetDescription.text = spannableDescription
     }
