@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.BottomNavigationLayoutBinding
+import com.gb_materialdesign.ui.main.contacts.ContactsFragment
+import com.gb_materialdesign.ui.main.contacts.TestFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
@@ -28,8 +29,20 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
-                R.id.navigation_one -> Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
-                R.id.navigation_two -> Toast.makeText(context, "1", Toast.LENGTH_SHORT).show()
+
+                R.id.navigation_contacts ->
+                       parentFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.container, ContactsFragment.newInstance())
+                            .addToBackStack("tag")
+                            .commit()
+
+                R.id.navigation_two ->
+                    parentFragmentManager
+                    .beginTransaction()
+                    .replace(R.id.container, TestFragment.newInstance())
+                    .addToBackStack("tag")
+                    .commit()
             }
             true
         }
