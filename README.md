@@ -6,9 +6,12 @@
 
 <h2>Project Screenshots:</h2>
 
-<img src="https://i.ibb.co.com/NFRWNkR/IMG-20230922-002742.jpg" alt="project-screenshot" width="200" height="400/"> <img src="https://i.ibb.co.com/ZcVV8XM/IMG-20230922-003033.jpg" alt="project-screenshot" width="200" height="400/"> <img src="https://i.ibb.co.com/4MwWNQ0/IMG-20230922-002807.jpg" alt="project-screenshot" width="200" height="400/">
+<img src="https://gdurl.com/c1ZE" alt="project-screenshot" width="200" height="400/">    <img src="https://gdurl.com/h4bG" alt="project-screenshot" width="200" height="400/">    <img src="https://gdurl.com/qC91" alt="project-screenshot" width="200" height="400/">
+<img src="https://gdurl.com/BXLI" alt="project-screenshot" width="200" height="400/"> 
 
-<img src="https://i.ibb.co.com/sKhFCJY/IMG-20230922-002905.jpg" alt="project-screenshot" width="200" height="400/"> <img src="https://i.ibb.co.com/19fRTKS/IMG-20230922-002931.jpg" alt="project-screenshot" width="200" height="400/"> <img src="https://i.ibb.co.com/fQKTqCt/IMG-20230922-002833.jpg" alt="project-screenshot" width="200" height="400/">
+<h2>Application Demo Video:</h2>
+
+<p>Watch a demo of the application here: <a href="https://gdurl.com/paST" target="_blank">NASA App Demo Video</a></p>
 
 <h2>💻 Built with</h2>
 
