@@ -15,13 +15,13 @@ interface PictureOfTheDayAPI {
     @GET(END_POINT)
     fun getPictureOfTheDay(
         @Query("api_key") apiKey:String
-    ) : Call<PictureOfTheDayResponse>
+    ) : Call<com.test.application.core.domain.PictureOfTheDayResponse>
 
     @GET(END_POINT)
     fun getPictureOfTheDayByDate(
         @Query("api_key") apiKey:String,
         @Query("date") date: String
-    ) : Call<PictureOfTheDayResponse>
+    ) : Call<com.test.application.core.domain.PictureOfTheDayResponse>
 
     @GET(MARS_END_POINT)
     fun getPicturesOfMars(

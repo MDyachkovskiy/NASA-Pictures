@@ -130,7 +130,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp">
 
-            <com.gb_materialdesign.utils.EquilateralImageView
+            <com.test.application.picture_of_the_day.custom_view.EquilateralImageView
                 android:id="@+id/mars_picture"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>

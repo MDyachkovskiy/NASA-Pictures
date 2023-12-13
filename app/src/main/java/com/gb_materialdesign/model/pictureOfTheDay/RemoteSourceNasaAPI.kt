@@ -60,11 +60,11 @@ class RemoteSourceNasaAPI {
         }
     }
 
-    fun getPictureOfTheDay(callback: Callback<PictureOfTheDayResponse>){
+    fun getPictureOfTheDay(callback: Callback<com.test.application.core.domain.PictureOfTheDayResponse>){
         nasaAPI.getPictureOfTheDay(NASA_API_KEY).enqueue(callback)
     }
 
-    fun getPictureOfTheDayByDate (date: String, callback: Callback<PictureOfTheDayResponse>){
+    fun getPictureOfTheDayByDate (date: String, callback: Callback<com.test.application.core.domain.PictureOfTheDayResponse>){
         nasaAPI.getPictureOfTheDayByDate(NASA_API_KEY, date).enqueue(callback)
     }
 

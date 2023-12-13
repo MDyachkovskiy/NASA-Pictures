@@ -10,7 +10,7 @@ import com.gb_materialdesign.adapters.MarsViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentMarsViewpagerBinding
 import com.gb_materialdesign.model.marsPicture.Camera
 import com.gb_materialdesign.model.marsPicture.Photo
-import com.gb_materialdesign.ui.main.appState.AppState
+import com.test.application.core.utils.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
@@ -64,11 +64,11 @@ class MarsViewPagerFragment: Fragment() {
         }
     }
 
-    private fun renderData (appState: AppState?) {
+    private fun renderData (appState: com.test.application.core.utils.AppState?) {
         dataRenderer.render(appState)
 
         when (appState) {
-            is AppState.SuccessMarsPicture -> {
+            is com.test.application.core.utils.AppState.SuccessMarsPicture -> {
                 val pictures = appState.marsPictures
 
                 binding.marsViewPager.adapter = MarsViewPagerAdapter(requireActivity(),

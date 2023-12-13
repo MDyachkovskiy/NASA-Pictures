@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import com.gb_materialdesign.databinding.ActivityMainBinding
 import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.mars.MarsFragment
-import com.gb_materialdesign.ui.main.pictureOfTheDay.PictureOfTheDayFragment
+import com.test.application.picture_of_the_day.view.PictureOfTheDayFragment
 import com.gb_materialdesign.ui.main.settings.SettingsFragment
 import com.gb_materialdesign.ui.main.space.SpaceFragment
 
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         if (savedInstanceState == null) {
-            replaceFragment(PictureOfTheDayFragment())
+            replaceFragment(com.test.application.picture_of_the_day.view.PictureOfTheDayFragment())
         }
 
         setBottomNavigationView()
@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when(item.itemId) {
                 R.id.navigation_telescope -> {
-                    replaceFragment(PictureOfTheDayFragment())
+                    replaceFragment(com.test.application.picture_of_the_day.view.PictureOfTheDayFragment())
                     true
                 }
                 R.id.navigation_earth -> {

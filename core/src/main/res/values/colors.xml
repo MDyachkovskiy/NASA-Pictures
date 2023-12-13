@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    //main
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="colorOnPrimaryGreyTheme">#212121</color>
+
+    //Chip
+
+    <color name="grey_style_1">#120908</color>
+    <color name="grey_primary_light">#5e5559</color>
+
+    //JupiterTheme
+
+    <color name="colorPrimaryJupiterTheme">#d7652a</color>
+    <color name="colorPrimaryVariantJupiterTheme">#ff9557</color>
+    <color name="colorPrimaryDarkJupiterTheme">#9f3700</color>
+    <color name="colorOnPrimaryJupiterTheme">#212121</color>
+    <color name="colorSecondaryJupiterTheme">#f4bc5d</color>
+    <color name="colorSecondaryVariantJupiterTheme">#ffee8d</color>
+    <color name="colorSecondaryContainerJupiterTheme">#be8c2e</color>
+    <color name="textColorPrimaryJupiterTheme">#490206</color>
+    <color name="textColorSecondaryJupiterTheme">#360201</color>
+    <color name="colorOnSecondaryJupiterTheme">#FF000000</color>
+
+</resources>

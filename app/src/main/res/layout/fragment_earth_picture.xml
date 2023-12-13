@@ -100,7 +100,7 @@
             app:layout_constraintTop_toTopOf="@id/guideline_hor_45"
             app:layout_constraintBottom_toBottomOf="@id/guideline_hor_45">
 
-            <com.gb_materialdesign.utils.EquilateralImageView
+            <com.test.application.picture_of_the_day.custom_view.EquilateralImageView
                 android:id="@+id/earth_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

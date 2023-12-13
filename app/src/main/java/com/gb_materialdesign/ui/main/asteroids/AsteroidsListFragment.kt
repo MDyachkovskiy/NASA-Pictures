@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gb_materialdesign.adapters.AsteroidsListAdapter
 import com.gb_materialdesign.databinding.FragmentAsteroidsListBinding
-import com.gb_materialdesign.ui.main.appState.AppState
+import com.test.application.core.utils.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.utils.getTheDateInFormat
 
@@ -49,11 +49,11 @@ class AsteroidsListFragment : Fragment() {
         }
     }
 
-    private fun renderData(appState: AppState?) {
+    private fun renderData(appState: com.test.application.core.utils.AppState?) {
         dataRenderer.render(appState)
 
         when(appState) {
-            is AppState.SuccessAsteroidList -> {
+            is com.test.application.core.utils.AppState.SuccessAsteroidList -> {
                 binding.asteroidsList.adapter = AsteroidsListAdapter(appState.asteroidList,
                 binding.asteroidsList, context)
             }

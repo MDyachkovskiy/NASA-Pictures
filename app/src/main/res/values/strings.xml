@@ -1,8 +1,6 @@
 <resources>
     <string name="app_name">GB_MaterialDesign</string>
-    <string name="photo_of_the_day_stub">Photo of the day</string>
-    <string name="search_wiki">Найти в Википедии</string>
-    <string name="wiki_helper_text">Поищите термин в википедии</string>
+
     <string name="favourite">favourite</string>
     <string name="settings">settings</string>
     <string name="search">Search</string>
@@ -11,10 +9,6 @@
     <string name="requestError">Ошибка загрузки данных</string>
     <string name="repeatRequest">Отправить повторный запрос</string>
 
-    <!-- Chip titles -->
-    <string name="chipToday">today</string>
-    <string name="chipYesterday">yesterday</string>
-    <string name="chipBeforeYesterday">day before yesterday</string>
 
     <!-- Color styles titles -->
     <string name="colorThemeTitle">Выберите цветовую тему</string>

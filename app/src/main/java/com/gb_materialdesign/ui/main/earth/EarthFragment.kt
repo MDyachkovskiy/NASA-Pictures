@@ -14,7 +14,7 @@ import com.gb_materialdesign.R
 import com.gb_materialdesign.adapters.ViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentEarthBinding
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
-import com.gb_materialdesign.ui.main.appState.AppState
+import com.test.application.core.utils.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.gb_materialdesign.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
@@ -87,11 +87,11 @@ class EarthFragment : Fragment() {
         }
     }
 
-    private fun renderData(appState: AppState?) {
+    private fun renderData(appState: com.test.application.core.utils.AppState?) {
         dataRenderer.render(appState)
 
         when (appState) {
-            is AppState.SuccessEarthPicture -> {
+            is com.test.application.core.utils.AppState.SuccessEarthPicture -> {
 
                 val pictures = appState.earthPictures
 
