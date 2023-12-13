@@ -95,4 +95,10 @@
     <!-- FAB Style -->
 
 
+    <!-- Splash Background -->
+
+    <style name="Splash" parent="MyGreyTheme.GB_MaterialDesign">
+        <item name="android:windowBackground">@drawable/splash_background_drawable</item>
+    </style>
+
 </resources>
