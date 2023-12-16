@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="bottom_sheet_line_color">#663b4351</color>
+    <color name="text_hightlight_color">#FF018786</color>
+    <color name="header_background_color">#4e5067</color>
+    <color name="text_quote_color">#96130d</color>
 </resources>

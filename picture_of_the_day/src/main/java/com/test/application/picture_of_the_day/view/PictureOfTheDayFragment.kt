@@ -4,16 +4,11 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
-import android.text.Spannable
-import android.text.SpannableString
 import android.text.style.*
 import android.view.*
-import android.view.animation.Animation
-import android.view.animation.ScaleAnimation
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.transition.Fade
@@ -48,8 +43,11 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
 
     private var isImageScaled = false
 
-    private var pivotX = 0.5f
-    private var pivotY = 0.5f
+
+
+    private val imageScaleAnimator = ImageScaleAnimator()
+    private val bottomSheetDescriptionFormatter = BottomSheetDescriptionFormatter(requireContext())
+    private val bottomSheetHeaderFormatter = BottomSheetHeaderFormatter(requireContext())
 
     private var isViewVisible = false
 
@@ -84,31 +82,12 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
         binding.pictureOfTheDay.setOnTouchListener { v, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 v.performClick()
-                if (!isImageScaled) {
-                    pivotX = motionEvent.x / v.width
-                    pivotY = motionEvent.y / v.height
-                    val animation = ScaleAnimation(
-                        1f, 3f,
-                        1f, 3f,
-                        Animation.RELATIVE_TO_SELF, pivotX,
-                        Animation.RELATIVE_TO_SELF, pivotY
-                    )
-                    animation.duration = 1000
-                    animation.fillAfter = true
-                    v.startAnimation(animation)
-                    isImageScaled = !isImageScaled
-                } else {
-                    val animation = ScaleAnimation(
-                        3f, 1f,
-                        3f, 1f,
-                        Animation.RELATIVE_TO_SELF, pivotX,
-                        Animation.RELATIVE_TO_SELF, pivotY
-                    )
-                    animation.duration = 1000
-                    animation.fillAfter = true
-                    v.startAnimation(animation)
-                    isImageScaled = !isImageScaled
-                }
+                val pivotX = motionEvent.x / v.width
+                val pivotY = motionEvent.y / v.height
+                val scaleFrom = if(!isImageScaled) 1f else 3f
+                val scaleTo = if(!isImageScaled) 3f else 1f
+                imageScaleAnimator.animateScale(v, scaleFrom, scaleTo, pivotX, pivotY, 1000)
+                isImageScaled = !isImageScaled
             }
             true
         }
@@ -177,99 +156,14 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
 
     private fun setTextFormatDescription(description: String) {
         val bottomSheetDescription = binding.bottomSheetLayout.bottomSheetDescription
-        val indexOfLastCharOnFirstLine = 40
-        val newDescription = description.substring(0, indexOfLastCharOnFirstLine) + "\n" +
-                description.substring(indexOfLastCharOnFirstLine)
-
-
-        val spannableDescription = SpannableString(newDescription)
-        val startIndex = 0
-        val flag = 0
-        val endIndex = description.length
-        val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
-
-        val stripeWidthInPx = 20
-        val gapWidthInPx = 100
-
-        spannableDescription.setSpan(
-            QuoteSpan(color, stripeWidthInPx, gapWidthInPx),
-            startIndex, indexOfLastCharOnFirstLine, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        val lineHeightInPx = 100
-        spannableDescription.setSpan(
-            LineHeightSpan.Standard(lineHeightInPx),
-            startIndex, endIndex, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
-
-        val fontSizeMultiplier = 2.0f
-        spannableDescription.setSpan(
-            RelativeSizeSpan(fontSizeMultiplier),
-            startIndex, startIndex + 1, flag
-        )
-
-        val bitmap = ContextCompat.getDrawable(
-            requireContext(),
-            R.drawable.ic_baseline_favorite_border_24
-        )!!.toBitmap()
-        for (i in newDescription.indices) {
-            if (newDescription[i] == 'o') {
-                spannableDescription.setSpan(
-                    ImageSpan(requireContext(), bitmap, DynamicDrawableSpan.ALIGN_BOTTOM),
-                    i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            } else if (newDescription[i] == 'O') {
-                spannableDescription.setSpan(
-                    ImageSpan(requireContext(), bitmap, DynamicDrawableSpan.ALIGN_BOTTOM),
-                    i, i + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-            }
-        }
-
-        val resultStar = newDescription.indexesOf("star")
-        if (resultStar.isNotEmpty()) {
-            val textColor = ContextCompat.getColor(requireContext(), R.color.teal_700)
-            resultStar.forEach {
-                spannableDescription.setSpan(
-                    ForegroundColorSpan(textColor), it,
-                    it + 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                spannableDescription.setSpan(UnderlineSpan(), it, it + 4, flag)
-            }
-        }
-
-        val resultStars = newDescription.indexesOf("stars")
-        if (resultStars.isNotEmpty()) {
-            resultStars.forEach {
-                val textColor = ContextCompat.getColor(requireContext(), R.color.teal_700)
-                spannableDescription.setSpan(
-                    ForegroundColorSpan(textColor), it,
-                    it + 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
-                )
-                spannableDescription.setSpan(UnderlineSpan(), it, it + 5, flag)
-            }
-        }
-
-        bottomSheetDescription.text = spannableDescription
+        bottomSheetDescription.text = bottomSheetDescriptionFormatter.formatDescription(description)
     }
 
-    private fun String.indexesOf(substr: String, ignoreCase: Boolean = true): List<Int> =
-        (if (ignoreCase) Regex(substr, RegexOption.IGNORE_CASE) else Regex(substr))
-            .findAll(this).map { it.range.first }.toList()
+
 
     private fun setTextFormatHeader(header: String) {
-        val spannableHeader = SpannableString(header)
-        val startIndex = 0
-        val flag = 0
-        val endIndex = header.length
-
-        val color = ContextCompat.getColor(requireContext(), R.color.colorPrimaryMarsTheme)
-        spannableHeader.setSpan(BackgroundColorSpan(color), startIndex, endIndex, flag)
-
-        val proportion = 1.5f
-        spannableHeader.setSpan(ScaleXSpan(proportion), startIndex, endIndex, flag)
-
-        binding.bottomSheetLayout.bottomSheetDescriptionHeader.text = spannableHeader
+        binding.bottomSheetLayout.bottomSheetDescriptionHeader.text =
+            bottomSheetHeaderFormatter.formatHeader(header)
 
     }
 
