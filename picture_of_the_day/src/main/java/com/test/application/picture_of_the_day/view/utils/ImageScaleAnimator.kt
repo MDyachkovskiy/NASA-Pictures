@@ -1,4 +1,4 @@
-package com.test.application.picture_of_the_day.view
+package com.test.application.picture_of_the_day.view.utils
 
 import android.view.View
 import android.view.animation.Animation

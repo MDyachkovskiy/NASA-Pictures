@@ -12,7 +12,7 @@ import com.gb_materialdesign.model.marsPicture.Camera
 import com.gb_materialdesign.model.marsPicture.Photo
 import com.test.application.core.utils.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
-import com.gb_materialdesign.utils.getTheDateInFormat
+import com.test.application.picture_of_the_day.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MarsViewPagerFragment: Fragment() {
@@ -26,7 +26,8 @@ class MarsViewPagerFragment: Fragment() {
 
     private val dataRenderer by lazy {
         AppStateRenderer(parentView) {viewModel.getPicturesOfMarsByCamera(
-            camera.name, getTheDateInFormat(0))}
+            camera.name, com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)
+        )}
     }
 
     private val viewModel: MarsPictureViewModel by lazy {
@@ -58,7 +59,9 @@ class MarsViewPagerFragment: Fragment() {
 
         camera = arguments?.getParcelable("camera")?: Camera()
 
-        viewModel.getPicturesOfMarsByCamera(camera.name, getTheDateInFormat(0))
+        viewModel.getPicturesOfMarsByCamera(camera.name,
+            com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)
+        )
         viewModel.getLiveData().observe(viewLifecycleOwner) {
             renderData(it)
         }

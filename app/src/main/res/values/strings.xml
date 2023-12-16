@@ -1,9 +1,7 @@
 <resources>
     <string name="app_name">GB_MaterialDesign</string>
 
-    <string name="favourite">favourite</string>
     <string name="settings">settings</string>
-    <string name="search">Search</string>
 
     <!-- AppState Snackbar -->
     <string name="requestError">Ошибка загрузки данных</string>

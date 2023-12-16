@@ -49,4 +49,5 @@ dependencies {
     //Design
     implementation(Design.material)
     implementation("com.github.bumptech.glide:glide:4.15.1")
+    implementation(Coil.coil_kt)
 }

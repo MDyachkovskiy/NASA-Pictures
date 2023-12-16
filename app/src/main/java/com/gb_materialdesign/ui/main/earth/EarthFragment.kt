@@ -16,7 +16,7 @@ import com.gb_materialdesign.databinding.FragmentEarthBinding
 import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
 import com.test.application.core.utils.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
-import com.gb_materialdesign.utils.getTheDateInFormat
+import com.test.application.picture_of_the_day.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
 
 class EarthFragment : Fragment() {
@@ -31,7 +31,11 @@ class EarthFragment : Fragment() {
     }
 
     private val dataRenderer by lazy {
-        AppStateRenderer(parentView) { viewModel.getLiveData(getTheDateInFormat(0)) }
+        AppStateRenderer(parentView) { viewModel.getLiveData(
+            com.test.application.picture_of_the_day.utils.getTheDateInFormat(
+                0
+            )
+        ) }
     }
 
     private val onPageChangeListener = object : ViewPager2.OnPageChangeCallback() {
@@ -82,7 +86,7 @@ class EarthFragment : Fragment() {
 
         binding.earthViewPager.registerOnPageChangeCallback(onPageChangeListener)
 
-        viewModel.getLiveData(getTheDateInFormat(0)).observe(viewLifecycleOwner) {
+        viewModel.getLiveData(com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)).observe(viewLifecycleOwner) {
             renderData(it)
         }
     }

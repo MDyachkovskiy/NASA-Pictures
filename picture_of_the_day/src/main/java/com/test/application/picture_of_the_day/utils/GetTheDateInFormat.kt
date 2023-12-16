@@ -1,4 +1,4 @@
-package com.gb_materialdesign.utils
+package com.test.application.picture_of_the_day.utils
 
 import java.text.SimpleDateFormat
 import java.util.*

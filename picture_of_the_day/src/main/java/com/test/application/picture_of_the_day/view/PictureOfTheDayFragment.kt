@@ -1,37 +1,32 @@
 package com.test.application.picture_of_the_day.view
 
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.style.*
 import android.view.*
 import android.widget.FrameLayout
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.transition.Fade
-import androidx.transition.Slide
-import androidx.transition.TransitionManager
-import androidx.transition.TransitionSet
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.RequestOptions
+import coil.load
 import com.gb_materialdesign.MainActivity
 import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
-import com.gb_materialdesign.utils.getTheDateInFormat
-import com.google.android.material.bottomappbar.BottomAppBar
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.test.application.core.domain.PictureOfTheDay
 import com.test.application.core.utils.WIKIPEDIA_DOMAIN
 import com.test.application.core.view.BaseFragment
 import com.test.application.picture_of_the_day.R
 import com.test.application.picture_of_the_day.databinding.FragmentPictureOfTheDayBinding
+import com.test.application.picture_of_the_day.utils.getTheDateInFormat
+import com.test.application.picture_of_the_day.view.utils.BottomAppBarConfigurator
+import com.test.application.picture_of_the_day.view.utils.BottomSheetDescriptionFormatter
+import com.test.application.picture_of_the_day.view.utils.BottomSheetHeaderFormatter
+import com.test.application.picture_of_the_day.view.utils.ImageScaleAnimator
+import com.test.application.picture_of_the_day.view.utils.TransitionAnimator
 import kotlinx.coroutines.launch
 
 
@@ -43,11 +38,11 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
 
     private var isImageScaled = false
 
-
-
     private val imageScaleAnimator = ImageScaleAnimator()
     private val bottomSheetDescriptionFormatter = BottomSheetDescriptionFormatter(requireContext())
     private val bottomSheetHeaderFormatter = BottomSheetHeaderFormatter(requireContext())
+    private val bottomAppBarConfigurator = BottomAppBarConfigurator(requireContext())
+    private val transitionAnimator = TransitionAnimator()
 
     private var isViewVisible = false
 
@@ -110,43 +105,26 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
     }
 
     override fun setupData(data: PictureOfTheDay) {
-        val options = RequestOptions()
-            .error(R.drawable.ic_load_error_vector)
-            .placeholder(R.drawable.ic_no_photo_vector)
-
-        activity?.let {
-            Glide.with(it)
-                .load(data.url)
-                .apply(options)
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .listener(object : RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        binding.imageProgressBar.visibility = View.GONE
-                        return false
-                    }
-
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        binding.imageProgressBar.visibility = View.GONE
-                        displayViewElements()
-                        return false
-                    }
-                })
-                .into(binding.pictureOfTheDay)
-
-        }
+        loadImage(data.url)
         setTextFormatHeader(data.title)
         setTextFormatDescription(data.explanation)
+    }
+
+    private fun loadImage(imageUrl: String) {
+        binding.pictureOfTheDay.load(imageUrl) {
+            crossfade(true)
+            placeholder(com.test.application.core.R.drawable.ic_no_photo_vector)
+            error(com.test.application.core.R.drawable.ic_load_error_vector)
+            listener(
+                onError = {_,_ ->
+                    binding.imageProgressBar.visibility = View.GONE
+                },
+                onSuccess = {_,_ ->
+                    binding.imageProgressBar.visibility = View.GONE
+                    displayViewElements()
+                }
+            )
+        }
     }
 
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
@@ -154,58 +132,38 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun setTextFormatDescription(description: String) {
         val bottomSheetDescription = binding.bottomSheetLayout.bottomSheetDescription
         bottomSheetDescription.text = bottomSheetDescriptionFormatter.formatDescription(description)
     }
 
-
-
     private fun setTextFormatHeader(header: String) {
         binding.bottomSheetLayout.bottomSheetDescriptionHeader.text =
             bottomSheetHeaderFormatter.formatHeader(header)
-
     }
 
     private fun displayViewElements() {
-
-        val chipTransition = TransitionSet().apply {
-            duration = 1500
-            ordering = TransitionSet.ORDERING_SEQUENTIAL
-            val fade = Slide(Gravity.END)
-            this.addTransition(fade)
-        }
-
-        val textInputTransition = TransitionSet().apply {
-            duration = 2000
-            val fade = Fade()
-            this.addTransition(fade)
-        }
-
-        if (isViewVisible) {
-            return
-        } else {
+        if(!isViewVisible) {
             with(binding) {
-                TransitionManager.beginDelayedTransition(chipGroup, chipTransition)
+                transitionAnimator.applyTransitionOnChips(chipGroup)
                 chipToday.visibility = View.VISIBLE
                 chipYesterday.visibility = View.VISIBLE
                 chipDayBeforeYesterday.visibility = View.VISIBLE
 
-                TransitionManager.beginDelayedTransition(inputLayout, textInputTransition)
+                transitionAnimator.applyTransitionOnInputLayout(inputLayout)
                 inputLayout.visibility = View.VISIBLE
 
-                TransitionManager.beginDelayedTransition(root)
+                transitionAnimator.applyTransitionOnViewGroup(root)
             }
             isViewVisible = !isViewVisible
-        }
+         }
     }
 
     private fun setBottomAppBar(view: View) {
         val context = activity as MainActivity
         context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
-
         setHasOptionsMenu(true)
-
         setFloatingActionButton()
     }
 
@@ -232,41 +190,8 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
 
     private fun setFloatingActionButton() {
         binding.fab.setOnClickListener {
-            if (isMain) {
-                isMain = false
-                with(binding) {
-                    bottomAppBar.navigationIcon = null
-
-                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_END
-
-                    fab.setImageDrawable(context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.ic_back_fab
-                        )
-                    })
-
-                    bottomAppBar.replaceMenu(R.menu.menu_bottom_bar_other_screen)
-                }
-            } else {
-                isMain = true
-                with(binding) {
-                    bottomAppBar.navigationIcon = context?.let {
-                        ContextCompat.getDrawable(it, R.drawable.ic_hamburger_menu_bottom_bar)
-                    }
-
-                    bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
-
-                    fab.setImageDrawable(context?.let {
-                        ContextCompat.getDrawable(
-                            it,
-                            R.drawable.ic_plus_fab
-                        )
-                    })
-
-                    bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
-                }
-            }
+            isMain = !isMain
+            bottomAppBarConfigurator.setupBottomAppBar(binding.bottomAppBar, binding.fab, isMain)
         }
     }
 

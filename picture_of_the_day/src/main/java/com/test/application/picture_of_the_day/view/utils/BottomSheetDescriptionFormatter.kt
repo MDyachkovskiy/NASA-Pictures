@@ -1,4 +1,4 @@
-package com.test.application.picture_of_the_day.view
+package com.test.application.picture_of_the_day.view.utils
 
 import android.content.Context
 import android.os.Build
