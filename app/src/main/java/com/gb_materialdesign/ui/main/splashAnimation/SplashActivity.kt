@@ -7,7 +7,7 @@ import android.os.Handler
 import android.os.Looper
 import android.view.animation.LinearInterpolator
 import androidx.appcompat.app.AppCompatActivity
-import com.gb_materialdesign.MainActivity
+import com.gb_materialdesign.view.MainActivity
 import com.gb_materialdesign.databinding.ActivitySplashBinding
 
 class SplashActivity : AppCompatActivity() {

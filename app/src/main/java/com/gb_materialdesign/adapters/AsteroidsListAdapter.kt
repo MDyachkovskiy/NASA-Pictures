@@ -11,16 +11,16 @@ import androidx.transition.Explode
 import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
-import com.gb_materialdesign.MainActivity
+import com.gb_materialdesign.view.MainActivity
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.ItemAsteroidsListBinding
-import com.gb_materialdesign.model.asteroids.Asteroid
-import com.gb_materialdesign.model.asteroids.AsteroidsListResponse
+import com.test.application.remote_data.dto.asteroidList.Asteroid
+import com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse
 import com.gb_materialdesign.ui.main.asteroids.AsteroidDetailsFragment
 import com.gb_materialdesign.utils.KEY_BUNDLE_ASTEROID
 
 class AsteroidsListAdapter(
-    private val asteroidList: AsteroidsListResponse,
+    private val asteroidList: com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse,
     private val recyclerView: RecyclerView,
     private val context: Context?
 ): RecyclerView.Adapter<AsteroidsListAdapter.ViewHolder>() {
@@ -43,7 +43,7 @@ class AsteroidsListAdapter(
         }
     }
 
-    private fun openDetailsFragment(asteroid: Asteroid) {
+    private fun openDetailsFragment(asteroid: com.test.application.remote_data.dto.asteroidList.Asteroid) {
         val fragment = AsteroidDetailsFragment.newInstance(Bundle())
         fragment.arguments = Bundle().apply {
             putParcelable(KEY_BUNDLE_ASTEROID, asteroid)
@@ -59,7 +59,7 @@ class AsteroidsListAdapter(
 
     }
 
-    private fun explodeAnimation(it: View, asteroid: Asteroid) {
+    private fun explodeAnimation(it: View, asteroid: com.test.application.remote_data.dto.asteroidList.Asteroid) {
         val myAutoTransition = TransitionSet()
         myAutoTransition.ordering = TransitionSet.ORDERING_SEQUENTIAL
         val explode = Explode()
@@ -83,7 +83,7 @@ class AsteroidsListAdapter(
 
     class ViewHolder (itemView: View): RecyclerView.ViewHolder(itemView){
 
-        fun bind (asteroid: Asteroid){
+        fun bind (asteroid: com.test.application.remote_data.dto.asteroidList.Asteroid){
             val binding = ItemAsteroidsListBinding.bind(itemView)
 
             with(binding){

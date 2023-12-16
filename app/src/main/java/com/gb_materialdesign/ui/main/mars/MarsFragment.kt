@@ -7,7 +7,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentMarsBinding
-import com.gb_materialdesign.model.marsPicture.Camera
+import com.test.application.remote_data.dto.marsPictureResponse.Camera
 
 class MarsFragment : Fragment() {
 
@@ -36,15 +36,27 @@ class MarsFragment : Fragment() {
         navView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
                 R.id.navcam -> {
-                    replaceFragment(Camera(name= "navcam"))
+                    replaceFragment(
+                        com.test.application.remote_data.dto.marsPictureResponse.Camera(
+                            name = "navcam"
+                        )
+                    )
                     true
                 }
                 R.id.chemcam -> {
-                    replaceFragment(Camera(name= "chemcam"))
+                    replaceFragment(
+                        com.test.application.remote_data.dto.marsPictureResponse.Camera(
+                            name = "chemcam"
+                        )
+                    )
                     true
                 }
                 R.id.fhaz -> {
-                    replaceFragment(Camera(name= "fhaz"))
+                    replaceFragment(
+                        com.test.application.remote_data.dto.marsPictureResponse.Camera(
+                            name = "fhaz"
+                        )
+                    )
                     true
                 }
                 else -> false
@@ -63,7 +75,7 @@ class MarsFragment : Fragment() {
         }
     }
 
-    private fun replaceFragment(camera: Camera) {
+    private fun replaceFragment(camera: com.test.application.remote_data.dto.marsPictureResponse.Camera) {
 
         val drawerLayout = binding.marsFragment
         childFragmentManager.beginTransaction()

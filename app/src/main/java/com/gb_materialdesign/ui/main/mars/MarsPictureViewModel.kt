@@ -2,11 +2,10 @@ package com.gb_materialdesign.ui.main.mars
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
+import com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse
 import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import com.gb_materialdesign.repository.marsPicture.MarsPictureRepository
 import com.gb_materialdesign.repository.marsPicture.MarsPictureRepositoryImpl
-import com.test.application.core.utils.AppState
 import com.gb_materialdesign.utils.CORRUPTED_DATA
 import com.gb_materialdesign.utils.REQUEST_ERROR
 import com.gb_materialdesign.utils.SERVER_ERROR
@@ -19,12 +18,12 @@ class MarsPictureViewModel(
         MarsPictureRepositoryImpl(RemoteSourceNasaAPI())
 ) : ViewModel() {
 
-    private val callback = object : retrofit2.Callback<MarsPictureResponse> {
+    private val callback = object : retrofit2.Callback<com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse> {
         override fun onResponse(
-            call: Call<MarsPictureResponse>,
-            response: Response<MarsPictureResponse>
+            call: Call<com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse>,
+            response: Response<com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse>
         ) {
-            val serverResponse: MarsPictureResponse? = response.body()
+            val serverResponse: com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse? = response.body()
             liveData.postValue(
                 if (response.isSuccessful && serverResponse != null) {
                     checkResponse(serverResponse)
@@ -39,13 +38,13 @@ class MarsPictureViewModel(
             )
         }
 
-        override fun onFailure(call: Call<MarsPictureResponse>, t: Throwable) {
+        override fun onFailure(call: Call<com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse>, t: Throwable) {
             liveData.postValue(com.test.application.core.utils.AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
 
     }
 
-    private fun checkResponse (serverResponse: MarsPictureResponse) : com.test.application.core.utils.AppState {
+    private fun checkResponse (serverResponse: com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse) : com.test.application.core.utils.AppState {
        return if  (serverResponse == null) {
            com.test.application.core.utils.AppState.Error (Throwable(CORRUPTED_DATA))
        } else {

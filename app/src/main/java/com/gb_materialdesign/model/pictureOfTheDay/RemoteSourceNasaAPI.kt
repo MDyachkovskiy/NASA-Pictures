@@ -1,50 +1,12 @@
 package com.gb_materialdesign.model.pictureOfTheDay
 
 import android.util.Log
-import com.gb_materialdesign.model.asteroids.AsteroidsListResponse
-import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
-import com.gb_materialdesign.model.earthPicture.PictureOfEarthAPI
-import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
-import com.gb_materialdesign.utils.EARTH_PICTURE_DOMAIN
 import com.gb_materialdesign.utils.NASA_API_KEY
-import com.gb_materialdesign.utils.NASA_DOMAIN
-import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Callback
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.io.IOException
 
 class RemoteSourceNasaAPI {
-
-    private val nasaAPI = Retrofit.Builder()
-        .baseUrl(NASA_DOMAIN)
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-        .client(createOkHttpClient(PictureOfTheDayInterceptor()))
-        .build()
-        .create(PictureOfTheDayAPI::class.java)
-
-    private val earthPictureAPI = Retrofit.Builder()
-        .baseUrl(EARTH_PICTURE_DOMAIN)
-        .addConverterFactory(GsonConverterFactory.create(GsonBuilder().setLenient().create()))
-        .build()
-        .create(PictureOfEarthAPI::class.java)
-
-    private fun createOkHttpClient(
-        interceptor: Interceptor
-    ): OkHttpClient {
-
-        val httpClient = OkHttpClient.Builder()
-        httpClient.addInterceptor(interceptor)
-
-        httpClient.addInterceptor(
-            HttpLoggingInterceptor()
-                .setLevel(HttpLoggingInterceptor.Level.BODY))
-
-        return httpClient.build()
-    }
 
     inner class PictureOfTheDayInterceptor : Interceptor {
 
@@ -68,15 +30,15 @@ class RemoteSourceNasaAPI {
         nasaAPI.getPictureOfTheDayByDate(NASA_API_KEY, date).enqueue(callback)
     }
 
-    fun getPicturesOfEarthByDate (date: String, callback: Callback<EarthPictureResponse>){
+    fun getPicturesOfEarthByDate (date: String, callback: Callback<com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse>){
         earthPictureAPI.getPicturesOfEarth(date).enqueue(callback)
     }
 
-    fun getPicturesOfMars (date: String, camera: String?, callback: Callback<MarsPictureResponse>){
+    fun getPicturesOfMars (date: String, camera: String?, callback: Callback<com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse>){
         nasaAPI.getPicturesOfMars(NASA_API_KEY, "2023-02-20", camera).enqueue(callback)
     }
 
-    fun getAsteroidsList (date: String?, callback: Callback<AsteroidsListResponse>){
+    fun getAsteroidsList (date: String?, callback: Callback<com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse>){
         nasaAPI.getAsteroidsList(NASA_API_KEY, "2023-03-10", date).enqueue(callback)
     }
 }

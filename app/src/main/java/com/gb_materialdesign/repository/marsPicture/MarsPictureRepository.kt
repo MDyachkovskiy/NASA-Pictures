@@ -1,6 +1,6 @@
 package com.gb_materialdesign.repository.marsPicture
 
-import com.gb_materialdesign.model.marsPicture.MarsPictureResponse
+import com.test.application.remote_data.dto.marsPictureResponse.MarsPictureResponse
 
 interface MarsPictureRepository {
     fun getPictureOfMars (date: String,

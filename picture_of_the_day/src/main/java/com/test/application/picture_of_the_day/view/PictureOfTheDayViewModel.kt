@@ -2,6 +2,7 @@ package com.test.application.picture_of_the_day.view
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.gb_materialdesign.model.pictureOfTheDay.PictureOfTheDayResponse
 import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import com.gb_materialdesign.repository.pictureOfTheDay.PictureOfTheDayRepository
@@ -10,14 +11,22 @@ import com.gb_materialdesign.ui.main.appState.AppState
 import com.gb_materialdesign.utils.CORRUPTED_DATA
 import com.gb_materialdesign.utils.REQUEST_ERROR
 import com.gb_materialdesign.utils.SERVER_ERROR
+import com.test.application.core.utils.AppState
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Response
 
 class PictureOfTheDayViewModel(
-    private val liveData: MutableLiveData<AppState> = MutableLiveData(),
     private val pictureOfTheDayRepository: PictureOfTheDayRepository
     = PictureOfTheDayRepositoryImpl(RemoteSourceNasaAPI())
 ) : ViewModel() {
+
+    private val _stateFlow = MutableStateFlow<AppState>(AppState.Loading)
+    val stateFlow: StateFlow<AppState> = _stateFlow.asStateFlow()
+
 
     private val callback = object : retrofit2.Callback<PictureOfTheDayResponse> {
 
@@ -53,23 +62,19 @@ class PictureOfTheDayViewModel(
         }
     }
 
-    fun getLiveData(): MutableLiveData<AppState> {
-        sendServerRequest()
-        return liveData
-    }
-
    fun getPictureOfTheDay() {
-       liveData.value = AppState.Loading
-       pictureOfTheDayRepository.getPictureOfTheDay(callback)
+       viewModelScope.launch {
+           pictureOfTheDayRepository.getPictureOfTheDay().collect {
+               _stateFlow.value = it
+           }
+       }
     }
 
     fun getPictureOfTheDayByDate(date: String) {
-        liveData.value = AppState.Loading
-        pictureOfTheDayRepository.getPictureOfTheDayByDate(date, callback)
-    }
-
-    private fun sendServerRequest() {
-        liveData.value = AppState.Loading
-        pictureOfTheDayRepository.getPictureOfTheDay(callback)
+        viewModelScope.launch {
+            pictureOfTheDayRepository.getPictureOfTheDayByDate(date).collect {
+                _stateFlow.value = it
+            }
+        }
     }
 }

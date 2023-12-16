@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gb_materialdesign.adapters.MarsViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentMarsViewpagerBinding
-import com.gb_materialdesign.model.marsPicture.Camera
-import com.gb_materialdesign.model.marsPicture.Photo
-import com.test.application.core.utils.AppState
+import com.test.application.remote_data.dto.marsPictureResponse.Camera
+import com.test.application.remote_data.dto.marsPictureResponse.Photo
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
-import com.test.application.picture_of_the_day.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
 
 class MarsViewPagerFragment: Fragment() {
@@ -22,7 +20,7 @@ class MarsViewPagerFragment: Fragment() {
 
     private lateinit var parentView: View
 
-    private lateinit var camera : Camera
+    private lateinit var camera : com.test.application.remote_data.dto.marsPictureResponse.Camera
 
     private val dataRenderer by lazy {
         AppStateRenderer(parentView) {viewModel.getPicturesOfMarsByCamera(
@@ -35,7 +33,7 @@ class MarsViewPagerFragment: Fragment() {
     }
 
     companion object {
-        fun newInstance(camera: Camera): MarsViewPagerFragment {
+        fun newInstance(camera: com.test.application.remote_data.dto.marsPictureResponse.Camera): MarsViewPagerFragment {
             val fragment = MarsViewPagerFragment()
             fragment.arguments = Bundle().apply{
                 putParcelable("camera", camera)
@@ -57,7 +55,7 @@ class MarsViewPagerFragment: Fragment() {
 
         parentView = binding.marsViewPagerFragment
 
-        camera = arguments?.getParcelable("camera")?: Camera()
+        camera = arguments?.getParcelable("camera")?: com.test.application.remote_data.dto.marsPictureResponse.Camera()
 
         viewModel.getPicturesOfMarsByCamera(camera.name,
             com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)
@@ -83,7 +81,7 @@ class MarsViewPagerFragment: Fragment() {
         }
     }
 
-    private fun setTabs(photos: List<Photo>) {
+    private fun setTabs(photos: List<com.test.application.remote_data.dto.marsPictureResponse.Photo>) {
         TabLayoutMediator(binding.marsTabLayout, binding.marsViewPager) {tab, position ->
             val marsPicture = photos[position]
             tab.text = marsPicture.id.toString()

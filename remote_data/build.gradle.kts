@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 28
+        minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -40,4 +40,8 @@ dependencies {
 
     //Androidx
     implementation(AndroidX.appcompat)
+
+    //Retrofit
+    implementation (Retrofit.main)
+    implementation (Retrofit.gson_convertor)
 }

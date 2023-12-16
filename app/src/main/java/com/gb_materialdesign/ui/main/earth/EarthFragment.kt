@@ -13,10 +13,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.gb_materialdesign.R
 import com.gb_materialdesign.adapters.ViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentEarthBinding
-import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
-import com.test.application.core.utils.AppState
+import com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
-import com.test.application.picture_of_the_day.utils.getTheDateInFormat
 import com.google.android.material.tabs.TabLayoutMediator
 
 class EarthFragment : Fragment() {
@@ -116,7 +114,7 @@ class EarthFragment : Fragment() {
         super.onDestroyView()
     }
 
-    private fun setTabs(pictures: EarthPictureResponse) {
+    private fun setTabs(pictures: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse) {
         TabLayoutMediator(binding.earthTabLayout, binding.earthViewPager) { tab, position ->
             val picture = pictures[position]
             context?.let {

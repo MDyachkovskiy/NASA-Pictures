@@ -2,21 +2,19 @@ package com.test.application.picture_of_the_day.view
 
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.text.style.*
 import android.view.*
 import android.widget.FrameLayout
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import coil.load
-import com.gb_materialdesign.MainActivity
-import com.gb_materialdesign.ui.main.earth.EarthFragment
-import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.test.application.core.domain.PictureOfTheDay
+import com.test.application.core.navigation.FragmentInteractionListener
+import com.test.application.core.navigation.FragmentType
 import com.test.application.core.utils.WIKIPEDIA_DOMAIN
 import com.test.application.core.view.BaseFragment
 import com.test.application.picture_of_the_day.R
@@ -28,15 +26,17 @@ import com.test.application.picture_of_the_day.view.utils.BottomSheetHeaderForma
 import com.test.application.picture_of_the_day.view.utils.ImageScaleAnimator
 import com.test.application.picture_of_the_day.view.utils.TransitionAnimator
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
-class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTheDayBinding> (
+class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfTheDayBinding>(
     FragmentPictureOfTheDayBinding::inflate
 ) {
 
     private val viewModel: PictureOfTheDayViewModel by viewModel()
 
     private var isImageScaled = false
+    private var isViewVisible = false
+    private var isMain = true
 
     private val imageScaleAnimator = ImageScaleAnimator()
     private val bottomSheetDescriptionFormatter = BottomSheetDescriptionFormatter(requireContext())
@@ -44,20 +44,14 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
     private val bottomAppBarConfigurator = BottomAppBarConfigurator(requireContext())
     private val transitionAnimator = TransitionAnimator()
 
-    private var isViewVisible = false
-
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
-
-    companion object {
-        private var isMain = true
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         initViewModel()
         setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
         handlePictureScaleAnimation()
         setInputLayout()
-        setBottomAppBar(view)
+        setBottomAppBar()
         setChipGroup()
     }
 
@@ -79,8 +73,8 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
                 v.performClick()
                 val pivotX = motionEvent.x / v.width
                 val pivotY = motionEvent.y / v.height
-                val scaleFrom = if(!isImageScaled) 1f else 3f
-                val scaleTo = if(!isImageScaled) 3f else 1f
+                val scaleFrom = if (!isImageScaled) 1f else 3f
+                val scaleTo = if (!isImageScaled) 3f else 1f
                 imageScaleAnimator.animateScale(v, scaleFrom, scaleTo, pivotX, pivotY, 1000)
                 isImageScaled = !isImageScaled
             }
@@ -89,10 +83,9 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
     }
 
     private fun initViewModel() {
-
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.stateFlow.collect {appState ->
+                viewModel.stateFlow.collect { appState ->
                     renderData(appState)
                 }
             }
@@ -101,7 +94,7 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
     }
 
     override fun findProgressBar(): FrameLayout {
-        TODO("Not yet implemented")
+        return binding.progressBar
     }
 
     override fun setupData(data: PictureOfTheDay) {
@@ -116,10 +109,10 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
             placeholder(com.test.application.core.R.drawable.ic_no_photo_vector)
             error(com.test.application.core.R.drawable.ic_load_error_vector)
             listener(
-                onError = {_,_ ->
+                onError = { _, _ ->
                     binding.imageProgressBar.visibility = View.GONE
                 },
-                onSuccess = {_,_ ->
+                onSuccess = { _, _ ->
                     binding.imageProgressBar.visibility = View.GONE
                     displayViewElements()
                 }
@@ -132,7 +125,6 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 
-    @RequiresApi(Build.VERSION_CODES.Q)
     private fun setTextFormatDescription(description: String) {
         val bottomSheetDescription = binding.bottomSheetLayout.bottomSheetDescription
         bottomSheetDescription.text = bottomSheetDescriptionFormatter.formatDescription(description)
@@ -144,7 +136,7 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
     }
 
     private fun displayViewElements() {
-        if(!isViewVisible) {
+        if (!isViewVisible) {
             with(binding) {
                 transitionAnimator.applyTransitionOnChips(chipGroup)
                 chipToday.visibility = View.VISIBLE
@@ -157,12 +149,11 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
                 transitionAnimator.applyTransitionOnViewGroup(root)
             }
             isViewVisible = !isViewVisible
-         }
+        }
     }
 
-    private fun setBottomAppBar(view: View) {
-        val context = activity as MainActivity
-        context.setSupportActionBar(view.findViewById(R.id.bottom_app_bar))
+    private fun setBottomAppBar() {
+        (requireActivity() as FragmentInteractionListener).setupSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
         setFloatingActionButton()
     }
@@ -175,15 +166,14 @@ class PictureOfTheDayFragment: BaseFragment<PictureOfTheDay, FragmentPictureOfTh
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                activity?.let {
-                    BottomNavigationDrawerFragment().show(it.supportFragmentManager, "tag")
-                }
+                (requireActivity() as FragmentInteractionListener)
+                    .openBottomNavigationDrawer()
             }
-            R.id.app_bar_fav -> requireActivity().supportFragmentManager.beginTransaction()
-                .hide(this)
-                .add(R.id.container, EarthFragment.newInstance())
-                .addToBackStack("tag")
-                .commit()
+
+            R.id.app_bar_fav -> {
+                (requireActivity() as FragmentInteractionListener)
+                    .navigateToFragment(FragmentType.EARTH_FRAGMENT)
+            }
         }
         return super.onOptionsItemSelected(item)
     }

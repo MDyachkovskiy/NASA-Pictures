@@ -8,7 +8,7 @@ android {
     compileSdk = 34
 
     defaultConfig {
-        minSdk = 28
+        minSdk = 29
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -45,9 +45,12 @@ dependencies {
 
     //Androidx
     implementation(AndroidX.appcompat)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     //Design
     implementation(Design.material)
-    implementation("com.github.bumptech.glide:glide:4.15.1")
     implementation(Coil.coil_kt)
+
+    //Koin
+    implementation(Koin.android)
 }

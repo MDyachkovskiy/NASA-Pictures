@@ -19,10 +19,9 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentMarsPictureBinding
-import com.gb_materialdesign.model.marsPicture.Photo
+import com.test.application.remote_data.dto.marsPictureResponse.Photo
 
 class MarsPictureFragment : Fragment() {
 
@@ -31,10 +30,10 @@ class MarsPictureFragment : Fragment() {
 
     private var isImageScaled = false
 
-    private lateinit var marsPicture: Photo
+    private lateinit var marsPicture: com.test.application.remote_data.dto.marsPictureResponse.Photo
 
     companion object {
-        fun newInstance (marsPicture: Photo) : MarsPictureFragment {
+        fun newInstance (marsPicture: com.test.application.remote_data.dto.marsPictureResponse.Photo) : MarsPictureFragment {
             val fragment = MarsPictureFragment()
             fragment.arguments = Bundle().apply{
                 putParcelable("marsPicture", marsPicture)
@@ -54,7 +53,7 @@ class MarsPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        marsPicture = arguments?.getParcelable("marsPicture")?: Photo()
+        marsPicture = arguments?.getParcelable("marsPicture")?: com.test.application.remote_data.dto.marsPictureResponse.Photo()
 
         binding.marsPicture.setOnClickListener {
             pictureAnimation(it)
@@ -89,7 +88,7 @@ class MarsPictureFragment : Fragment() {
         it.layoutParams = params
     }
 
-    private fun displayPicture (marsPicture: Photo) {
+    private fun displayPicture (marsPicture: com.test.application.remote_data.dto.marsPictureResponse.Photo) {
 
         with(binding) {
 

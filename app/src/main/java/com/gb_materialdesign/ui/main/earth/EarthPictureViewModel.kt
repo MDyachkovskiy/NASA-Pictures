@@ -2,11 +2,10 @@ package com.gb_materialdesign.ui.main.earth
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gb_materialdesign.model.earthPicture.EarthPictureResponse
+import com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse
 import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import com.gb_materialdesign.repository.earthPicture.EarthPictureRepository
 import com.gb_materialdesign.repository.earthPicture.EarthPictureRepositoryImpl
-import com.test.application.core.utils.AppState
 import com.gb_materialdesign.utils.CORRUPTED_DATA
 import com.gb_materialdesign.utils.REQUEST_ERROR
 import com.gb_materialdesign.utils.SERVER_ERROR
@@ -19,13 +18,13 @@ class EarthPictureViewModel (
         EarthPictureRepositoryImpl(RemoteSourceNasaAPI())
 ): ViewModel() {
 
-    private val callback = object: retrofit2.Callback<EarthPictureResponse> {
+    private val callback = object: retrofit2.Callback<com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse> {
 
         override fun onResponse(
-            call: Call<EarthPictureResponse>,
-            response: Response<EarthPictureResponse>
+            call: Call<com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse>,
+            response: Response<com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse>
         ) {
-            val serverResponse: EarthPictureResponse? = response.body()
+            val serverResponse: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse? = response.body()
             liveData.postValue(
                 if (response.isSuccessful && serverResponse != null) {
                     checkResponse(serverResponse)
@@ -40,12 +39,12 @@ class EarthPictureViewModel (
             )
         }
 
-        override fun onFailure(call: Call<EarthPictureResponse>, t: Throwable) {
+        override fun onFailure(call: Call<com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse>, t: Throwable) {
             liveData.postValue(com.test.application.core.utils.AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
     }
 
-    private fun checkResponse(serverResponse: EarthPictureResponse): com.test.application.core.utils.AppState {
+    private fun checkResponse(serverResponse: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponse): com.test.application.core.utils.AppState {
         return if (serverResponse.isEmpty()) {
             com.test.application.core.utils.AppState.Error(Throwable(CORRUPTED_DATA))
         } else {

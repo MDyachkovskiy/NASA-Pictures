@@ -2,11 +2,10 @@ package com.gb_materialdesign.ui.main.asteroids
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.gb_materialdesign.model.asteroids.AsteroidsListResponse
+import com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse
 import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
 import com.gb_materialdesign.repository.spaceFragment.SpaceFragmentRepository
 import com.gb_materialdesign.repository.spaceFragment.SpaceFragmentRepositoryImpl
-import com.test.application.core.utils.AppState
 import com.gb_materialdesign.utils.CORRUPTED_DATA
 import com.gb_materialdesign.utils.REQUEST_ERROR
 import com.gb_materialdesign.utils.SERVER_ERROR
@@ -19,12 +18,12 @@ class AsteroidsListViewModel(
     = SpaceFragmentRepositoryImpl(RemoteSourceNasaAPI())
 ) :ViewModel() {
 
-    private val callback = object: retrofit2.Callback<AsteroidsListResponse>{
+    private val callback = object: retrofit2.Callback<com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse>{
         override fun onResponse(
-            call: Call<AsteroidsListResponse>,
-            response: Response<AsteroidsListResponse>
+            call: Call<com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse>,
+            response: Response<com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse>
         ) {
-            val serverResponse: AsteroidsListResponse? = response.body()
+            val serverResponse: com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse? = response.body()
             liveData.postValue(
                 if (response.isSuccessful && serverResponse != null) {
                     checkResponse(serverResponse)
@@ -39,12 +38,12 @@ class AsteroidsListViewModel(
             )
         }
 
-        override fun onFailure(call: Call<AsteroidsListResponse>, t: Throwable) {
+        override fun onFailure(call: Call<com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse>, t: Throwable) {
             liveData.postValue(com.test.application.core.utils.AppState.Error(Throwable(t.message ?: REQUEST_ERROR)))
         }
     }
 
-    private fun checkResponse(serverResponse: AsteroidsListResponse): com.test.application.core.utils.AppState {
+    private fun checkResponse(serverResponse: com.test.application.remote_data.dto.asteroidList.AsteroidsListResponse): com.test.application.core.utils.AppState {
         return if (serverResponse == null) {
             com.test.application.core.utils.AppState.Error(Throwable(CORRUPTED_DATA))
         } else {

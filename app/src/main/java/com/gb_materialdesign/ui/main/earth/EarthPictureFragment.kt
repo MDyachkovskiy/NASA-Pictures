@@ -11,10 +11,9 @@ import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.Target
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentEarthPictureBinding
-import com.gb_materialdesign.model.earthPicture.EarthPictureResponseItem
+import com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem
 import com.gb_materialdesign.utils.DSCOVR_EPIC_DOMAIN
 
 class EarthPictureFragment : Fragment() {
@@ -22,10 +21,10 @@ class EarthPictureFragment : Fragment() {
     private var _binding: FragmentEarthPictureBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var earthPicture: EarthPictureResponseItem
+    private lateinit var earthPicture: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem
 
     companion object {
-        fun newInstance(picture : EarthPictureResponseItem): EarthPictureFragment {
+        fun newInstance(picture : com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem): EarthPictureFragment {
             val fragment = EarthPictureFragment()
             fragment.arguments = Bundle().apply {
                 putParcelable("picture", picture)
@@ -45,12 +44,12 @@ class EarthPictureFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        earthPicture = arguments?.getParcelable("picture")?: EarthPictureResponseItem()
+        earthPicture = arguments?.getParcelable("picture")?: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem()
 
         displayPicture(earthPicture)
     }
 
-    private fun displayPicture(earthPicture: EarthPictureResponseItem) {
+    private fun displayPicture(earthPicture: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem) {
 
         with (binding) {
             pictureTitle.text = earthPicture.caption
@@ -97,7 +96,7 @@ class EarthPictureFragment : Fragment() {
         }
     }
 
-    private fun getCorrectUrl(data: EarthPictureResponseItem): String {
+    private fun getCorrectUrl(data: com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem): String {
 
         val date = data.date
         val year = date?.substring(0, 4)

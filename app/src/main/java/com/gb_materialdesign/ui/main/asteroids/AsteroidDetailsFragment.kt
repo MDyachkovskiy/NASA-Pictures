@@ -12,7 +12,7 @@ import androidx.transition.ChangeBounds
 import androidx.transition.TransitionManager
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.FragmentAsteroidDetailsBinding
-import com.gb_materialdesign.model.asteroids.Asteroid
+import com.test.application.remote_data.dto.asteroidList.Asteroid
 import com.gb_materialdesign.utils.KEY_BUNDLE_ASTEROID
 
 class AsteroidDetailsFragment : Fragment() {
@@ -41,7 +41,7 @@ class AsteroidDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        val asteroid = arguments?.getParcelable(KEY_BUNDLE_ASTEROID)?: Asteroid()
+        val asteroid = arguments?.getParcelable(KEY_BUNDLE_ASTEROID)?: com.test.application.remote_data.dto.asteroidList.Asteroid()
         displayAsteroidDetails(asteroid)
 
         binding.tap.setOnClickListener {
@@ -70,7 +70,7 @@ class AsteroidDetailsFragment : Fragment() {
         constraintSet.applyTo(binding.asteroidDetail)
     }
 
-    private fun displayAsteroidDetails(asteroid: Asteroid) {
+    private fun displayAsteroidDetails(asteroid: com.test.application.remote_data.dto.asteroidList.Asteroid) {
 
         with(binding) {
             asteroidName.text = asteroid.name
