@@ -6,33 +6,29 @@ import com.test.application.remote_data.dto.pictureOfTheDay.PictureOfTheDayRespo
 import com.test.application.remote_data.utils.ASTEROIDS_END_POINT
 import com.test.application.remote_data.utils.END_POINT
 import com.test.application.remote_data.utils.MARS_END_POINT
-import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 interface PictureOfTheDayAPI {
     @GET(END_POINT)
-    fun getPictureOfTheDay(
-        @Query("api_key") apiKey:String
-    ) : Call<PictureOfTheDayResponse>
+    suspend fun getPictureOfTheDay(
+    ) : Response<PictureOfTheDayResponse>
 
     @GET(END_POINT)
-    fun getPictureOfTheDayByDate(
-        @Query("api_key") apiKey:String,
+    suspend fun getPictureOfTheDayByDate(
         @Query("date") date: String
-    ) : Call<PictureOfTheDayResponse>
+    ) : Response<PictureOfTheDayResponse>
 
     @GET(MARS_END_POINT)
-    fun getPicturesOfMars(
-        @Query("api_key") apiKey:String,
+    suspend fun getPicturesOfMars(
         @Query("earth_date") date:String,
         @Query("camera") camera:String?
-    ) : Call<MarsPictureResponse>
+    ) : Response<MarsPictureResponse>
 
     @GET(ASTEROIDS_END_POINT)
-    fun getAsteroidsList(
-        @Query("api_key") apiKey:String,
+    suspend fun getAsteroidsList(
         @Query("start_date") startDate:String?,
         @Query("end_date") endDate:String?
-    ) : Call<AsteroidsListResponse>
+    ) : Response<AsteroidsListResponse>
 }

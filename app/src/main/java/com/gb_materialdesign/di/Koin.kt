@@ -1,48 +1,59 @@
 package com.gb_materialdesign.di
 
-import com.gb_materialdesign.model.pictureOfTheDay.RemoteSourceNasaAPI
+import com.gb_materialdesign.BuildConfig
 import com.gb_materialdesign.utils.NASA_DOMAIN
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.test.application.core.repository.PictureOfTheDayRepository
+import com.test.application.picture_of_the_day.view.PictureOfTheDayViewModel
 import com.test.application.remote_data.api.EarthPictureAPI
 import com.test.application.remote_data.api.PictureOfTheDayAPI
+import com.test.application.remote_data.repository.PictureOfTheDayRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 val networkModule = module {
-    fun provideGson(): Gson {
-        return GsonBuilder()
+
+    single {
+        GsonBuilder()
             .setLenient()
             .create()
     }
 
-    fun provideOkHttpClient(interceptor: Interceptor): OkHttpClient {
-        return OkHttpClient.Builder()
-            .addInterceptor(interceptor)
-            .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+    single {
+        OkHttpClient.Builder()
+            .addInterceptor(Interceptor { chain ->
+                val originalRequest = chain.request()
+                val urlWithApiKey = originalRequest.url.newBuilder()
+                    .addQueryParameter("api_key", BuildConfig.NASA_API_KEY)
+                    .build()
+                val newRequest = originalRequest.newBuilder()
+                    .url(urlWithApiKey)
+                    .build()
+                chain.proceed(newRequest)
+            })
             .build()
     }
 
-    fun provideInterceptor() = RemoteSourceNasaAPI.PictureOfTheDayInterceptor()
-
-    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
-        return Retrofit.Builder()
+    single {
+        Retrofit.Builder()
             .baseUrl(NASA_DOMAIN)
-            .addConverterFactory(GsonConverterFactory.create(gson))
-            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .client(get())
             .build()
     }
-
-    single { provideGson() }
-    single { provideInterceptor() }
-    single { provideOkHttpClient(get()) }
-    single { provideRetrofit(get(), get()) }
 
     single { get<Retrofit>().create(PictureOfTheDayAPI::class.java) }
     single { get<Retrofit>().create(EarthPictureAPI::class.java) }
-    single { RemoteSourceNasaAPI(get(), get()) }
+}
+
+val repositoryModule = module {
+    single<PictureOfTheDayRepository> {PictureOfTheDayRepositoryImpl(get())}
+}
+
+val viewModelModule = module {
+    viewModel { PictureOfTheDayViewModel(get()) }
 }

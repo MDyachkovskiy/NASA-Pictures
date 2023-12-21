@@ -3,7 +3,6 @@ package com.test.application.picture_of_the_day.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.text.style.*
 import android.view.*
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout

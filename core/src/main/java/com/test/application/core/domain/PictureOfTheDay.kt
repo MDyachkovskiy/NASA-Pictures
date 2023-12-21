@@ -1,4 +1,5 @@
 package com.test.application.core.domain
+
 data class PictureOfTheDay(
     val copyright: String,
     val date: String,
