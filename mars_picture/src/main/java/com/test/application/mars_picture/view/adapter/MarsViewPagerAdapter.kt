@@ -1,16 +1,13 @@
-package com.gb_materialdesign.adapters
+package com.test.application.mars_picture.view.adapter
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.test.application.remote_data.dto.marsPictureResponse.Photo
-import com.gb_materialdesign.ui.main.mars.MarsPictureFragment
+import com.test.application.core.domain.marsPicture.MarsPhoto
 
 class MarsViewPagerAdapter (
     fragmentActivity: FragmentActivity,
-    val context: Context?,
-    private val marsPictures: List<com.test.application.remote_data.dto.marsPictureResponse.Photo>
+    private val marsPictures: List<MarsPhoto>
     ) : FragmentStateAdapter (fragmentActivity) {
 
     override fun getItemCount(): Int = marsPictures.size
@@ -19,6 +16,4 @@ class MarsViewPagerAdapter (
         val marsPicture = marsPictures[position]
         return MarsPictureFragment.newInstance(marsPicture)
     }
-
-
 }

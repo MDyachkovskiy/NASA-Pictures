@@ -28,17 +28,9 @@
 
 
 
-    <!-- Mars camera menu -->
-    <string name="menu_mars_camera_fhaz">Front Hazard Avoidance Camera</string>
-    <string name="menu_mars_camera_chemcam">Chemistry and Camera Complex</string>
-    <string name="menu_mars_camera_navcam">Navigation Camera</string>
 
-    <!-- Mars Picture fragment -->
-    <string name="mars_picture_title">Снимок сделан:</string>
-    <string name="mars_picture_rover">Ровер -</string>
-    <string name="mars_picture_date">Дата снимка на Земле:</string>
-    <string name="mars_picture_mars_sol">Дата снимка в Марсианских сол:</string>
-    <string name="mars_picture_camera">Камера:</string>
+
+
 
     <!-- Asteroid detail fragment -->
     <string name="asteroid_name">Название астероида</string>

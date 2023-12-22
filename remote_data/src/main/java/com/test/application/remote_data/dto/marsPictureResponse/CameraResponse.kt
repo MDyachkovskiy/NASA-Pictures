@@ -2,7 +2,7 @@ package com.test.application.remote_data.dto.marsPictureResponse
 
 import com.google.gson.annotations.SerializedName
 
-data class Camera(
+data class CameraResponse(
     @SerializedName("full_name")
     val fullName: String = "",
     val id: Int = 0,

@@ -9,21 +9,20 @@ import coil.load
 import com.test.application.core.domain.earthPicture.EarthPictureItem
 import com.test.application.core.utils.DSCOVR_EPIC_DOMAIN
 import com.test.application.earth_picture.databinding.FragmentEarthPictureBinding
+import com.test.application.earth_picture.utils.EARTH_BUNDLE_KEY
 
 class EarthPictureFragment : Fragment() {
 
     private var _binding: FragmentEarthPictureBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var earthPicture: EarthPictureItem
+    private val earthPicture: EarthPictureItem by lazy {
+        requireArguments().getParcelable(EARTH_BUNDLE_KEY) ?: EarthPictureItem()
+    }
 
     companion object {
-        fun newInstance(picture: EarthPictureItem): EarthPictureFragment {
-            val fragment = EarthPictureFragment()
-            fragment.arguments = Bundle().apply {
-                putParcelable("picture", picture)
-            }
-            return fragment
+        fun newInstance(picture: EarthPictureItem) = EarthPictureFragment().apply {
+           arguments = Bundle().apply { putParcelable(EARTH_BUNDLE_KEY, picture) }
         }
     }
 
@@ -37,7 +36,6 @@ class EarthPictureFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        earthPicture = requireArguments().getParcelable("picture") ?: EarthPictureItem()
         renderData(earthPicture)
     }
 
@@ -48,6 +46,7 @@ class EarthPictureFragment : Fragment() {
 
     private fun displayTextData(earthPicture: EarthPictureItem) {
         with(binding) {
+            pictureTitle.text = earthPicture.caption
             pictureDate.text = earthPicture.date
             coordinateLat.text = earthPicture.centroidCoordinates?.lat.toString()
             coordinateLon.text = earthPicture.centroidCoordinates?.lon.toString()
@@ -56,7 +55,6 @@ class EarthPictureFragment : Fragment() {
 
     private fun displayImageData(earthPicture: EarthPictureItem) {
         with(binding) {
-            pictureTitle.text = earthPicture.caption
             val url = getCorrectUrl(earthPicture)
 
             earthImage.load(url) {

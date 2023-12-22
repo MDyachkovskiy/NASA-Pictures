@@ -56,6 +56,7 @@ dependencies {
     implementation(project (":core"))
     implementation(project (":picture_of_the_day"))
     implementation(project (":earth_picture"))
+    implementation(project (":mars_picture"))
     implementation(project (":remote_data"))
 
     //Kotlin

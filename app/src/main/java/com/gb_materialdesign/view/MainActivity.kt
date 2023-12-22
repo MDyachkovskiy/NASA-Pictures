@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.ActivityMainBinding
-import com.gb_materialdesign.ui.main.mars.MarsFragment
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
 import com.gb_materialdesign.ui.main.settings.SettingsFragment
 import com.gb_materialdesign.ui.main.space.SpaceFragment
@@ -46,7 +45,7 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener {
                     true
                 }
                 R.id.navigation_mars -> {
-                    replaceFragment(MarsFragment())
+                    replaceFragment(com.test.application.mars_picture.view.MarsFragment())
                     true
                 }
                 R.id.navigation_space -> {
