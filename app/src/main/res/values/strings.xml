@@ -26,13 +26,7 @@
     <string name="navView_space">Космос</string>
     <string name="navView_settings">Настройки</string>
 
-    <!-- Earth Picture fragment -->
-    <string name="earthPictureTitle">Титульник</string>
-    <string name="earthPictureDate">Дата и время снимка:</string>
-    <string name="pictureCoordinates">Координаты снимка</string>
-    <string name="coordinatesLon">LON</string>
-    <string name="coordinatesLat">LAT</string>
-    <string name="tab_layout_sometime">в какое-то время</string>
+
 
     <!-- Mars camera menu -->
     <string name="menu_mars_camera_fhaz">Front Hazard Avoidance Camera</string>

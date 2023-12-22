@@ -81,9 +81,9 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_8dp_small"
-        app:layout_behavior=".custom_view.BottomSheetBehavior">
+        app:layout_behavior="com.test.application.core.custom_view.BottomSheetBehavior">
 
-        <com.test.application.picture_of_the_day.custom_view.EquilateralImageView
+        <com.test.application.core.custom_view.EquilateralImageView
             android:id="@+id/picture_of_the_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

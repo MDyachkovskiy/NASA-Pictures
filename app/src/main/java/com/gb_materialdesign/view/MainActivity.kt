@@ -6,7 +6,6 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.ActivityMainBinding
-import com.gb_materialdesign.ui.main.earth.EarthFragment
 import com.gb_materialdesign.ui.main.mars.MarsFragment
 import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
 import com.gb_materialdesign.ui.main.settings.SettingsFragment
@@ -43,7 +42,7 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener {
                     true
                 }
                 R.id.navigation_earth -> {
-                    replaceFragment(EarthFragment())
+                    replaceFragment(com.test.application.earth_picture.EarthFragment())
                     true
                 }
                 R.id.navigation_mars -> {
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener {
 
     override fun navigateToFragment(fragmentType: FragmentType) {
         val fragment = when (fragmentType) {
-            FragmentType.EARTH_FRAGMENT -> EarthFragment()
+            FragmentType.EARTH_FRAGMENT -> com.test.application.earth_picture.EarthFragment()
         }
         replaceFragment(fragment)
     }

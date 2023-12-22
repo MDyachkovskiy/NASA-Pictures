@@ -1,4 +1,4 @@
-package com.test.application.picture_of_the_day.custom_view
+package com.test.application.core.custom_view
 
 import android.content.Context
 import android.util.AttributeSet

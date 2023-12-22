@@ -5,10 +5,6 @@
     android:layout_height="match_parent"
     android:id="@+id/fragmentEarth">
 
-    <include
-        android:id="@+id/includedLoadingLayout"
-        layout="@layout/loading_layout" />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/earth_tab_layout"
         android:layout_width="match_parent"
@@ -28,5 +24,23 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/earth_tab_layout">
     </androidx.viewpager2.widget.ViewPager2>
+
+    <FrameLayout
+        android:id="@+id/progress_bar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

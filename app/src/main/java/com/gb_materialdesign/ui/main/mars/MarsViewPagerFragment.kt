@@ -8,10 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gb_materialdesign.adapters.MarsViewPagerAdapter
 import com.gb_materialdesign.databinding.FragmentMarsViewpagerBinding
-import com.test.application.remote_data.dto.marsPictureResponse.Camera
-import com.test.application.remote_data.dto.marsPictureResponse.Photo
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
 import com.google.android.material.tabs.TabLayoutMediator
+import com.test.application.core.utils.getTheDateInFormat
 
 class MarsViewPagerFragment: Fragment() {
 
@@ -24,7 +23,7 @@ class MarsViewPagerFragment: Fragment() {
 
     private val dataRenderer by lazy {
         AppStateRenderer(parentView) {viewModel.getPicturesOfMarsByCamera(
-            camera.name, com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)
+            camera.name, getTheDateInFormat(0)
         )}
     }
 
@@ -58,7 +57,7 @@ class MarsViewPagerFragment: Fragment() {
         camera = arguments?.getParcelable("camera")?: com.test.application.remote_data.dto.marsPictureResponse.Camera()
 
         viewModel.getPicturesOfMarsByCamera(camera.name,
-            com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)
+            getTheDateInFormat(0)
         )
         viewModel.getLiveData().observe(viewLifecycleOwner) {
             renderData(it)

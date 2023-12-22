@@ -1,11 +1,10 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
-    id("kotlin-parcelize")
 }
 
 android {
-    namespace = "com.test.application.core"
+    namespace = "com.test.application.earth_picture"
     compileSdk = 34
 
     defaultConfig {
@@ -31,6 +30,7 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
     buildFeatures {
         viewBinding = true
     }
@@ -38,12 +38,19 @@ android {
 
 dependencies {
 
+    implementation(project (":core"))
+
     //Kotlin
     implementation(Kotlin.core)
 
     //Androidx
     implementation(AndroidX.appcompat)
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
 
     //Design
     implementation(Design.material)
+    implementation(Coil.coil_kt)
+
+    //Koin
+    implementation(Koin.android)
 }

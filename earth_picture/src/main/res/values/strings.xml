@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Earth Picture fragment -->
+    <string name="earth_picture_title">Титульник</string>
+    <string name="earth_picture_date">Дата и время снимка:</string>
+    <string name="picture_coordinates">Координаты снимка</string>
+    <string name="coordinates_lon">LON</string>
+    <string name="coordinates_lat">LAT</string>
+    <string name="tab_layout_sometime">в какое-то время</string>
+
+</resources>

@@ -1,16 +1,13 @@
-package com.gb_materialdesign.adapters
+package com.test.application.earth_picture.adapter
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem
-import com.gb_materialdesign.ui.main.earth.EarthPictureFragment
+import com.test.application.core.domain.earthPicture.EarthPictureItem
 
 class ViewPagerAdapter(
     fragmentActivity: FragmentActivity,
-    val context: Context?,
-    private val earthPictures: ArrayList<com.test.application.remote_data.dto.earthPictureResponse.EarthPictureResponseItem>
+    private val earthPictures: ArrayList<EarthPictureItem>
 ) : FragmentStateAdapter(fragmentActivity) {
 
     override fun getItemCount(): Int = earthPictures.size

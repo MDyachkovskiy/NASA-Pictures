@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/earth_today"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_50"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_25"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.25" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_ver_93"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.93" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_hor_10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.10" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_hor_45"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_hor_75"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.75" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_hor_80"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.80" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_hor_85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.85" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/barrier_93"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="left"
+        app:constraint_referenced_ids="guideline_ver_93" />
+
+
+    <TextView
+        android:id="@+id/picture_title"
+        style="@style/earth_picture_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_8dp_small"
+        android:layout_marginVertical="@dimen/margin_12dp_small"
+        android:gravity="center"
+        android:text="@string/earth_picture_title"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_10"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_10" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/margin_8dp_small"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_45"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_45">
+
+        <com.test.application.core.custom_view.EquilateralImageView
+            android:id="@+id/earth_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible" />
+
+    </FrameLayout>
+
+    <TextView
+        style="@style/earth_picture_elements_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_8dp_small"
+        android:text="@string/earth_picture_date"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_75"
+        app:layout_constraintEnd_toEndOf="@id/guideline_ver_25"
+        app:layout_constraintStart_toStartOf="@id/guideline_ver_25"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_75" />
+
+    <TextView
+        android:id="@+id/picture_date"
+        style="@style/earth_picture_elements_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_12dp_small"
+        android:gravity="start"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_75"
+        app:layout_constraintStart_toStartOf="@id/guideline_ver_50"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_75" />
+
+    <TextView
+        android:id="@+id/coordinate_title"
+        style="@style/earth_picture_elements_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_8dp_small"
+        android:layout_marginVertical="@dimen/margin_12dp_small"
+        android:gravity="center"
+        android:text="@string/picture_coordinates"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_80"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_80" />
+
+    <TextView
+        style="@style/earth_picture_elements_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/coordinates_lat"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_85"
+        app:layout_constraintEnd_toEndOf="@id/guideline_ver_25"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_85" />
+
+    <TextView
+        android:id="@+id/coordinate_lat"
+        style="@style/earth_picture_elements_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_85"
+        app:layout_constraintStart_toStartOf="@id/guideline_ver_25"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_85" />
+
+    <TextView
+        style="@style/earth_picture_elements_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/coordinates_lon"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_85"
+        app:layout_constraintEnd_toEndOf="@id/guideline_ver_75"
+        app:layout_constraintStart_toStartOf="@id/guideline_ver_50"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_85" />
+
+    <TextView
+        android:id="@+id/coordinate_lon"
+        style="@style/earth_picture_elements_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        app:layout_constraintBottom_toBottomOf="@id/guideline_hor_85"
+        app:layout_constraintEnd_toEndOf="@id/barrier_93"
+        app:layout_constraintStart_toStartOf="@id/guideline_ver_75"
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_85" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

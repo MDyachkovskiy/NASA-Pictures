@@ -8,9 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.gb_materialdesign.adapters.AsteroidsListAdapter
 import com.gb_materialdesign.databinding.FragmentAsteroidsListBinding
-import com.test.application.core.utils.AppState
 import com.gb_materialdesign.ui.main.appState.AppStateRenderer
-import com.test.application.picture_of_the_day.utils.getTheDateInFormat
+import com.test.application.core.utils.getTheDateInFormat
 
 class AsteroidsListFragment : Fragment() {
 
@@ -25,7 +24,7 @@ class AsteroidsListFragment : Fragment() {
 
     private val dataRenderer by lazy {
         AppStateRenderer(parentView) {viewModel.getAsteroidsList(
-            com.test.application.picture_of_the_day.utils.getTheDateInFormat(
+            getTheDateInFormat(
                 0
             )
         )}
@@ -48,7 +47,7 @@ class AsteroidsListFragment : Fragment() {
 
         parentView = binding.asteroidsListContainer
 
-        viewModel.getLiveData(com.test.application.picture_of_the_day.utils.getTheDateInFormat(0)).observe(viewLifecycleOwner) {
+        viewModel.getLiveData(getTheDateInFormat(0)).observe(viewLifecycleOwner) {
             renderData(it)
         }
     }

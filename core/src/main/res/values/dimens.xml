@@ -3,7 +3,11 @@
 
     <dimen name="margin_8dp_small">8dp</dimen>
     <dimen name="margin_10dp_small">10dp</dimen>
+    <dimen name="margin_12dp_small">12dp</dimen>
     <dimen name="margin_20dp_medium">20dp</dimen>
     <dimen name="margin_30dp_large">30dp</dimen>
+
+    <dimen name="text_size_18sp">18sp</dimen>
+    <dimen name="text_size_25sp">25sp</dimen>
 
 </resources>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="earth_picture_title">
+        <item name="android:textSize">@dimen/text_size_25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineHeight">26.4dp</item>
+    </style>
+
+    <style name="earth_picture_elements_title">
+        <item name="android:textSize">@dimen/text_size_18sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineHeight">21.6dp</item>
+    </style>
+
+    <style name="earth_picture_elements_text">
+        <item name="android:textSize">@dimen/text_size_18sp</item>
+        <item name="android:lineHeight">21.6dp</item>
+    </style>
+
+</resources>

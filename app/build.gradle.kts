@@ -8,7 +8,7 @@ plugins {
 
 android {
     namespace = "com.gb_materialdesign"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.gb_materialdesign"
@@ -55,6 +55,7 @@ dependencies {
 
     implementation(project (":core"))
     implementation(project (":picture_of_the_day"))
+    implementation(project (":earth_picture"))
     implementation(project (":remote_data"))
 
     //Kotlin

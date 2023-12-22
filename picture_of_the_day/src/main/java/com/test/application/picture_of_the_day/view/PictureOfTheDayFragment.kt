@@ -11,14 +11,14 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.test.application.core.domain.PictureOfTheDay
+import com.test.application.core.domain.pictureOfTheDay.PictureOfTheDay
 import com.test.application.core.navigation.FragmentInteractionListener
 import com.test.application.core.navigation.FragmentType
 import com.test.application.core.utils.WIKIPEDIA_DOMAIN
 import com.test.application.core.view.BaseFragment
 import com.test.application.picture_of_the_day.R
 import com.test.application.picture_of_the_day.databinding.FragmentPictureOfTheDayBinding
-import com.test.application.picture_of_the_day.utils.getTheDateInFormat
+import com.test.application.core.utils.getTheDateInFormat
 import com.test.application.picture_of_the_day.view.utils.BottomAppBarConfigurator
 import com.test.application.picture_of_the_day.view.utils.BottomSheetDescriptionFormatter
 import com.test.application.picture_of_the_day.view.utils.BottomSheetHeaderFormatter

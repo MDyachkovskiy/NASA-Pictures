@@ -1,4 +1,4 @@
-package com.test.application.core.domain
+package com.test.application.core.domain.pictureOfTheDay
 
 data class PictureOfTheDay(
     val copyright: String,
