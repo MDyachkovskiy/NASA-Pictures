@@ -30,18 +30,18 @@ class ItemTouchHelperCallback(
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        if(viewHolder is ContactsListAdapter.AlternativeContactsViewHolder) {
+        if(viewHolder is com.test.application.contacts.ContactsListAdapter.AlternativeContactsViewHolder) {
                 viewHolder.onItemSelect()
-            } else if (viewHolder is ContactsListAdapter.ContactsViewHolder) {
+            } else if (viewHolder is com.test.application.contacts.ContactsListAdapter.ContactsViewHolder) {
             viewHolder.onItemSelect()
             }
         super.onSelectedChanged(viewHolder, actionState)
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        if(viewHolder is ContactsListAdapter.AlternativeContactsViewHolder) {
+        if(viewHolder is com.test.application.contacts.ContactsListAdapter.AlternativeContactsViewHolder) {
             viewHolder.onItemClear()
-        } else if (viewHolder is ContactsListAdapter.ContactsViewHolder) {
+        } else if (viewHolder is com.test.application.contacts.ContactsListAdapter.ContactsViewHolder) {
             viewHolder.onItemClear()
         }
     }

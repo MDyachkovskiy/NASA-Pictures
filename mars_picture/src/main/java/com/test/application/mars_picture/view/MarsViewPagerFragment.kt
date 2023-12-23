@@ -44,7 +44,6 @@ class MarsViewPagerFragment: BaseFragment<MarsPicture,FragmentMarsViewpagerBindi
     }
 
     private fun initViewModel() {
-        viewModel.getPicturesOfMarsByCamera(marsCamera.name, getTheDateInFormat(0))
         lifecycleScope.launch {
             lifecycle.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.stateFlow.collect { appState ->
@@ -52,6 +51,7 @@ class MarsViewPagerFragment: BaseFragment<MarsPicture,FragmentMarsViewpagerBindi
                 }
             }
         }
+        viewModel.getPicturesOfMarsByCamera(marsCamera.name, getTheDateInFormat(0))
     }
 
     private fun setTabs(photos: List<MarsPhoto>) {

@@ -1,7 +1,7 @@
 package com.gb_materialdesign.adapters.difutils
 
 import androidx.recyclerview.widget.DiffUtil
-import com.gb_materialdesign.model.contacts.User
+import com.test.application.core.domain.contacts.User
 
 class DiffUtilCallback(
     private val oldList: List<User>,

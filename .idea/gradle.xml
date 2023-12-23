@@ -12,12 +12,16 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/asteroids" />
             <option value="$PROJECT_DIR$/buildSrc" />
+            <option value="$PROJECT_DIR$/contacts" />
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/earth_picture" />
             <option value="$PROJECT_DIR$/mars_picture" />
             <option value="$PROJECT_DIR$/picture_of_the_day" />
             <option value="$PROJECT_DIR$/remote_data" />
+            <option value="$PROJECT_DIR$/settings" />
+            <option value="$PROJECT_DIR$/space" />
           </set>
         </option>
       </GradleProjectSettings>

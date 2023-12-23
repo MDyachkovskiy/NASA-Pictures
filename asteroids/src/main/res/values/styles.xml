@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="asteroid_details_title">
+        <item name="android:textSize">@dimen/text_size_25sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight">26.4dp</item>
+    </style>
+
+    <style name="asteroid_details_title_narrow">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight">21.6dp</item>
+    </style>
+
+    <style name="asteroid_details_text">
+        <item name="android:textSize">@dimen/text_size_20sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:lineHeight">21.6dp</item>
+    </style>
+
+</resources>

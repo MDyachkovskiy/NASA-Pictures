@@ -3,7 +3,6 @@ import java.util.Properties
 plugins {
     id ("com.android.application")
     id ("org.jetbrains.kotlin.android")
-    id ("kotlin-parcelize")
 }
 
 android {
@@ -57,6 +56,10 @@ dependencies {
     implementation(project (":picture_of_the_day"))
     implementation(project (":earth_picture"))
     implementation(project (":mars_picture"))
+    implementation(project (":asteroids"))
+    implementation(project (":contacts"))
+    implementation(project (":space"))
+    implementation(project (":settings"))
     implementation(project (":remote_data"))
 
     //Kotlin

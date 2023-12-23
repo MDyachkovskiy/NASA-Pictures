@@ -26,24 +26,6 @@
     <string name="navView_space">Космос</string>
     <string name="navView_settings">Настройки</string>
 
-
-
-
-
-
-
-    <!-- Asteroid detail fragment -->
-    <string name="asteroid_name">Название астероида</string>
-    <string name="estimated_diameter">Расчетный диаметр</string>
-    <string name="min_estimated_diameter">Минимальный расчитанный диаметр</string>
-    <string name="km">км</string>
-    <string name="max_estimated_diameter">Максимальный расчитанный диаметр</string>
-    <string name="relative_velocity">Относительная скорость</string>
-    <string name="km_per_sec">км/с</string>
-    <string name="potentially_hazardous">Потенциальная опасность</string>
-    <string name="sentry_object">Отслеживаемость</string>
-    <string name="miss_distance">Расстояние прохода от Земли</string>
-
     <!-- Space fragment -->
     <string name="solar_flare">Вспышки на солнце</string>
     <string name="geomagnetic_storm">Геомагнитные бури</string>

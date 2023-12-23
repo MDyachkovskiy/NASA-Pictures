@@ -6,14 +6,16 @@ import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.ActivityMainBinding
-import com.gb_materialdesign.ui.main.navigationDrawer.BottomNavigationDrawerFragment
-import com.gb_materialdesign.ui.main.settings.SettingsFragment
-import com.gb_materialdesign.ui.main.space.SpaceFragment
+import com.test.application.core.navigation.FragmentAdder
 import com.test.application.core.navigation.FragmentInteractionListener
 import com.test.application.core.navigation.FragmentType
+import com.test.application.earth_picture.EarthFragment
+import com.test.application.mars_picture.view.MarsFragment
 import com.test.application.picture_of_the_day.view.PictureOfTheDayFragment
+import com.test.application.settings.SettingsFragment
+import com.test.application.space.SpaceFragment
 
-class MainActivity : AppCompatActivity(), FragmentInteractionListener {
+class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentAdder {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -41,11 +43,11 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener {
                     true
                 }
                 R.id.navigation_earth -> {
-                    replaceFragment(com.test.application.earth_picture.EarthFragment())
+                    replaceFragment(EarthFragment())
                     true
                 }
                 R.id.navigation_mars -> {
-                    replaceFragment(com.test.application.mars_picture.view.MarsFragment())
+                    replaceFragment(MarsFragment())
                     true
                 }
                 R.id.navigation_space -> {
@@ -90,7 +92,8 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener {
 
     override fun navigateToFragment(fragmentType: FragmentType) {
         val fragment = when (fragmentType) {
-            FragmentType.EARTH_FRAGMENT -> com.test.application.earth_picture.EarthFragment()
+            FragmentType.EARTH_FRAGMENT -> EarthFragment()
+            FragmentType.ASTEROID_DETAIL_FRAGMENT -> TODO()
         }
         replaceFragment(fragment)
     }
@@ -99,5 +102,12 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener {
         val bottomNavigationDrawerFragment = BottomNavigationDrawerFragment()
         bottomNavigationDrawerFragment
             .show(supportFragmentManager, bottomNavigationDrawerFragment.tag)
+    }
+
+    override fun addFragmentOnTop(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .add(R.id.container, fragment)
+            .addToBackStack(null)
+            .commit()
     }
 }

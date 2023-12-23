@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Asteroid detail fragment -->
+    <string name="asteroid_name">Название астероида</string>
+    <string name="estimated_diameter">Расчетный диаметр</string>
+    <string name="min_estimated_diameter">Минимальный расчитанный диаметр</string>
+    <string name="km">км</string>
+    <string name="max_estimated_diameter">Максимальный расчитанный диаметр</string>
+    <string name="relative_velocity">Относительная скорость</string>
+    <string name="km_per_sec">км/с</string>
+    <string name="potentially_hazardous">Потенциальная опасность</string>
+    <string name="sentry_object">Отслеживаемость</string>
+    <string name="miss_distance">Расстояние прохода от Земли</string>
+    <string name="show_details">Показать описание</string>
+
+    <string name="potentially_hazardous_asteroid">Представляет опасность</string>
+    <string name="potentially_non_hazardous_asteroid">Потенциально не опасный</string>
+
+    <string name="sentry_asteroid">Отслеживается</string>
+    <string name="non_sentry_asteroid">Не отслеживается</string>
+
+</resources>
