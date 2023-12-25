@@ -2,13 +2,11 @@ package com.test.application.settings
 
 import android.content.Context
 import android.os.Bundle
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.gb_materialdesign.R
-import com.gb_materialdesign.databinding.FragmentSettingsBinding
+import com.test.application.settings.databinding.FragmentSettingsBinding
 
 
 class SettingsFragment : Fragment() {
@@ -16,18 +14,9 @@ class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
 
-    private var currentThemeId = R.style.MyGreyTheme_GB_MaterialDesign
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        activity?.setTheme(currentThemeId)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-
-        val context: Context = ContextThemeWrapper(activity, currentThemeId)
         val localInflater = inflater.cloneInContext(context)
         _binding = FragmentSettingsBinding.inflate(localInflater, container, false)
         return binding.root
@@ -38,19 +27,26 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.jupiterStyle.setOnClickListener{
-            currentThemeId = R.style.JupiterTheme_GB_MaterialDesign
-            activity?.recreate()
+            changeTheme(R.style.JupiterTheme_GB_MaterialDesign)
         }
 
         binding.marsStyle.setOnClickListener{
-            currentThemeId = R.style.MarsTheme_GB_MaterialDesign
-            activity?.recreate()
+            changeTheme(R.style.MarsTheme_GB_MaterialDesign)
         }
 
         binding.moonStyle.setOnClickListener{
-            currentThemeId = R.style.MoonTheme_GB_MaterialDesign
-            activity?.recreate()
+            changeTheme(R.style.MoonTheme_GB_MaterialDesign)
         }
+    }
+
+    private fun changeTheme(themeId: Int) {
+        val sharedPreferences = requireActivity().getPreferences(Context.MODE_PRIVATE)
+        with(sharedPreferences.edit()) {
+            putInt("theme", themeId)
+            putBoolean("returnToSettings", true)
+            apply()
+        }
+        requireActivity().recreate()
     }
 
     override fun onDestroyView() {

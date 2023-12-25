@@ -8,10 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.gb_materialdesign.R
-import com.gb_materialdesign.databinding.FragmentSpaceBinding
-
-import com.test.application.asteroids.AsteroidsListFragment
+import com.test.application.space.databinding.FragmentSpaceBinding
 
 class SpaceFragment: Fragment() {
 
@@ -32,12 +29,6 @@ class SpaceFragment: Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        childFragmentManager.beginTransaction()
-            .replace(R.id.space_container, com.test.application.asteroids.AsteroidsListFragment.newInstance())
-            .addToBackStack("")
-            .commit()
-
         binding.fab.setOnClickListener {
             menuAnimation()
         }
@@ -45,89 +36,43 @@ class SpaceFragment: Fragment() {
 
     private fun menuAnimation() {
         isMenuDisplayed = !isMenuDisplayed
-        if(isMenuDisplayed) {
-            ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, 360f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.solarFlareOption, View.TRANSLATION_Y,  -225f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.geomagneticStormOption, View.TRANSLATION_Y, -315f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.radiationBeltOption, View.TRANSLATION_Y, -405f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.transparentBackground, View.ALPHA, 0.5f)
+        animateFabRotation()
+        animateOptions()
+        animateBackground()
+    }
+
+    private fun animateBackground() {
+        val alpha = if (isMenuDisplayed) 0.5f else 0f
+        ObjectAnimator.ofFloat(binding.transparentBackground, View.ALPHA, alpha)
+            .setDuration(1000)
+            .start()
+    }
+
+    private fun animateOptions() {
+        val translationY = if(isMenuDisplayed) -225f else 0f
+        val options = listOf(binding.solarFlareOption, binding.geomagneticStormOption, binding.radiationBeltOption)
+
+        options.forEachIndexed { index, option ->
+            ObjectAnimator.ofFloat(option, View.TRANSLATION_Y, translationY * (index + 1))
                 .setDuration(duration)
                 .start()
 
-            binding.solarFlareOption.animate().alpha(1f).setDuration(duration).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        binding.solarFlareOption.isClickable = true
+            option.animate()
+                .alpha(if (isMenuDisplayed) 1f else 0f)
+                .setDuration(duration)
+                .setListener(object : AnimatorListenerAdapter(){
+                    override fun onAnimationEnd(animation: Animator) {
+                        option.isClickable = isMenuDisplayed
                     }
-                }
-            )
-
-            binding.geomagneticStormOption.animate().alpha(1f).setDuration(duration).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        binding.geomagneticStormOption.isClickable = true
-                    }
-                }
-            )
-
-            binding.radiationBeltOption.animate().alpha(1f).setDuration(duration).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        binding.radiationBeltOption.isClickable = true
-                    }
-                }
-            )
-
-
-        } else {
-            ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, -360f)
-                .setDuration(1000)
-                .start()
-            ObjectAnimator.ofFloat(binding.solarFlareOption, View.TRANSLATION_Y, 0f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.geomagneticStormOption, View.TRANSLATION_Y, 0f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.radiationBeltOption, View.TRANSLATION_Y, 0f)
-                .setDuration(duration)
-                .start()
-            ObjectAnimator.ofFloat(binding.transparentBackground, View.ALPHA, 0f)
-                .setDuration(duration)
-                .start()
-
-            binding.solarFlareOption.animate().alpha(0f).setDuration(duration).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        binding.solarFlareOption.isClickable = false
-                    }
-                }
-            )
-
-            binding.geomagneticStormOption.animate().alpha(0f).setDuration(duration).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        binding.geomagneticStormOption.isClickable = false
-                    }
-                }
-            )
-
-            binding.radiationBeltOption.animate().alpha(0f).setDuration(duration).setListener(
-                object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
-                        binding.radiationBeltOption.isClickable = false
-                    }
-                }
-            )
+                })
         }
+    }
+
+    private fun animateFabRotation() {
+        val rotation = if(isMenuDisplayed) 360f else -360f
+        ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, rotation)
+            .setDuration(duration)
+            .start()
     }
 
     override fun onDestroyView() {

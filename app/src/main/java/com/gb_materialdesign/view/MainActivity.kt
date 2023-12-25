@@ -1,5 +1,7 @@
 package com.gb_materialdesign.view
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -9,6 +11,8 @@ import com.gb_materialdesign.databinding.ActivityMainBinding
 import com.test.application.core.navigation.FragmentAdder
 import com.test.application.core.navigation.FragmentInteractionListener
 import com.test.application.core.navigation.FragmentType
+import com.test.application.core.utils.RETURN_TO_SETTINGS_KEY
+import com.test.application.core.utils.THEME_KEY
 import com.test.application.earth_picture.EarthFragment
 import com.test.application.mars_picture.view.MarsFragment
 import com.test.application.picture_of_the_day.view.PictureOfTheDayFragment
@@ -19,18 +23,48 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentA
 
     private lateinit var binding: ActivityMainBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.MyGreyTheme_GB_MaterialDesign)
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    companion object {
+        private val DEFAULT_THEME = R.style.MyGreyTheme_GB_MaterialDesign
+    }
 
-        if (savedInstanceState == null) {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        applyThemePreferences()
+        setupUI()
+        navigateToInitialFragment(savedInstanceState)
+    }
+
+    private fun navigateToInitialFragment(savedInstanceState: Bundle?) {
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        if(shouldReturnToSettings(sharedPreferences)) {
+            clearReturnToSettingsFlag(sharedPreferences)
+            replaceFragment(SettingsFragment())
+        } else if (savedInstanceState == null) {
             replaceFragment(PictureOfTheDayFragment())
         }
+    }
 
+    private fun shouldReturnToSettings(sharedPreferences: SharedPreferences): Boolean {
+        return sharedPreferences.getBoolean(RETURN_TO_SETTINGS_KEY, false)
+    }
+
+    private fun clearReturnToSettingsFlag(sharedPreferences: SharedPreferences) {
+        with(sharedPreferences.edit()) {
+            remove(RETURN_TO_SETTINGS_KEY)
+            apply()
+        }
+    }
+
+    private fun setupUI() {
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         setBottomNavigationView()
+    }
 
+    private fun applyThemePreferences() {
+        val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
+        val themeId = sharedPreferences.getInt(THEME_KEY, DEFAULT_THEME)
+        setTheme(themeId)
     }
 
     private fun setBottomNavigationView() {

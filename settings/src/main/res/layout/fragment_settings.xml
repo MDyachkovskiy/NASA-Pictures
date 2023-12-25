@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_hor_5"
@@ -54,14 +55,13 @@
         app:constraint_referenced_ids="mars_style_text"/>
 
     <TextView
+        style="@style/settings_title"
         android:id="@+id/color_theme_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="@dimen/margin_12dp_small"
         android:gravity="center"
-        android:text="@string/colorThemeTitle"
-        android:textSize="25sp"
-        android:textStyle="bold"
+        android:text="@string/color_theme_title"
         app:layout_constraintBottom_toBottomOf="@id/guideline_hor_5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -74,16 +74,16 @@
         android:src="@drawable/jupiter"
         app:layout_constraintStart_toStartOf="@id/guideline_ver_25"
         app:layout_constraintEnd_toEndOf="@id/guideline_ver_25"
-        app:layout_constraintTop_toTopOf="@id/guideline_hor_10" />
+        app:layout_constraintTop_toTopOf="@id/guideline_hor_10"
+        tools:ignore="contentDescription"/>
 
     <TextView
+        style="@style/settings_title"
         android:id="@+id/jupiter_style_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/jupiter_style_title"
-        android:textSize="25sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline_ver_25"
         app:layout_constraintEnd_toEndOf="@id/guideline_ver_25"
         app:layout_constraintTop_toBottomOf="@id/jupiter_style"/>
@@ -95,16 +95,16 @@
         android:src="@drawable/mars"
         app:layout_constraintStart_toStartOf="@id/guideline_ver_50"
         app:layout_constraintEnd_toEndOf="@id/guideline_ver_50"
-        app:layout_constraintTop_toBottomOf="@id/barrier_under_jupiter"/>
+        app:layout_constraintTop_toBottomOf="@id/barrier_under_jupiter"
+        tools:ignore="contentDescription"/>
 
     <TextView
+        style="@style/settings_title"
         android:id="@+id/mars_style_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/mars_style_title"
-        android:textSize="25sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline_ver_50"
         app:layout_constraintEnd_toEndOf="@id/guideline_ver_50"
         app:layout_constraintTop_toBottomOf="@id/mars_style"/>
@@ -116,15 +116,15 @@
         android:src="@drawable/moon"
         app:layout_constraintStart_toStartOf="@id/guideline_ver_75"
         app:layout_constraintEnd_toEndOf="@id/guideline_ver_75"
-        app:layout_constraintTop_toBottomOf="@id/barrier_under_mars"/>
+        app:layout_constraintTop_toBottomOf="@id/barrier_under_mars"
+        tools:ignore="contentDescription"/>
 
     <TextView
+        style="@style/settings_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/moon_style_title"
-        android:textSize="25sp"
-        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/guideline_ver_75"
         app:layout_constraintEnd_toEndOf="@id/guideline_ver_75"
         app:layout_constraintTop_toBottomOf="@id/moon_style" />

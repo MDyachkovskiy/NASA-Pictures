@@ -1,32 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="JupiterTheme.GB_MaterialDesign" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/colorPrimaryJupiterTheme</item>
-        <item name="colorPrimaryVariant">@color/colorPrimaryVariantJupiterTheme</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDarkJupiterTheme</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/colorSecondaryJupiterTheme</item>
-        <item name="colorSecondaryVariant">@color/colorSecondaryVariantJupiterTheme</item>
-        <item name="colorSecondaryContainer">@color/colorSecondaryContainerJupiterTheme</item>
-        <item name="android:textColorPrimary">@color/textColorPrimaryJupiterTheme</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryJupiterTheme</item>
-        <!-- Status bar color. -->
-        <item name="bottomAppBarColor">@color/colorPrimaryDarkJupiterTheme</item>
-
-        <item name="fontFamily">@font/roboto_thin</item>
-
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-
-        <item name="selected_tab_icon_color">@color/textColorPrimaryJupiterTheme</item>
-        <item name="selected_tab_text_color">@color/textColorPrimaryJupiterTheme</item>
-        <item name="tab_text_color">@color/colorOnPrimaryGreyTheme</item>
-        <item name="tab_color">@color/colorOnPrimaryGreyTheme</item>
-
-    </style>
-
     <!-- Chip Style -->
 
     <style name="MyGreyChip.GB_MaterialDesign" parent="Widget.MaterialComponents.Chip.Choice">

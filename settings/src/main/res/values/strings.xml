@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Color styles titles -->
+    <string name="color_theme_title">Выберите цветовую тему</string>
+    <string name="jupiter_style_title">Юпитер</string>
+    <string name="mars_style_title">Марс</string>
+    <string name="moon_style_title">Луна</string>
+</resources>
