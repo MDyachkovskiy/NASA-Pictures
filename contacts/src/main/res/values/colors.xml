@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="up_down_button_color">#960000</color>
+    <color name="hint_text_color">#757575</color>
+    <color name="selected_item_color">#222723</color>
+
+</resources>

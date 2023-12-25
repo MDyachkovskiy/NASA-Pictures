@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="avatar_height">48dp</dimen>
+    <dimen name="more_icon_height">40dp</dimen>
+    <dimen name="up_down_button">20dp</dimen>
+</resources>

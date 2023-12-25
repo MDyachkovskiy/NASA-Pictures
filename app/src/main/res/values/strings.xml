@@ -1,12 +1,10 @@
 <resources>
     <string name="app_name">GB_MaterialDesign</string>
-
     <string name="settings">settings</string>
 
     <!-- AppState Snackbar -->
     <string name="requestError">Ошибка загрузки данных</string>
     <string name="repeatRequest">Отправить повторный запрос</string>
-
 
     <!-- Color styles titles -->
     <string name="colorThemeTitle">Выберите цветовую тему</string>
@@ -34,9 +32,5 @@
 
     <!-- PictureOfTheDay Bottom menu -->
     <string name="menu_contacts">Контакты</string>
-
-    <!-- Contacts Fragment Item -->
-    <string name="company_name">Название компании</string>
-    <string name="user_name">ФИО контакта</string>
 
 </resources>

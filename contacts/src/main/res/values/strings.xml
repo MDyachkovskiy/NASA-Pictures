@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Contacts Fragment Item -->
+    <string name="company_name">Название компании</string>
+    <string name="user_name">ФИО контакта</string>
+
+
+</resources>

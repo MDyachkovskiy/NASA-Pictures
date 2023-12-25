@@ -1,16 +1,19 @@
 package com.test.application.core.repository
 
-import com.gb_materialdesign.model.contacts.User
-
+import com.test.application.core.domain.contacts.User
+import com.test.application.core.utils.AppState
+import kotlinx.coroutines.flow.Flow
 
 interface ContactsRepository {
 
-    fun getContactsList(): List<User>
+    suspend fun getContactsList(): Flow<AppState>
 
-    fun deleteUser(position: Int)
+    fun getCurrentContacts(): List<User>
 
-    fun addUser(user: User, position: Int)
+    suspend fun deleteUser(position: Int)
 
-    fun moveContact(user: User, moveBy: Int)
+    suspend fun addUser(user: User, position: Int)
+
+    suspend fun moveContact(user: User, moveBy: Int)
 
 }

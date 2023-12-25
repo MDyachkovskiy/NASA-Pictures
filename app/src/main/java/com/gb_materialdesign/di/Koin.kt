@@ -4,6 +4,8 @@ import com.gb_materialdesign.BuildConfig
 import com.gb_materialdesign.utils.NASA_DOMAIN
 import com.google.gson.GsonBuilder
 import com.test.application.asteroids.AsteroidsListViewModel
+import com.test.application.contacts.view.ContactsViewModel
+import com.test.application.core.repository.ContactsRepository
 import com.test.application.core.repository.EarthPictureRepository
 import com.test.application.core.repository.MarsPictureRepository
 import com.test.application.core.repository.PictureOfTheDayRepository
@@ -13,6 +15,8 @@ import com.test.application.mars_picture.view.MarsFragmentViewModel
 import com.test.application.picture_of_the_day.view.PictureOfTheDayViewModel
 import com.test.application.remote_data.api.EarthPictureAPI
 import com.test.application.remote_data.api.PictureOfTheDayAPI
+import com.test.application.remote_data.api.UserService
+import com.test.application.remote_data.repository.ContactsRepositoryImpl
 import com.test.application.remote_data.repository.EarthPictureRepositoryImpl
 import com.test.application.remote_data.repository.MarsPictureRepositoryImpl
 import com.test.application.remote_data.repository.PictureOfTheDayRepositoryImpl
@@ -60,10 +64,13 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
+    single { UserService() }
+
     single<PictureOfTheDayRepository> { PictureOfTheDayRepositoryImpl(get()) }
     single<EarthPictureRepository> { EarthPictureRepositoryImpl(get()) }
     single<MarsPictureRepository> { MarsPictureRepositoryImpl(get()) }
     single<SpaceFragmentRepository> { SpaceFragmentRepositoryImpl(get()) }
+    single<ContactsRepository> {ContactsRepositoryImpl(get())}
 }
 
 val viewModelModule = module {
@@ -71,4 +78,5 @@ val viewModelModule = module {
     viewModel { EarthFragmentViewModel(get()) }
     viewModel { MarsFragmentViewModel(get()) }
     viewModel { AsteroidsListViewModel(get()) }
+    viewModel { ContactsViewModel(get()) }
 }

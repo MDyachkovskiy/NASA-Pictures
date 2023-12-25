@@ -1,4 +1,4 @@
-package com.gb_materialdesign.adapters.difutils
+package com.test.application.contacts.adapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.test.application.core.domain.contacts.User
@@ -25,7 +25,7 @@ class DiffUtilCallback(
                 oldList[oldItemPosition].company == newList[newItemPosition].company
     }
 
-    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any? {
+    override fun getChangePayload(oldItemPosition: Int, newItemPosition: Int): Any {
         val old = oldList[oldItemPosition]
         val new = newList[newItemPosition]
 
@@ -33,12 +33,3 @@ class DiffUtilCallback(
     }
 }
 
-data class Change<T> (val oldList:T, val newList:T)
-
-fun <T> createCombinedPayload(payload: List<Change<T>>): Change<T>{
-    assert(payload.isNotEmpty())
-    val firstChange = payload.first()
-    val lastChange = payload.last()
-
-    return Change(firstChange.oldList, lastChange.newList)
-}

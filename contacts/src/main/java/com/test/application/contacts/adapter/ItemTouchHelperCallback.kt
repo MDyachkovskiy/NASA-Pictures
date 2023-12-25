@@ -1,10 +1,10 @@
-package com.gb_materialdesign.adapters
+package com.test.application.contacts.adapter
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 
 class ItemTouchHelperCallback(
-    private val callback: ItemTouchHelperAdapter
+    private val adapter: ContactsListAdapter
 ): ItemTouchHelper.Callback() {
 
     override fun getMovementFlags(
@@ -21,27 +21,27 @@ class ItemTouchHelperCallback(
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
     ): Boolean {
-        callback.onItemMove(viewHolder.adapterPosition, target.adapterPosition)
+        adapter.onItemDragAndMove?.invoke(
+            adapter.contacts[viewHolder.adapterPosition],
+            viewHolder.adapterPosition,
+            target.adapterPosition
+        )
         return true
     }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-        callback.onItemDismiss(viewHolder.adapterPosition)
+        adapter.onItemRemove?.invoke(viewHolder.adapterPosition)
     }
 
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
-        if(viewHolder is com.test.application.contacts.ContactsListAdapter.AlternativeContactsViewHolder) {
-                viewHolder.onItemSelect()
-            } else if (viewHolder is com.test.application.contacts.ContactsListAdapter.ContactsViewHolder) {
-            viewHolder.onItemSelect()
-            }
         super.onSelectedChanged(viewHolder, actionState)
+        if (viewHolder is ContactsListAdapter.BaseViewHolder) {
+            viewHolder.onItemSelect()
+        }
     }
 
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
-        if(viewHolder is com.test.application.contacts.ContactsListAdapter.AlternativeContactsViewHolder) {
-            viewHolder.onItemClear()
-        } else if (viewHolder is com.test.application.contacts.ContactsListAdapter.ContactsViewHolder) {
+        if (viewHolder is ContactsListAdapter.BaseViewHolder) {
             viewHolder.onItemClear()
         }
     }

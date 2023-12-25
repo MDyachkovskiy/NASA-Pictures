@@ -44,4 +44,8 @@ dependencies {
     //Retrofit
     implementation (Retrofit.main)
     implementation (Retrofit.gson_convertor)
+
+    //Data Faker
+    implementation ("com.github.javafaker:javafaker:1.0.2")
+
 }

@@ -86,6 +86,5 @@ dependencies {
     implementation (Navigation.fragment_ktx)
     implementation (Navigation.ui_ktx)
 
-    implementation ("com.github.javafaker:javafaker:1.0.2")
 
 }

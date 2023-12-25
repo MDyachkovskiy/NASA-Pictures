@@ -1,6 +1,7 @@
-package com.test.application.core.domain.contacts
+package com.test.application.remote_data.api
 
 import com.github.javafaker.Faker
+import com.test.application.core.domain.contacts.User
 import java.util.*
 import kotlin.random.Random
 
