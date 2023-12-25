@@ -1,17 +1,5 @@
 <resources>
     <string name="app_name">GB_MaterialDesign</string>
-    <string name="settings">settings</string>
-
-    <!-- AppState Snackbar -->
-    <string name="requestError">Ошибка загрузки данных</string>
-    <string name="repeatRequest">Отправить повторный запрос</string>
-
-
-
-    <!-- TabLayout titles -->
-    <string name="tabToday">Сегодня</string>
-    <string name="tabYesterday">Вчера</string>
-    <string name="tabBeforeYesterday">Позавчера</string>
 
     <!-- NavigationView titles -->
     <string name="navView_telescope">Телескоп</string>

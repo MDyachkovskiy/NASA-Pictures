@@ -4,7 +4,6 @@
     <color name="colorPrimaryMarsTheme">#cf231c</color>
     <color name="colorPrimaryVariantMarsTheme">#ff5d46</color>
     <color name="colorPrimaryDarkMarsTheme">#960000</color>
-    <color name="colorOnPrimaryMarsTheme">#212121</color>
     <color name="colorSecondaryMarsTheme">#eddfa0</color>
     <color name="colorSecondaryVariantMarsTheme">#ffffd2</color>
     <color name="colorSecondaryContainerMarsTheme">#baad71</color>
@@ -26,12 +25,10 @@
     <color name="colorPrimaryJupiterTheme">#d7652a</color>
     <color name="colorPrimaryVariantJupiterTheme">#ff9557</color>
     <color name="colorPrimaryDarkJupiterTheme">#9f3700</color>
-    <color name="colorOnPrimaryJupiterTheme">#212121</color>
     <color name="colorSecondaryJupiterTheme">#f4bc5d</color>
     <color name="colorSecondaryVariantJupiterTheme">#ffee8d</color>
     <color name="colorSecondaryContainerJupiterTheme">#be8c2e</color>
     <color name="textColorPrimaryJupiterTheme">#490206</color>
     <color name="textColorSecondaryJupiterTheme">#360201</color>
-    <color name="colorOnSecondaryJupiterTheme">#FF000000</color>
 
 </resources>
