@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:theme="@style/JupiterTheme.GB_MaterialDesign">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
@@ -81,62 +80,57 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_margin="@dimen/margin_8dp_small"
-        app:layout_behavior=".view.custom_view.BottomSheetBehavior">
+        app:layout_behavior="com.test.application.picture_of_the_day.view.custom_view.BottomSheetBehavior">
 
         <com.test.application.core.custom_view.EquilateralImageView
             android:id="@+id/picture_of_the_day"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/photo_of_the_day_stub"
-            android:scaleType="fitCenter" />
+            android:scaleType="fitCenter"
+            tools:ignore="contentDescription"/>
 
-        <ProgressBar
-            android:id="@+id/image_progress_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:visibility="visible" />
+        <FrameLayout
+            android:id="@+id/progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center" />
+
+        </FrameLayout>
 
     </FrameLayout>
+
 
     <include
         android:id="@+id/bottom_sheet_layout"
         layout="@layout/bottom_sheet_layout" />
 
-    <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottom_app_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:backgroundTint="?attr/bottomAppBarColor"
-        app:fabAlignmentMode="center"
-        app:fabCradleRoundedCornerRadius="8dp"
-        app:fabCradleVerticalOffset="15dp"
-        app:hideOnScroll="true"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
+    <!-- <com.google.android.material.bottomappbar.BottomAppBar
+          android:id="@+id/bottom_app_bar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_gravity="bottom"
+          app:fabAlignmentMode="center"
+          app:fabCradleRoundedCornerRadius="8dp"
+          app:fabCradleVerticalOffset="15dp"
+          app:hideOnScroll="true"
+          app:layout_anchor="@+id/fab"
+          app:layout_anchorGravity="center"
+          app:layout_scrollFlags="scroll|enterAlways"
+          app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" /> -->
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        style="@style/MyFAB.GB_MaterialDesign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_plus_fab"
-        android:tint="#FFFFFF"
-        app:layout_anchor="@id/bottom_app_bar"
-        tools:ignore="ContentDescription" />
+      <!-- <com.google.android.material.floatingactionbutton.FloatingActionButton
+          android:id="@+id/fab"
+          style="@style/MyFAB.GB_MaterialDesign"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/ic_plus_fab"
+          android:tint="#FFFFFF"
+          app:layout_anchor="@id/bottom_app_bar"
+          tools:ignore="ContentDescription" /> -->
 
-    <FrameLayout
-        android:id="@+id/progress_bar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
-
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" />
-
-    </FrameLayout>
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+ </androidx.coordinatorlayout.widget.CoordinatorLayout>

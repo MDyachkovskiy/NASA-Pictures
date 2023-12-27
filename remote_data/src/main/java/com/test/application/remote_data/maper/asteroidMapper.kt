@@ -14,21 +14,15 @@ import com.test.application.remote_data.dto.asteroidList.CloseApproachDataRespon
 import com.test.application.remote_data.dto.asteroidList.EstimatedDiameterResponse
 import com.test.application.remote_data.dto.asteroidList.KilometersResponse
 import com.test.application.remote_data.dto.asteroidList.MissDistanceResponse
-import com.test.application.remote_data.dto.asteroidList.NearEarthObjectsResponse
 import com.test.application.remote_data.dto.asteroidList.RelativeVelocityResponse
 
 fun AsteroidsListResponse.toDomain() : AsteroidsList {
+    val allAsteroids = this.nearEarthObjects.values.flatten().map { asteroidResponse ->
+        asteroidResponse.toDomain()
+    }
     return AsteroidsList(
         elementCount = this.elementCount,
-        nearEarthObjects = this.nearEarthObjects.toDomain()
-    )
-}
-
-fun NearEarthObjectsResponse.toDomain() : NearEarthObjects {
-    return NearEarthObjects(
-        asteroids = this.asteroids.map {asteroidResponse ->
-            asteroidResponse.toDomain()
-        }
+        nearEarthObjects = NearEarthObjects(allAsteroids)
     )
 }
 

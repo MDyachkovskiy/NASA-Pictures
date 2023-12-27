@@ -8,7 +8,6 @@ import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.BottomNavigationLayoutBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.test.application.contacts.view.ContactsFragment
-import com.test.application.contacts.TestFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
 
@@ -36,13 +35,6 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
                             .replace(R.id.container, ContactsFragment.newInstance())
                             .addToBackStack("tag")
                             .commit()
-
-                R.id.navigation_two ->
-                    parentFragmentManager
-                    .beginTransaction()
-                    .replace(R.id.container, TestFragment.newInstance())
-                    .addToBackStack("tag")
-                    .commit()
             }
             true
         }

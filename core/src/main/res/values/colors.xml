@@ -10,5 +10,6 @@
 
     <color name="grey_style_1">#120908</color>
     <color name="grey_primary_light">#5e5559</color>
+    <color name="color_gray">#66000000</color>
 
 </resources>

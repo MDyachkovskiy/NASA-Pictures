@@ -32,7 +32,7 @@ android {
         val nasaApiKey = properties.getProperty("NASA_API_KEY", "")
 
         forEach { buildType ->
-            buildType.buildConfigField("String", "NASA_API_KEY", "\"$nasaApiKey\"")
+            buildType.buildConfigField("String", "NASA_API_KEY", nasaApiKey)
         }
     }
 

@@ -22,7 +22,7 @@ class BottomAppBarConfigurator(
 
     private fun setupMainState(bottomAppBar: BottomAppBar, fab: FloatingActionButton) {
         bottomAppBar.navigationIcon = ContextCompat
-            .getDrawable(context, R.drawable.ic_hamburger_menu_bottom_bar)
+            .getDrawable(context, com.test.application.core.R.drawable.ic_hamburger_menu_bottom_bar)
         bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
         fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
         bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)

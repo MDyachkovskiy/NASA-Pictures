@@ -38,19 +38,24 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
     private var isMain = true
 
     private val imageScaleAnimator = ImageScaleAnimator()
-    private val bottomSheetDescriptionFormatter = BottomSheetDescriptionFormatter(requireContext())
-    private val bottomSheetHeaderFormatter = BottomSheetHeaderFormatter(requireContext())
-    private val bottomAppBarConfigurator = BottomAppBarConfigurator(requireContext())
+    private lateinit var bottomSheetDescriptionFormatter: BottomSheetDescriptionFormatter
+    private lateinit var bottomSheetHeaderFormatter: BottomSheetHeaderFormatter
+    private lateinit var bottomAppBarConfigurator: BottomAppBarConfigurator
     private val transitionAnimator = TransitionAnimator()
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<ConstraintLayout>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        bottomSheetDescriptionFormatter = BottomSheetDescriptionFormatter(requireContext())
+        bottomSheetHeaderFormatter = BottomSheetHeaderFormatter(requireContext())
+        bottomAppBarConfigurator = BottomAppBarConfigurator(requireContext())
+
         initViewModel()
-        setBottomSheetBehavior(view.findViewById(R.id.bottom_sheet_container))
+        //setBottomSheetBehavior(binding.bottomSheetLayout.bottomSheetContainer)
         handlePictureScaleAnimation()
         setInputLayout()
-        setBottomAppBar()
+        //setBottomAppBar()
         setChipGroup()
     }
 
@@ -67,15 +72,25 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
     }
 
     private fun handlePictureScaleAnimation() {
+        var lastScale = 1f
+        var lastPivotX = 0.5f
+        var lastPivotY = 0.5f
+
         binding.pictureOfTheDay.setOnTouchListener { v, motionEvent ->
             if (motionEvent.action == MotionEvent.ACTION_DOWN) {
                 v.performClick()
-                val pivotX = motionEvent.x / v.width
-                val pivotY = motionEvent.y / v.height
-                val scaleFrom = if (!isImageScaled) 1f else 3f
+
+                if (!isImageScaled) {
+                    lastPivotX = motionEvent.x / v.width
+                    lastPivotY = motionEvent.y / v.height
+                }
+
+                val scaleFrom = lastScale
                 val scaleTo = if (!isImageScaled) 3f else 1f
-                imageScaleAnimator.animateScale(v, scaleFrom, scaleTo, pivotX, pivotY, 1000)
+
+                imageScaleAnimator.animateScale(v, scaleFrom, scaleTo, lastPivotX, lastPivotY, 1000)
                 isImageScaled = !isImageScaled
+                lastScale = scaleTo
             }
             true
         }
@@ -109,10 +124,10 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
             error(com.test.application.core.R.drawable.ic_load_error_vector)
             listener(
                 onError = { _, _ ->
-                    binding.imageProgressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                 },
                 onSuccess = { _, _ ->
-                    binding.imageProgressBar.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                     displayViewElements()
                 }
             )
@@ -122,6 +137,17 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
     private fun setBottomSheetBehavior(bottomSheet: ConstraintLayout) {
         bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
         bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+
+        bottomSheetBehavior.addBottomSheetCallback(object: BottomSheetBehavior.BottomSheetCallback() {
+            override fun onStateChanged(bottomSheet: View, newState: Int) {
+                val isExpanded = newState == BottomSheetBehavior.STATE_EXPANDED
+                binding.pictureOfTheDay.isEnabled = !isExpanded
+            }
+
+            override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            }
+
+        })
     }
 
     private fun setTextFormatDescription(description: String) {
@@ -151,11 +177,11 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
         }
     }
 
-    private fun setBottomAppBar() {
+    /*private fun setBottomAppBar() {
         (requireActivity() as FragmentInteractionListener).setupSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
-        setFloatingActionButton()
-    }
+        //setFloatingActionButton()
+    }*/
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
@@ -177,12 +203,12 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
         return super.onOptionsItemSelected(item)
     }
 
-    private fun setFloatingActionButton() {
+    /*private fun setFloatingActionButton() {
         binding.fab.setOnClickListener {
             isMain = !isMain
             bottomAppBarConfigurator.setupBottomAppBar(binding.bottomAppBar, binding.fab, isMain)
         }
-    }
+    }*/
 
     private fun setChipGroup() {
 

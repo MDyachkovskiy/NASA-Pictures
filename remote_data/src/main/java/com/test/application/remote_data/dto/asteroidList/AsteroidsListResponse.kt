@@ -7,5 +7,5 @@ data class AsteroidsListResponse(
     val elementCount: Int,
 
     @SerializedName("near_earth_objects")
-    val nearEarthObjects: NearEarthObjectsResponse
+    val nearEarthObjects: Map<String, List<AsteroidResponse>>
 )
