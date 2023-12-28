@@ -25,7 +25,6 @@ class BottomAppBarConfigurator(
             .getDrawable(context, com.test.application.core.R.drawable.ic_hamburger_menu_bottom_bar)
         bottomAppBar.fabAlignmentMode = BottomAppBar.FAB_ALIGNMENT_MODE_CENTER
         fab.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.ic_plus_fab))
-        bottomAppBar.replaceMenu(R.menu.menu_bottom_bar)
     }
 
     private fun setupAlternateState(bottomAppBar: BottomAppBar, fab: FloatingActionButton) {

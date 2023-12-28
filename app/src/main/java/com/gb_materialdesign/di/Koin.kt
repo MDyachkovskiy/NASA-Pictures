@@ -1,6 +1,7 @@
 package com.gb_materialdesign.di
 
 import com.gb_materialdesign.BuildConfig
+import com.gb_materialdesign.utils.EARTH_PICTURE_DOMAIN
 import com.gb_materialdesign.utils.NASA_DOMAIN
 import com.google.gson.GsonBuilder
 import com.test.application.asteroids.AsteroidsListViewModel
@@ -24,6 +25,7 @@ import com.test.application.remote_data.repository.SpaceFragmentRepositoryImpl
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -51,7 +53,7 @@ val networkModule = module {
             .build()
     }
 
-    single {
+    single(named("nasaRetrofit")) {
         Retrofit.Builder()
             .baseUrl(NASA_DOMAIN)
             .addConverterFactory(GsonConverterFactory.create(get()))
@@ -59,8 +61,16 @@ val networkModule = module {
             .build()
     }
 
-    single { get<Retrofit>().create(PictureOfTheDayAPI::class.java) }
-    single { get<Retrofit>().create(EarthPictureAPI::class.java) }
+    single(named("earthPictureRetrofit")) {
+        Retrofit.Builder()
+            .baseUrl(EARTH_PICTURE_DOMAIN)
+            .addConverterFactory(GsonConverterFactory.create(get()))
+            .client(get())
+            .build()
+    }
+
+    single { get<Retrofit>(named("nasaRetrofit")).create(PictureOfTheDayAPI::class.java) }
+    single { get<Retrofit>(named("earthPictureRetrofit")).create(EarthPictureAPI::class.java) }
 }
 
 val repositoryModule = module {

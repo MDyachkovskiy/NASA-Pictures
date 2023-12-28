@@ -3,7 +3,9 @@ package com.test.application.picture_of_the_day.view
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.view.*
+import android.view.MenuItem
+import android.view.MotionEvent
+import android.view.View
 import android.widget.FrameLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.Lifecycle
@@ -13,12 +15,10 @@ import coil.load
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.test.application.core.domain.pictureOfTheDay.PictureOfTheDay
 import com.test.application.core.navigation.FragmentInteractionListener
-import com.test.application.core.navigation.FragmentType
 import com.test.application.core.utils.WIKIPEDIA_DOMAIN
-import com.test.application.core.view.BaseFragment
-import com.test.application.picture_of_the_day.R
-import com.test.application.picture_of_the_day.databinding.FragmentPictureOfTheDayBinding
 import com.test.application.core.utils.getTheDateInFormat
+import com.test.application.core.view.BaseFragment
+import com.test.application.picture_of_the_day.databinding.FragmentPictureOfTheDayBinding
 import com.test.application.picture_of_the_day.view.utils.BottomAppBarConfigurator
 import com.test.application.picture_of_the_day.view.utils.BottomSheetDescriptionFormatter
 import com.test.application.picture_of_the_day.view.utils.BottomSheetHeaderFormatter
@@ -52,11 +52,16 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
         bottomAppBarConfigurator = BottomAppBarConfigurator(requireContext())
 
         initViewModel()
-        //setBottomSheetBehavior(binding.bottomSheetLayout.bottomSheetContainer)
+        setBottomSheetBehavior(binding.bottomSheetLayout.bottomSheetContainer)
         handlePictureScaleAnimation()
         setInputLayout()
-        //setBottomAppBar()
+        setBottomAppBar()
         setChipGroup()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        isViewVisible = false
     }
 
     private fun setInputLayout() {
@@ -177,15 +182,10 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
         }
     }
 
-    /*private fun setBottomAppBar() {
+    private fun setBottomAppBar() {
         (requireActivity() as FragmentInteractionListener).setupSupportActionBar(binding.bottomAppBar)
         setHasOptionsMenu(true)
-        //setFloatingActionButton()
-    }*/
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
-        inflater.inflate(R.menu.menu_bottom_bar, menu)
+        setFloatingActionButton()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -194,21 +194,16 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
                 (requireActivity() as FragmentInteractionListener)
                     .openBottomNavigationDrawer()
             }
-
-            R.id.app_bar_fav -> {
-                (requireActivity() as FragmentInteractionListener)
-                    .navigateToFragment(FragmentType.EARTH_FRAGMENT)
-            }
         }
         return super.onOptionsItemSelected(item)
     }
 
-    /*private fun setFloatingActionButton() {
+    private fun setFloatingActionButton() {
         binding.fab.setOnClickListener {
             isMain = !isMain
             bottomAppBarConfigurator.setupBottomAppBar(binding.bottomAppBar, binding.fab, isMain)
         }
-    }*/
+    }
 
     private fun setChipGroup() {
 

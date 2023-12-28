@@ -38,6 +38,7 @@
         android:layout_height="@dimen/scroll_view_height"
         android:layout_marginVertical="@dimen/margin_20dp_medium"
         android:layout_marginHorizontal="@dimen/margin_8dp_small"
+        android:paddingBottom="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/bottom_sheet_description_header">
