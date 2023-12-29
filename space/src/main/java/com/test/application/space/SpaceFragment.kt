@@ -70,9 +70,14 @@ class SpaceFragment: Fragment() {
 
     private fun animateFabRotation() {
         val rotation = if(isMenuDisplayed) 360f else -360f
-        ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, rotation)
-            .setDuration(duration)
-            .start()
+        ObjectAnimator.ofFloat(binding.plusFab, View.ROTATION, 0f, rotation).apply {
+            duration = this@SpaceFragment.duration
+            addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    binding.plusFab.bringToFront()
+                }
+            })
+        }.start()
     }
 
     override fun onDestroyView() {

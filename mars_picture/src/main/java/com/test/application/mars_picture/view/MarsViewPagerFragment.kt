@@ -10,7 +10,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.test.application.core.domain.marsPicture.MarsCamera
 import com.test.application.core.domain.marsPicture.MarsPhoto
 import com.test.application.core.domain.marsPicture.MarsPicture
-import com.test.application.core.utils.getTheDateInFormat
 import com.test.application.core.view.BaseFragment
 import com.test.application.mars_picture.databinding.FragmentMarsViewpagerBinding
 import com.test.application.mars_picture.utils.MARS_CAMERA_BUNDLE_KEY
@@ -51,7 +50,7 @@ class MarsViewPagerFragment: BaseFragment<MarsPicture,FragmentMarsViewpagerBindi
                 }
             }
         }
-        viewModel.getPicturesOfMarsByCamera(marsCamera.name, getTheDateInFormat(0))
+        viewModel.getPicturesOfMarsByCamera(marsCamera.name)
     }
 
     private fun setTabs(photos: List<MarsPhoto>) {

@@ -65,13 +65,13 @@ class MarsFragment : Fragment() {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         toolbar.setNavigationOnClickListener {
-            val drawerLayout = binding.marsFragment
+            val drawerLayout = binding.marsDrawerLayout
             drawerLayout.openDrawer(GravityCompat.START)
         }
     }
 
     private fun replaceFragment(camera: MarsCamera) {
-        val drawerLayout = binding.marsFragment
+        val drawerLayout = binding.marsDrawerLayout
         childFragmentManager.beginTransaction()
             .replace(R.id.mars_container, MarsViewPagerFragment.newInstance(camera))
             .addToBackStack("tag")

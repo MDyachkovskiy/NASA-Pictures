@@ -43,14 +43,14 @@ fun CentroidCoordinatesResponse.toDomain(): CentroidCoordinates {
 
 fun PictureOfTheDayResponse.toDomain(): PictureOfTheDay {
     return PictureOfTheDay(
-        copyright = this.copyright,
-        date = this.date,
-        explanation = this.explanation,
-        hdurl = this.hdurl,
-        mediaType = this.mediaType,
-        serviceVersion = this.serviceVersion,
-        title = this.title,
-        url = this.url
+        copyright = this.copyright  ?: "Unknown",
+        date = this.date  ?: "Unknown",
+        explanation = this.explanation  ?: "No explanation",
+        hdurl = this.hdurl ?: "",
+        mediaType = this.mediaType ?: "Unknown",
+        serviceVersion = this.serviceVersion ?: "Unknown",
+        title = this.title ?: "Untitled",
+        url = this.url ?: ""
     )
 }
 

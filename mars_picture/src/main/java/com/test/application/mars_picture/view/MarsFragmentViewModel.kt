@@ -16,9 +16,9 @@ class MarsFragmentViewModel(
     private val _stateFlow = MutableStateFlow<AppState>(AppState.Loading)
     val stateFlow: StateFlow<AppState> = _stateFlow.asStateFlow()
 
-    fun getPicturesOfMarsByCamera (camera: String?, date: String) {
+    fun getPicturesOfMarsByCamera (camera: String?) {
         viewModelScope.launch {
-            marsPictureRepository.getPictureOfMars(date, camera).collect {
+            marsPictureRepository.getPictureOfMars(camera).collect {
                 _stateFlow.value = it
             }
         }

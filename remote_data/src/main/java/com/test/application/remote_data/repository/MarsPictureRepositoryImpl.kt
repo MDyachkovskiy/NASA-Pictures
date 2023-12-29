@@ -12,10 +12,10 @@ class MarsPictureRepositoryImpl (
     private val marsPictureApi: PictureOfTheDayAPI
 ) : MarsPictureRepository {
 
-    override fun getPictureOfMars(date: String, camera: String?): Flow<AppState> = flow {
+    override fun getPictureOfMars(camera: String?): Flow<AppState> = flow {
         emit(AppState.Loading)
         try {
-            val response = marsPictureApi.getPicturesOfMars(date, camera)
+            val response = marsPictureApi.getPicturesOfMars(camera = camera)
             if(response.isSuccessful) {
                 response.body()?.let { marsPictureResponse ->
                     emit(AppState.Success(marsPictureResponse.toDomain()))

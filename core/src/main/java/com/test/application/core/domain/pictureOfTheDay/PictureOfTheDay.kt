@@ -1,12 +1,12 @@
 package com.test.application.core.domain.pictureOfTheDay
 
 data class PictureOfTheDay(
-    val copyright: String,
-    val date: String,
-    val explanation: String,
-    val hdurl: String,
-    val mediaType: String,
-    val serviceVersion: String,
-    val title: String,
-    val url: String
+    val copyright: String = "Unknown",
+    val date: String = "Unknown",
+    val explanation: String = "No explanation",
+    val hdurl: String = "",
+    val mediaType: String = "Unknown",
+    val serviceVersion: String = "Unknown",
+    val title: String = "Untitled",
+    val url: String = ""
 )

@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface MarsPictureRepository {
-    fun getPictureOfMars (date: String, camera: String?): Flow<AppState>
+    fun getPictureOfMars (camera: String?): Flow<AppState>
 }

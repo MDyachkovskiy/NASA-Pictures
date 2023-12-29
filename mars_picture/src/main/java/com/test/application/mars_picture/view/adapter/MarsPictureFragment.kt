@@ -1,5 +1,6 @@
 package com.test.application.mars_picture.view.adapter
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,10 @@ import androidx.transition.ChangeBounds
 import androidx.transition.ChangeImageTransform
 import androidx.transition.TransitionManager
 import androidx.transition.TransitionSet
-import coil.load
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.test.application.core.domain.marsPicture.MarsPhoto
 import com.test.application.mars_picture.databinding.FragmentMarsPictureBinding
 import com.test.application.mars_picture.utils.MARS_BUNDLE_KEY
@@ -98,22 +102,33 @@ class MarsPictureFragment : Fragment() {
 
     private fun displayImageData(marsPictures: MarsPhoto) {
         with(binding) {
-            marsPicture.load(marsPictures.imgSrc) {
-                crossfade(true)
-                placeholder(com.test.application.core.R.drawable.ic_no_photo_vector)
-                error(com.test.application.core.R.drawable.ic_load_error_vector)
-                listener(
-                    onStart = {
-                        progressBar.visibility = View.VISIBLE
-                    },
-                    onSuccess = { _, _ ->
+            Glide.with(requireContext())
+                .load(marsPictures.imgSrc)
+                .placeholder(com.test.application.core.R.drawable.ic_no_photo_vector)
+                .error(com.test.application.core.R.drawable.ic_load_error_vector)
+                .listener(object : RequestListener<Drawable> {
+                    override fun onLoadFailed(
+                        e: GlideException?,
+                        model: Any?,
+                        target: com.bumptech.glide.request.target.Target<Drawable>?,
+                        isFirstResource: Boolean
+                    ): Boolean {
                         progressBar.visibility = View.GONE
-                    },
-                    onError = { _, _ ->
-                        progressBar.visibility = View.GONE
+                        return false
                     }
-                )
-            }
+
+                    override fun onResourceReady(
+                        resource: Drawable?,
+                        model: Any?,
+                        target: com.bumptech.glide.request.target.Target<Drawable>?,
+                        dataSource: DataSource?,
+                        isFirstResource: Boolean
+                    ): Boolean {
+                        progressBar.visibility = View.GONE
+                        return false
+                    }
+                })
+                .into(marsPicture)
         }
     }
 

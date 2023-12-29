@@ -22,7 +22,7 @@ interface PictureOfTheDayAPI {
 
     @GET(MARS_END_POINT)
     suspend fun getPicturesOfMars(
-        @Query("earth_date") date:String,
+        @Query("sol") date:String = "1000",
         @Query("camera") camera:String?
     ) : Response<MarsPictureResponse>
 
