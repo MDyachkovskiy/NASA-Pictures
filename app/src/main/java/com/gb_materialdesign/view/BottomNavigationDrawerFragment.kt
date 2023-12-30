@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.BottomNavigationLayoutBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.test.application.asteroids.AsteroidsListFragment
 import com.test.application.contacts.view.ContactsFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
@@ -29,12 +30,24 @@ class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {
         binding.navigationView.setNavigationItemSelectedListener { menuItem ->
             when(menuItem.itemId) {
 
-                R.id.navigation_contacts ->
-                       parentFragmentManager
-                            .beginTransaction()
-                            .replace(R.id.container, ContactsFragment.newInstance())
-                            .addToBackStack("tag")
-                            .commit()
+                R.id.navigation_contacts -> {
+                    parentFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, ContactsFragment.newInstance())
+                        .addToBackStack("tag")
+                        .commit()
+                    dismiss()
+                }
+
+
+                R.id.navigation_asteroid -> {
+                    parentFragmentManager
+                        .beginTransaction()
+                        .replace(R.id.container, AsteroidsListFragment())
+                        .addToBackStack("tag")
+                        .commit()
+                    dismiss()
+                }
             }
             true
         }

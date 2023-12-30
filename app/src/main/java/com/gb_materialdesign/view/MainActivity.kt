@@ -3,7 +3,6 @@ package com.gb_materialdesign.view
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
@@ -30,14 +29,12 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentA
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("@@@", "MainActivity onCreate called")
         applyThemePreferences()
         setupUI()
         navigateToInitialFragment(savedInstanceState)
     }
 
     private fun navigateToInitialFragment(savedInstanceState: Bundle?) {
-        Log.d("@@@", "navigateToInitialFragment: savedInstanceState is ${if (savedInstanceState == null) "null" else "not null"}")
         val sharedPreferences = getPreferences(Context.MODE_PRIVATE)
         if(shouldReturnToSettings(sharedPreferences)) {
             clearReturnToSettingsFlag(sharedPreferences)
@@ -74,7 +71,6 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentA
         binding.bottomNavigationView.selectedItemId = R.id.navigation_telescope
 
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
-            Log.d("@@@", "BottomNavigationView: Selected item ${item.itemId}")
             when(item.itemId) {
                 R.id.navigation_telescope -> {
                     replaceFragment(PictureOfTheDayFragment())
@@ -102,7 +98,6 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentA
     }
 
     private fun replaceFragment(fragment: Fragment) {
-        Log.d("@@@", "MainActivity Replacing fragment with ${fragment.javaClass.simpleName}")
         supportFragmentManager
             .beginTransaction()
             .replace(R.id.container, fragment)
@@ -117,7 +112,6 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentA
     override fun navigateToFragment(fragmentType: FragmentType) {
         val fragment = when (fragmentType) {
             FragmentType.EARTH_FRAGMENT -> EarthFragment()
-            FragmentType.ASTEROID_DETAIL_FRAGMENT -> TODO()
         }
         replaceFragment(fragment)
     }
@@ -128,9 +122,10 @@ class MainActivity : AppCompatActivity(), FragmentInteractionListener, FragmentA
             .show(supportFragmentManager, bottomNavigationDrawerFragment.tag)
     }
 
-    override fun addFragmentOnTop(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .add(R.id.container, fragment)
+    override fun replaceAsteroidFragment(fragment: Fragment) {
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.container, fragment)
             .addToBackStack(null)
             .commit()
     }

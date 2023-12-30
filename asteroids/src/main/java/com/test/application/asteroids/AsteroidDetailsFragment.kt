@@ -1,6 +1,7 @@
 package com.test.application.asteroids
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,7 +31,9 @@ class AsteroidDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        Log.d("@@@", "AsteroidDetailsFragment onCreateView: started")
         _binding = FragmentAsteroidDetailsBinding.inflate(inflater, container, false)
+        Log.d("@@@", "AsteroidDetailsFragment onCreateView: view created")
         return binding.root
     }
 
@@ -66,6 +69,7 @@ class AsteroidDetailsFragment : Fragment() {
     }
 
     private fun displayAsteroidDetails(asteroid: Asteroid) {
+        Log.d("@@@", "AsteroidDetailsFragment displayAsteroidDetails")
         with(binding) {
             asteroidName.text = asteroid.name
             minEstimatedDiameter.text = asteroid.estimatedDiameter

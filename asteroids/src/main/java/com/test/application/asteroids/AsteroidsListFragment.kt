@@ -28,7 +28,7 @@ class AsteroidsListFragment : BaseFragment<AsteroidsList, FragmentAsteroidsListB
 
     override fun setupData(data: AsteroidsList) {
         val adapter = AsteroidsListAdapter(data, binding.asteroidsList)
-        adapter.onAsteroidClick = {asteroid ->
+        adapter.onAsteroidClick = { asteroid ->
             openAsteroidDetails(asteroid)
         }
         binding.asteroidsList.adapter = adapter
@@ -39,7 +39,7 @@ class AsteroidsListFragment : BaseFragment<AsteroidsList, FragmentAsteroidsListB
         fragment.arguments = Bundle().apply {
             putParcelable(KEY_BUNDLE_ASTEROID, asteroid)
         }
-        (activity as? FragmentAdder)?.addFragmentOnTop(fragment)
+        (activity as? FragmentAdder)?.replaceAsteroidFragment(fragment)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

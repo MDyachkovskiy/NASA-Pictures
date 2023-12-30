@@ -120,7 +120,8 @@
         app:fabCradleVerticalOffset="0dp"
         app:hideOnScroll="true"
         app:layout_scrollFlags="scroll|enterAlways"
-        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar" />
+        app:navigationIcon="@drawable/ic_hamburger_menu_bottom_bar"
+        app:navigationIconTint="@color/black"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"

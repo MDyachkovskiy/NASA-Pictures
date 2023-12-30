@@ -10,5 +10,6 @@
 
     <!-- PictureOfTheDay Bottom menu -->
     <string name="menu_contacts">Контакты</string>
+    <string name="menu_asteroids">Список астероидов</string>
 
 </resources>

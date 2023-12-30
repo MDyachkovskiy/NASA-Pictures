@@ -9,9 +9,9 @@
         android:title="@string/menu_contacts" />
 
     <item
-        android:id="@+id/navigation_two"
+        android:id="@+id/navigation_asteroid"
         android:icon="@drawable/ic_send"
-        android:title="На экран 2" />
+        android:title="@string/menu_asteroids" />
 
     </group>
 

@@ -151,7 +151,6 @@ class PictureOfTheDayFragment : BaseFragment<PictureOfTheDay, FragmentPictureOfT
 
             override fun onSlide(bottomSheet: View, slideOffset: Float) {
             }
-
         })
     }
 
