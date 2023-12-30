@@ -11,10 +11,10 @@
         android:layout_height="@dimen/avatar_height"
         android:layout_marginTop="@dimen/margin_8dp_small"
         android:layout_marginEnd="@dimen/margin_20dp_medium"
+        android:src="@drawable/ic_user_avatar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="contentDescription"
-        tools:src="@drawable/ic_user_avatar" />
+        tools:ignore="contentDescription" />
 
     <TextView
         android:id="@+id/user_name_text_view"
@@ -49,11 +49,11 @@
         android:layout_marginStart="@dimen/margin_12dp_small"
         android:background="?android:attr/selectableItemBackgroundBorderless"
         android:padding="@dimen/margin_6dp_small"
+        android:src="@drawable/ic_more_vert"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="contentDescription"
-        tools:src="@drawable/ic_more_vert" />
+        tools:ignore="contentDescription" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/move_up_button"

@@ -13,8 +13,8 @@
         android:layout_marginTop="@dimen/margin_6dp_small"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_user_avatar"
-        tools:ignore="contentDescription"/>
+        tools:ignore="contentDescription"
+        tools:src="@drawable/ic_user_avatar" />
 
     <TextView
         android:id="@+id/user_name_text_view"
@@ -49,11 +49,11 @@
         android:layout_width="@dimen/more_icon_height"
         android:layout_height="@dimen/more_icon_height"
         android:layout_marginEnd="@dimen/margin_20dp_medium"
+        android:src="@drawable/ic_hamburger_menu_bottom_bar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/up_down_button_color"
-        tools:src="@drawable/ic_hamburger_menu_bottom_bar" />
+        app:tint="@color/up_down_button_color" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/add_button"
@@ -69,11 +69,11 @@
         android:id="@+id/remove_button"
         android:layout_width="@dimen/more_icon_height"
         android:layout_height="@dimen/more_icon_height"
+        android:src="@drawable/ic_delete"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/more_image_view_button"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/up_down_button_color"
-        tools:src="@drawable/ic_delete" />
+        app:tint="@color/up_down_button_color" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier"

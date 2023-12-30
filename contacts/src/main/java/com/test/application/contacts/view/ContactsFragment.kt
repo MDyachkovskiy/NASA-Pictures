@@ -1,6 +1,7 @@
 package com.test.application.contacts.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.FrameLayout
 import androidx.lifecycle.Lifecycle
@@ -33,6 +34,7 @@ class ContactsFragment : BaseFragment<List<User>, FragmentContactsBinding>(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("@@@", "ContactssFragment ViewCreated")
         initViewModel()
     }
 
@@ -48,7 +50,10 @@ class ContactsFragment : BaseFragment<List<User>, FragmentContactsBinding>(
     }
 
     override fun setupData(data: List<User>) {
+        Log.d("@@@", "ContactsFragment data setup $data")
+
         adapter = ContactsListAdapter()
+        adapter.updateContacts(data)
 
         adapter.onItemAdd = {user, position ->
             viewModel.addContact(user, position)
