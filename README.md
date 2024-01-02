@@ -11,7 +11,7 @@
 
 <h2>Application Demo Video:</h2>
 
-<p>Watch a demo of the application here: <a href="https://gdurl.com/paST" target="_blank">NASA App Demo Video</a></p>
+<p>Watch a demo of the application here: <a href="https://gdurl.com/O8seE" target="_blank">NASA App Demo Video</a></p>
 
 <h2>💻 Built with</h2>
 
@@ -20,10 +20,9 @@ Within the scope of this educational course the following knowledge and technolo
 *   Navigation
 *   Animation
 *   Recycler View
-*   Text Formatting
+*   Spannable Text Formatting
 *   Bottom Navigation Menu
 *   Material Components
 *   Tab Layout
 *   ViewPager
-*   Style
-*   Selectors
+*   Color Style Swap
