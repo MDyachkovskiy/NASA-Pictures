@@ -1,28 +1,38 @@
 <h1 align="center" id="title">NASA Application</h1>
 
 <p id="description">
-  
-  The educational project was completed as part of the course: "Android. Material Design." The programming language used is Kotlin. The application utilizes an open API from NASA to obtain Earth images taken from satellites and Mars images captured by active rovers. Additionally the app provides notifications about various cosmic events such as geomagnetic storms solar flares and radiation levels in space.</p>
+Учебный проект был выполнен в рамках курса: "Android. Material Design". Язык программирования Kotlin. Приложение использует открытое API от NASA для получения изображений Земли, сделанных со спутников, и изображений Марса, сделанных активными марсоходами. Кроме того, приложение предоставляет уведомления о различных космических объектах таких как астероиды.
+</p>
 
-<h2>Project Screenshots:</h2>
+<h2>Макеты экранов</h2>
 
 <img src="https://gdurl.com/c1ZE" alt="project-screenshot" width="200" height="400/">    <img src="https://gdurl.com/h4bG" alt="project-screenshot" width="200" height="400/">    <img src="https://gdurl.com/qC91" alt="project-screenshot" width="200" height="400/">
 <img src="https://gdurl.com/BXLI" alt="project-screenshot" width="200" height="400/"> 
 
-<h2>Application Demo Video:</h2>
+<h2>Экран Изображение дня</h2> 
 
-<p>Watch a demo of the application here: <a href="https://gdurl.com/O8seE" target="_blank">NASA App Demo Video</a></p>
+<table>
+  <tr>
+    <td width="400" height="650">
+      <img src="https://gdurl.com/jvzc" width="250" height="520" />
+    </td>
+    <td width="800">
+      <p>
+      Стартовый экран приложения отображает "Изображение дня" от NASA, давая возможность пользователям увидеть различные снимки из космоса. Используя чипы, пользователи могут                   переключаться между сегодняшним, вчерашним и позавчерашним архивными изображениями. Подробное описание к каждому изображению представлено в BottomSheetLayout, который можно свернуть или развернуть по желанию пользователя, управляя таким образом видимостью информации. Текст описания форматируется с использованием Spannable для выделения важных деталей. На главном экране также есть строка поиска по Википедии, которая в текущей версии приложения не активирована.
+      </p>
+    </td>
+  </tr>
+</table>
 
-<h2>💻 Built with</h2>
 
-Within the scope of this educational course the following knowledge and technologies were acquired:
+<h2>💻 Используемый стек технологий</h2>
 
-*   Navigation
+*   Jetpack Navigation
 *   Animation
 *   Recycler View
 *   Spannable Text Formatting
 *   Bottom Navigation Menu
 *   Material Components
-*   Tab Layout
+*   TabLayout
 *   ViewPager
-*   Color Style Swap
+*   Theme Color Style
