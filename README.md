@@ -14,7 +14,7 @@
 <table>
   <tr>
     <td width="400" height="650">
-      <img src="https://gdurl.com/jvzc" width="250" height="520" />
+      <img src="https://gdurl.com/jvzc"  />
     </td>
     <td width="800">
       <p>
@@ -27,7 +27,7 @@
   </tr>
   <tr>
     <td width="400" height="650">
-      <img src="https://gdurl.com/MXWg" width="250" height="520" />
+      <img src="https://gdurl.com/MXWg"  />
     </td>
     <td width="800">
       <p>
