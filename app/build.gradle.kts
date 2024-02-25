@@ -52,15 +52,15 @@ android {
 
 dependencies {
 
-    implementation(project (":core"))
-    implementation(project (":picture_of_the_day"))
-    implementation(project (":earth_picture"))
-    implementation(project (":mars_picture"))
-    implementation(project (":asteroids"))
-    implementation(project (":contacts"))
-    implementation(project (":space"))
-    implementation(project (":settings"))
-    implementation(project (":remote_data"))
+    implementation(project(":core"))
+    implementation(project(":features:picture_of_the_day"))
+    implementation(project(":features:earth_picture"))
+    implementation(project(":features:mars_picture"))
+    implementation(project(":features:asteroids"))
+    implementation(project(":features:contacts"))
+    implementation(project(":features:space"))
+    implementation(project(":features:settings"))
+    implementation(project(":remote_data"))
 
     //Kotlin
     implementation (Kotlin.core)
@@ -86,5 +86,5 @@ dependencies {
     implementation (Navigation.fragment_ktx)
     implementation (Navigation.ui_ktx)
 
-
+    debugImplementation("com.squareup.leakcanary:leakcanary-android:3.0-alpha-1")
 }

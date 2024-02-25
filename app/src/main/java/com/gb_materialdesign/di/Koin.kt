@@ -4,14 +4,14 @@ import com.gb_materialdesign.BuildConfig
 import com.gb_materialdesign.utils.EARTH_PICTURE_DOMAIN
 import com.gb_materialdesign.utils.NASA_DOMAIN
 import com.google.gson.GsonBuilder
-import com.test.application.asteroids.AsteroidsListViewModel
+import com.test.application.asteroids.view.AsteroidsListViewModel
 import com.test.application.contacts.view.ContactsViewModel
 import com.test.application.core.repository.ContactsRepository
 import com.test.application.core.repository.EarthPictureRepository
 import com.test.application.core.repository.MarsPictureRepository
 import com.test.application.core.repository.PictureOfTheDayRepository
 import com.test.application.core.repository.SpaceFragmentRepository
-import com.test.application.earth_picture.EarthFragmentViewModel
+import com.test.application.earth_picture.view.EarthFragmentViewModel
 import com.test.application.mars_picture.view.MarsFragmentViewModel
 import com.test.application.picture_of_the_day.view.PictureOfTheDayViewModel
 import com.test.application.remote_data.api.EarthPictureAPI

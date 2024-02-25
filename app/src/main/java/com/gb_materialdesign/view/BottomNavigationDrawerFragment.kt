@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import com.gb_materialdesign.R
 import com.gb_materialdesign.databinding.BottomNavigationLayoutBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.test.application.asteroids.AsteroidsListFragment
+import com.test.application.asteroids.view.AsteroidsListFragment
 import com.test.application.contacts.view.ContactsFragment
 
 class BottomNavigationDrawerFragment : BottomSheetDialogFragment() {

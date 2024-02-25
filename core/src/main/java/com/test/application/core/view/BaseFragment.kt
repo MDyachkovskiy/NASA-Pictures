@@ -21,7 +21,7 @@ abstract class BaseFragment<I, VB : ViewBinding>(
     private var _binding: VB? = null
     val binding: VB get() = _binding!!
 
-    protected lateinit var progressBar: FrameLayout
+    protected var progressBar: FrameLayout? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,6 +37,7 @@ abstract class BaseFragment<I, VB : ViewBinding>(
 
     override fun onDestroyView() {
         _binding = null
+        progressBar = null
         super.onDestroyView()
     }
 
@@ -62,8 +63,8 @@ abstract class BaseFragment<I, VB : ViewBinding>(
     abstract fun setupData(data: I)
 
     private fun showViewLoading() {
-        progressBar.animate().cancel()
-        progressBar.apply {
+        progressBar?.animate()?.cancel()
+        progressBar?.apply {
             alpha = 1.0f
             visibility = View.VISIBLE
         }
@@ -74,12 +75,12 @@ abstract class BaseFragment<I, VB : ViewBinding>(
     }
 
     private fun showWorkingView() {
-        progressBar.animate()
-            .alpha(0.0f)
-            .setDuration(300)
-            .setListener(object : AnimatorListenerAdapter() {
+        progressBar?.animate()
+            ?.alpha(0.0f)
+            ?.setDuration(300)
+            ?.setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    progressBar.visibility = View.GONE
+                    progressBar?.visibility = View.GONE
                 }
             })
     }

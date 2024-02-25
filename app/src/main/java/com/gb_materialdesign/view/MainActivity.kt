@@ -13,7 +13,7 @@ import com.test.application.core.navigation.FragmentInteractionListener
 import com.test.application.core.navigation.FragmentType
 import com.test.application.core.utils.RETURN_TO_SETTINGS_KEY
 import com.test.application.core.utils.THEME_KEY
-import com.test.application.earth_picture.EarthFragment
+import com.test.application.earth_picture.view.EarthFragment
 import com.test.application.mars_picture.view.MarsFragment
 import com.test.application.picture_of_the_day.view.PictureOfTheDayFragment
 import com.test.application.settings.SettingsFragment

@@ -4,26 +4,37 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="GRADLE" />
-        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT">
+            <builds>
+              <build path="$PROJECT_DIR$/buildSrc" name="buildSrc">
+                <projects>
+                  <project path="$PROJECT_DIR$/buildSrc" />
+                </projects>
+              </build>
+            </builds>
+          </compositeBuild>
+        </compositeConfiguration>
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="gradleJvm" value="jbr-17" />
+        <option name="gradleJvm" value="#GRADLE_LOCAL_JAVA_HOME" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/asteroids" />
             <option value="$PROJECT_DIR$/buildSrc" />
-            <option value="$PROJECT_DIR$/contacts" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/earth_picture" />
-            <option value="$PROJECT_DIR$/mars_picture" />
-            <option value="$PROJECT_DIR$/picture_of_the_day" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/asteroids" />
+            <option value="$PROJECT_DIR$/features/contacts" />
+            <option value="$PROJECT_DIR$/features/earth_picture" />
+            <option value="$PROJECT_DIR$/features/mars_picture" />
+            <option value="$PROJECT_DIR$/features/picture_of_the_day" />
+            <option value="$PROJECT_DIR$/features/settings" />
+            <option value="$PROJECT_DIR$/features/space" />
             <option value="$PROJECT_DIR$/remote_data" />
-            <option value="$PROJECT_DIR$/settings" />
-            <option value="$PROJECT_DIR$/space" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
